@@ -33,7 +33,7 @@ export default class Memory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionIndex: 9,
+      questionIndex: 6,
       presentIllnessOne: [],
       presentIllnessTwo: []
     };
@@ -56,14 +56,6 @@ export default class Memory extends Component {
       this.setState({ questionInfo: this.props.questionModel["questionInfo"] });
     }
   }
-  // 调用keyboard回调的方法
-  keyBoardChange = (key, value) => {
-    // console.log('key_'+ key +'_answer_'+value);
-    let questionInfo = this.state.questionInfo;
-    questionInfo[key]["answer"] = value;
-    this.setState({ questionInfo: questionInfo });
-    // console.log('this_state_questionInfo_',this.state.questionInfo);
-  };
   // 该模块上一个问题
   goPrev = () => {
     this.setState({ questionInfo: this.state.questionInfo });

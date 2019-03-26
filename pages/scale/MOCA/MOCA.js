@@ -14,6 +14,10 @@ import { inject } from "mobx-react";
 import ViewSpace from "./components/ViewSpace";
 import Named from "./components/Named";
 import Memory from "./components/Memory";
+import Attention from "./components/Attention";
+import RecordOne from "./components/RecordOne";
+import Calculate from "./components/Calculate";
+import RepeatRead from "./components/RepeatRead";
 
 // 量表
 import { save } from "../routeAndSave";
@@ -31,7 +35,11 @@ export default class MOCA extends React.Component {
     let questionModelArr = [
       "viewSpace",
       "named",
-      "memory"
+      "memory",
+      "attention",
+      "recordOne",
+      "calculate",
+      "repeatRead"
       //   "read",
       //   "understand",
       //   "write",
@@ -55,6 +63,18 @@ export default class MOCA extends React.Component {
       },
       memory: {
         questionInfo: ""
+      },
+      attention: {
+        questionInfo: ""
+      },
+      recordOne: {
+        questionInfo: ""
+      },
+      calculate: {
+        questionInfo: ""
+      },
+      repeatRead: {
+        questionInfo: ""
       }
     };
   }
@@ -63,7 +83,7 @@ export default class MOCA extends React.Component {
    * @description 进行总分计算，并且判断痴呆程度
    * @returns
    */
-  calculate = () => {};
+  calculateAll = () => {};
 
   // 从子组件问题模块传上来的值，然后确定是向前还是向后
   childrenInfo = (questionModel, questionInfo, totalScore, direction) => {};
@@ -97,9 +117,37 @@ export default class MOCA extends React.Component {
             callBack={this.childrenInfo}
           />
         )}
-        {this.state.questionModelIndex === 0 && (
+        {this.state.questionModelIndex === 2 && (
           <Memory
             questionModel={this.state.memory}
+            directionForward={this.state.directionForward}
+            callBack={this.childrenInfo}
+          />
+        )}
+        {this.state.questionModelIndex === 3 && (
+          <Attention
+            questionModel={this.state.attention}
+            directionForward={this.state.directionForward}
+            callBack={this.childrenInfo}
+          />
+        )}
+        {this.state.questionModelIndex === 3 && (
+          <RecordOne
+            questionModel={this.state.recordOne}
+            directionForward={this.state.directionForward}
+            callBack={this.childrenInfo}
+          />
+        )}
+        {this.state.questionModelIndex === 4 && (
+          <Calculate
+            questionModel={this.state.calculate}
+            directionForward={this.state.directionForward}
+            callBack={this.childrenInfo}
+          />
+        )}
+        {this.state.questionModelIndex === 0 && (
+          <RepeatRead
+            questionModel={this.state.repeatRead}
             directionForward={this.state.directionForward}
             callBack={this.childrenInfo}
           />
