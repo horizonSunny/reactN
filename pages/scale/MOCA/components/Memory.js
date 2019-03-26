@@ -34,7 +34,8 @@ export default class Memory extends Component {
     super(props);
     this.state = {
       questionIndex: 9,
-      presentIllness: []
+      presentIllnessOne: [],
+      presentIllnessTwo: []
     };
   }
   componentWillMount() {
@@ -71,23 +72,28 @@ export default class Memory extends Component {
     return;
   };
   goNext = () => {
-    let { keys, values, entries } = Object;
-    for (let value of values(this.state.questionInfo)) {
-      if (value["answer"] === "") {
-        androidToast("请选择选项");
-        return;
-      }
-    }
-    console.log("this.state.questionInfo_", this.state.questionInfo);
-    this.calculateScore();
+    console.log(
+      "presentIllnessOne_",
+      this.state.presentIllnessOne,
+      "_presentIllnessTwo_",
+      this.state.presentIllnessTwo
+    );
     return;
   };
-  handleNowPresentIlless = value => {
+  handleNowPresentOne = value => {
     // let presentIllnessinfo = this.state.presentIllness;
     // presentIllness = value;
     console.log("handleNowPresentIlless_", value);
     this.setState({
-      presentIllness: value
+      presentIllnessOne: value
+    });
+  };
+  handleNowPresentTwo = value => {
+    // let presentIllnessinfo = this.state.presentIllness;
+    // presentIllness = value;
+    console.log("handleNowPresentIlless_", value);
+    this.setState({
+      presentIllnessTwo: value
     });
   };
   render() {
@@ -135,7 +141,9 @@ export default class Memory extends Component {
             </View>
           </View>
         </View>
-        <View style={[styles.table, { marginBottom: dp(100) }]}>
+        <View
+          style={[styles.table, { marginBottom: dp(100), marginTop: dp(100) }]}
+        >
           <View style={styles.tableColumn1}>
             <Image
               style={{ width: dp(250), height: dp(320) }}
@@ -229,10 +237,44 @@ export default class Memory extends Component {
             </View>
             <View style={{ position: "absolute", top: dp(110), left: dp(275) }}>
               <CheckBox.CheckBoxGroup
-                value={this.state.presentIllness}
+                value={this.state.presentIllnessOne}
                 img={require("./img/checkbox.png")}
                 imgSel={require("./img/checkbox-sel.png")}
-                onChange={this.handleNowPresentIlless}
+                onChange={this.handleNowPresentOne}
+              >
+                <CheckBox
+                  value="0"
+                  style={{ marginRight: dp(157) }}
+                  iconStyle={styles.checkbox}
+                />
+                <CheckBox
+                  value="1"
+                  style={{ marginRight: dp(157) }}
+                  iconStyle={styles.checkbox}
+                />
+                <CheckBox
+                  value="2"
+                  style={{ marginRight: dp(157) }}
+                  iconStyle={styles.checkbox}
+                />
+                <CheckBox
+                  value="3"
+                  style={{ marginRight: dp(157) }}
+                  iconStyle={styles.checkbox}
+                />
+                <CheckBox
+                  value="4"
+                  style={{ marginRight: dp(157) }}
+                  iconStyle={styles.checkbox}
+                />
+              </CheckBox.CheckBoxGroup>
+            </View>
+            <View style={{ position: "absolute", top: dp(215), left: dp(275) }}>
+              <CheckBox.CheckBoxGroup
+                value={this.state.presentIllnessTwo}
+                img={require("./img/checkbox.png")}
+                imgSel={require("./img/checkbox-sel.png")}
+                onChange={this.handleNowPresentTwo}
               >
                 <CheckBox
                   value="0"
@@ -262,32 +304,6 @@ export default class Memory extends Component {
               </CheckBox.CheckBoxGroup>
             </View>
           </View>
-
-          {/* <View style={{ flexDirection: "row" }}>
-            <CheckBox.CheckBoxGroup
-              style={{ flexWrap: "wrap" }}
-              value={this.state.presentIllness}
-              img={require("./img/checkbox.png")}
-              imgSel={require("./img/checkbox-sel.png")}
-              onChange={this.handleNowPresentIlless}
-            >
-              <CheckBox
-                value="0"
-                style={{ marginRight: dp(91) }}
-                iconStyle={styles.checkbox}
-              />
-              <CheckBox
-                value="1"
-                style={{ marginRight: dp(75) }}
-                iconStyle={styles.checkbox}
-              />
-              <CheckBox
-                value="2"
-                style={{ marginRight: dp(75) }}
-                iconStyle={styles.checkbox}
-              />
-            </CheckBox.CheckBoxGroup>
-          </View> */}
         </View>
         <FrontAndBack goNext={this.goNext} goPrev={this.goPrev} />
       </React.Fragment>
