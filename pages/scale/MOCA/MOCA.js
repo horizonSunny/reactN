@@ -21,6 +21,7 @@ import RepeatRead from "./components/RepeatRead";
 import Fluency from "./components/Fluency";
 import Abstract from "./components/Abstract";
 import DelayRemeber from "./components/DelayRemeber";
+import DirectiveForce from "./components/DirectiveForce";
 
 // 量表
 import { save } from "../routeAndSave";
@@ -45,7 +46,8 @@ export default class MOCA extends React.Component {
       "repeatRead",
       "fluency",
       "abstract",
-      "delayRemeber"
+      "delayRemeber",
+      "directiveForce"
       //   "read",
       //   "understand",
       //   "write",
@@ -90,6 +92,9 @@ export default class MOCA extends React.Component {
       },
       delayRemeber: {
         questionInfo: ""
+      },
+      directiveForce: {
+        questionInfo: ""
       }
     };
   }
@@ -132,7 +137,7 @@ export default class MOCA extends React.Component {
             callBack={this.childrenInfo}
           />
         )}
-        {this.state.questionModelIndex === 0 && (
+        {this.state.questionModelIndex === 2 && (
           <Memory
             questionModel={this.state.memory}
             directionForward={this.state.directionForward}
@@ -184,6 +189,13 @@ export default class MOCA extends React.Component {
         {this.state.questionModelIndex === 8 && (
           <DelayRemeber
             questionModel={this.state.delayRemeber}
+            directionForward={this.state.directionForward}
+            callBack={this.childrenInfo}
+          />
+        )}
+        {this.state.questionModelIndex === 0 && (
+          <DirectiveForce
+            questionModel={this.state.directiveForce}
             directionForward={this.state.directionForward}
             callBack={this.childrenInfo}
           />
