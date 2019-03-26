@@ -18,6 +18,9 @@ import Attention from "./components/Attention";
 import RecordOne from "./components/RecordOne";
 import Calculate from "./components/Calculate";
 import RepeatRead from "./components/RepeatRead";
+import Fluency from "./components/Fluency";
+import Abstract from "./components/Abstract";
+import DelayRemeber from "./components/DelayRemeber";
 
 // 量表
 import { save } from "../routeAndSave";
@@ -39,7 +42,10 @@ export default class MOCA extends React.Component {
       "attention",
       "recordOne",
       "calculate",
-      "repeatRead"
+      "repeatRead",
+      "fluency",
+      "abstract",
+      "delayRemeber"
       //   "read",
       //   "understand",
       //   "write",
@@ -74,6 +80,15 @@ export default class MOCA extends React.Component {
         questionInfo: ""
       },
       repeatRead: {
+        questionInfo: ""
+      },
+      fluency: {
+        questionInfo: ""
+      },
+      abstract: {
+        questionInfo: ""
+      },
+      delayRemeber: {
         questionInfo: ""
       }
     };
@@ -117,7 +132,7 @@ export default class MOCA extends React.Component {
             callBack={this.childrenInfo}
           />
         )}
-        {this.state.questionModelIndex === 2 && (
+        {this.state.questionModelIndex === 0 && (
           <Memory
             questionModel={this.state.memory}
             directionForward={this.state.directionForward}
@@ -145,9 +160,30 @@ export default class MOCA extends React.Component {
             callBack={this.childrenInfo}
           />
         )}
-        {this.state.questionModelIndex === 0 && (
+        {this.state.questionModelIndex === 5 && (
           <RepeatRead
             questionModel={this.state.repeatRead}
+            directionForward={this.state.directionForward}
+            callBack={this.childrenInfo}
+          />
+        )}
+        {this.state.questionModelIndex === 6 && (
+          <Fluency
+            questionModel={this.state.fluency}
+            directionForward={this.state.directionForward}
+            callBack={this.childrenInfo}
+          />
+        )}
+        {this.state.questionModelIndex === 7 && (
+          <Abstract
+            questionModel={this.state.abstract}
+            directionForward={this.state.directionForward}
+            callBack={this.childrenInfo}
+          />
+        )}
+        {this.state.questionModelIndex === 8 && (
+          <DelayRemeber
+            questionModel={this.state.delayRemeber}
             directionForward={this.state.directionForward}
             callBack={this.childrenInfo}
           />
