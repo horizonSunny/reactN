@@ -70,15 +70,20 @@ export default class DelayRemeber extends Component {
     return;
   };
   calculateScore = () => {};
-  handleNowPresentOne = value => {
-    // let presentIllnessinfo = this.state.presentIllness;
-    // presentIllness = value;
-    console.log("handleNowPresentIlless_", value);
-    this.setState({
-      presentIllnessOne: value
-    });
-  };
+
   render() {
+    const radioStyles = [
+      { oneTop: dp(110), twoTop: dp(220), left: dp(272), name: "face" },
+      { oneTop: dp(110), twoTop: dp(220), left: dp(472), name: "velvet" },
+      { oneTop: dp(110), twoTop: dp(220), left: dp(672), name: "church" },
+      {
+        oneTop: dp(110),
+        twoTop: dp(220),
+        left: dp(872),
+        name: "chrysanthemum"
+      },
+      { oneTop: dp(110), twoTop: dp(220), left: dp(1072), name: "red" }
+    ];
     return (
       <React.Fragment>
         <View style={{ marginTop: dp(30) }}>
@@ -122,9 +127,8 @@ export default class DelayRemeber extends Component {
             </View>
           </View>
         </View>
-        <View
-          style={[styles.table, { marginBottom: dp(100), marginTop: dp(100) }]}
-        >
+        <View style={{ alignItems: "center", marginTop: dp(50) }} />
+        <View style={[styles.table]}>
           <View style={styles.tableColumn1}>
             <Image
               style={{ width: dp(250), height: dp(320) }}
@@ -133,7 +137,7 @@ export default class DelayRemeber extends Component {
           </View>
           <View>
             <View style={styles.tableRow}>
-              <Text style={[styles.tableCheckTh, styles.tdb]}>词语名称</Text>
+              <Text style={[styles.tableCheckTh, styles.tdb]}>词语名称 </Text>
               <Text style={[styles.tableCheckTh, styles.tdb]}>面孔</Text>
               <Text style={[styles.tableCheckTh, styles.tdb]}>天鹅绒</Text>
               <Text style={[styles.tableCheckTh, styles.tdb]}>教堂</Text>
@@ -141,80 +145,58 @@ export default class DelayRemeber extends Component {
               <Text style={[styles.tableCheckTh, styles.tdb]}>红色</Text>
             </View>
             <View style={styles.tableRow}>
-              <Text style={[styles.tableCheckTd, styles.tdb]}>确认</Text>
-              <Text
-                style={[
-                  styles.tableCheckTd,
-                  styles.tdb,
-                  { backgroundColor: "white" }
-                ]}
-              />
-              <Text
-                style={[
-                  styles.tableCheckTd,
-                  styles.tdb,
-                  { backgroundColor: "white" }
-                ]}
-              />
-              <Text
-                style={[
-                  styles.tableCheckTd,
-                  styles.tdb,
-                  { backgroundColor: "white" }
-                ]}
-              />
-              <Text
-                style={[
-                  styles.tableCheckTd,
-                  styles.tdb,
-                  { backgroundColor: "white" }
-                ]}
-              />
-              <Text
-                style={[
-                  styles.tableCheckTd,
-                  styles.tdb,
-                  { backgroundColor: "white" }
-                ]}
-              />
+              <Text style={[styles.tableCheckTd, styles.tdb]}>正确</Text>
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
             </View>
-            <View style={{ position: "absolute", top: dp(185), left: dp(275) }}>
-              <CheckBox.CheckBoxGroup
-                value={this.state.presentIllnessOne}
-                img={require("./img/checkbox.png")}
-                imgSel={require("./img/checkbox-sel.png")}
-                onChange={this.handleNowPresentOne}
-              >
-                <CheckBox
-                  value="0"
-                  style={{ marginRight: dp(157) }}
-                  iconStyle={styles.checkbox}
-                />
-                <CheckBox
-                  value="1"
-                  style={{ marginRight: dp(157) }}
-                  iconStyle={styles.checkbox}
-                />
-                <CheckBox
-                  value="2"
-                  style={{ marginRight: dp(157) }}
-                  iconStyle={styles.checkbox}
-                />
-                <CheckBox
-                  value="3"
-                  style={{ marginRight: dp(157) }}
-                  iconStyle={styles.checkbox}
-                />
-                <CheckBox
-                  value="4"
-                  style={{ marginRight: dp(157) }}
-                  iconStyle={styles.checkbox}
-                />
-              </CheckBox.CheckBoxGroup>
+            <View style={styles.tableRow}>
+              <Text style={[styles.tableCheckTd, styles.tdb]}>错误</Text>
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
             </View>
+            {radioStyles.map((item, index) => {
+              return (
+                <Radio.RadioGroup
+                  key={index}
+                  model={this.state.questionInfo[item["name"]]["answer"]}
+                  onChange={this.keyBoardChange.bind(this, item["name"])}
+                >
+                  <View
+                    style={{
+                      position: "absolute",
+                      top: item["oneTop"],
+                      left: item["left"],
+                      width: 50,
+                      height: 50,
+                      backgroundColor: "#fff"
+                    }}
+                  >
+                    <Radio value={1} style={styles.radio} />
+                  </View>
+                  <View
+                    style={{
+                      position: "absolute",
+                      width: 50,
+                      height: 49,
+                      top: item["twoTop"],
+                      left: item["left"],
+                      backgroundColor: "#fff"
+                    }}
+                  >
+                    <Radio value={0} style={styles.radio} />
+                  </View>
+                </Radio.RadioGroup>
+              );
+            })}
           </View>
         </View>
-
+        <View style={{ alignItems: "center", marginTop: dp(180) }} />
         <FrontAndBack goNext={this.goNext} goPrev={this.goPrev} />
       </React.Fragment>
     );

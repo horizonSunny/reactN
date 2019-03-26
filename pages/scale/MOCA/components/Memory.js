@@ -23,9 +23,6 @@ import FrontAndBack from "../../../PageComponent/frontAndBack/frontAndBack";
 import DoctorHelpConfirm from "../../../PageComponent/DoctorHelpConfirm/DoctorHelpConfirm";
 import styles from "../../../../../assets/css/common";
 import Radio from "../../../../components/Radio/src/Radio";
-import { DrawNumberCircle } from "../../../../utils/drawNumberCircle";
-import AnswerConfirm from "./ViewSpaceComponent/AnswerConfirm";
-import namedList from "./NamedComponent/namedComponent";
 import Audio from "../../../../components/Audio/Audio";
 import CheckBox from "../../../../components/CheckBox/src/CheckBox";
 
@@ -33,9 +30,10 @@ export default class Memory extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      questionModel: "directiveForce",
       questionIndex: 6,
-      presentIllnessOne: [],
-      presentIllnessTwo: []
+      totalScore: 0,
+      presentIllnessOne: []
     };
   }
   componentWillMount() {
@@ -48,7 +46,12 @@ export default class Memory extends Component {
       velvet: objectClone(answerModel),
       church: objectClone(answerModel),
       chrysanthemum: objectClone(answerModel),
-      red: objectClone(answerModel)
+      red: objectClone(answerModel),
+      faceTwo: objectClone(answerModel),
+      velvetTwo: objectClone(answerModel),
+      churchTwo: objectClone(answerModel),
+      chrysanthemumTwo: objectClone(answerModel),
+      redTwo: objectClone(answerModel)
     };
     if (this.props.questionModel["questionInfo"] === "") {
       this.setState({ questionInfo: questionInfo });
@@ -56,7 +59,11 @@ export default class Memory extends Component {
       this.setState({ questionInfo: this.props.questionModel["questionInfo"] });
     }
   }
-  // 该模块上一个问题
+  keyBoardChange = (key, value) => {
+    let questionInfo = this.state.questionInfo;
+    questionInfo[key]["answer"] = value;
+    this.setState({ questionInfo: questionInfo });
+  };
   goPrev = () => {
     this.setState({ questionInfo: this.state.questionInfo });
     console.log("immediatrly_", this.state.questionInfo);
@@ -64,31 +71,36 @@ export default class Memory extends Component {
     return;
   };
   goNext = () => {
-    console.log(
-      "presentIllnessOne_",
-      this.state.presentIllnessOne,
-      "_presentIllnessTwo_",
-      this.state.presentIllnessTwo
-    );
+    this.calculateScore();
     return;
   };
-  handleNowPresentOne = value => {
-    // let presentIllnessinfo = this.state.presentIllness;
-    // presentIllness = value;
-    console.log("handleNowPresentIlless_", value);
-    this.setState({
-      presentIllnessOne: value
-    });
-  };
-  handleNowPresentTwo = value => {
-    // let presentIllnessinfo = this.state.presentIllness;
-    // presentIllness = value;
-    console.log("handleNowPresentIlless_", value);
-    this.setState({
-      presentIllnessTwo: value
-    });
-  };
+  calculateScore = () => {};
+
   render() {
+    const radioStyles = [
+      { oneTop: dp(110), twoTop: dp(220), left: dp(272), name: "face" },
+      { oneTop: dp(110), twoTop: dp(220), left: dp(472), name: "velvet" },
+      { oneTop: dp(110), twoTop: dp(220), left: dp(672), name: "church" },
+      {
+        oneTop: dp(110),
+        twoTop: dp(220),
+        left: dp(872),
+        name: "chrysanthemum"
+      },
+      { oneTop: dp(110), twoTop: dp(220), left: dp(1072), name: "red" }
+    ];
+    const radioTwoStyles = [
+      { oneTop: dp(110), twoTop: dp(220), left: dp(272), name: "faceTwo" },
+      { oneTop: dp(110), twoTop: dp(220), left: dp(472), name: "velvetTwo" },
+      { oneTop: dp(110), twoTop: dp(220), left: dp(672), name: "churchTwo" },
+      {
+        oneTop: dp(110),
+        twoTop: dp(220),
+        left: dp(872),
+        name: "chrysanthemumTwo"
+      },
+      { oneTop: dp(110), twoTop: dp(220), left: dp(1072), name: "redTwo" }
+    ];
     return (
       <React.Fragment>
         <View style={{ marginTop: dp(30) }}>
@@ -113,8 +125,7 @@ export default class Memory extends Component {
               }}
             >
               <Text style={[styles.questionText, { width: "100%" }]}>
-                3-1.读出下列词语(每秒1个),后由患者{"\n"}
-                重复上述过程，重复两次，5分钟后回忆
+                3-1.(记忆，不记分)读出下列词语(每秒一个)，患者重复2次，5分钟后回忆？
               </Text>
             </View>
             <View
@@ -129,13 +140,12 @@ export default class Memory extends Component {
                 width: dp(200)
               }}
             >
-              <Audio src="moca_1.m4a" />
+              <Audio src="moca_16.m4a" />
             </View>
           </View>
         </View>
-        <View
-          style={[styles.table, { marginBottom: dp(100), marginTop: dp(100) }]}
-        >
+        <View style={{ alignItems: "center", marginTop: dp(30) }} />
+        <View style={[styles.table]}>
           <View style={styles.tableColumn1}>
             <Image
               style={{ width: dp(250), height: dp(320) }}
@@ -144,7 +154,7 @@ export default class Memory extends Component {
           </View>
           <View>
             <View style={styles.tableRow}>
-              <Text style={[styles.tableCheckTh, styles.tdb]}>词语名称</Text>
+              <Text style={[styles.tableCheckTh, styles.tdb]}>第一次 </Text>
               <Text style={[styles.tableCheckTh, styles.tdb]}>面孔</Text>
               <Text style={[styles.tableCheckTh, styles.tdb]}>天鹅绒</Text>
               <Text style={[styles.tableCheckTh, styles.tdb]}>教堂</Text>
@@ -152,151 +162,128 @@ export default class Memory extends Component {
               <Text style={[styles.tableCheckTh, styles.tdb]}>红色</Text>
             </View>
             <View style={styles.tableRow}>
-              <Text style={[styles.tableCheckTd, styles.tdb]}>第一次</Text>
-              <Text
-                style={[
-                  styles.tableCheckTd,
-                  styles.tdb,
-                  { backgroundColor: "white" }
-                ]}
-              />
-              <Text
-                style={[
-                  styles.tableCheckTd,
-                  styles.tdb,
-                  { backgroundColor: "white" }
-                ]}
-              />
-              <Text
-                style={[
-                  styles.tableCheckTd,
-                  styles.tdb,
-                  { backgroundColor: "white" }
-                ]}
-              />
-              <Text
-                style={[
-                  styles.tableCheckTd,
-                  styles.tdb,
-                  { backgroundColor: "white" }
-                ]}
-              />
-              <Text
-                style={[
-                  styles.tableCheckTd,
-                  styles.tdb,
-                  { backgroundColor: "white" }
-                ]}
-              />
+              <Text style={[styles.tableCheckTd, styles.tdb]}>正确</Text>
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
             </View>
             <View style={styles.tableRow}>
-              <Text style={[styles.tableCheckTd, styles.tdb]}>第二次</Text>
-              <Text
-                style={[
-                  styles.tableCheckTd,
-                  styles.tdb,
-                  { backgroundColor: "white" }
-                ]}
-              />
-              <Text
-                style={[
-                  styles.tableCheckTd,
-                  styles.tdb,
-                  { backgroundColor: "white" }
-                ]}
-              />
-              <Text
-                style={[
-                  styles.tableCheckTd,
-                  styles.tdb,
-                  { backgroundColor: "white" }
-                ]}
-              />
-              <Text
-                style={[
-                  styles.tableCheckTd,
-                  styles.tdb,
-                  { backgroundColor: "white" }
-                ]}
-              />
-              <Text
-                style={[
-                  styles.tableCheckTd,
-                  styles.tdb,
-                  { backgroundColor: "white" }
-                ]}
-              />
+              <Text style={[styles.tableCheckTd, styles.tdb]}>错误</Text>
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
             </View>
-            <View style={{ position: "absolute", top: dp(110), left: dp(275) }}>
-              <CheckBox.CheckBoxGroup
-                value={this.state.presentIllnessOne}
-                img={require("./img/checkbox.png")}
-                imgSel={require("./img/checkbox-sel.png")}
-                onChange={this.handleNowPresentOne}
-              >
-                <CheckBox
-                  value="0"
-                  style={{ marginRight: dp(157) }}
-                  iconStyle={styles.checkbox}
-                />
-                <CheckBox
-                  value="1"
-                  style={{ marginRight: dp(157) }}
-                  iconStyle={styles.checkbox}
-                />
-                <CheckBox
-                  value="2"
-                  style={{ marginRight: dp(157) }}
-                  iconStyle={styles.checkbox}
-                />
-                <CheckBox
-                  value="3"
-                  style={{ marginRight: dp(157) }}
-                  iconStyle={styles.checkbox}
-                />
-                <CheckBox
-                  value="4"
-                  style={{ marginRight: dp(157) }}
-                  iconStyle={styles.checkbox}
-                />
-              </CheckBox.CheckBoxGroup>
-            </View>
-            <View style={{ position: "absolute", top: dp(215), left: dp(275) }}>
-              <CheckBox.CheckBoxGroup
-                value={this.state.presentIllnessTwo}
-                img={require("./img/checkbox.png")}
-                imgSel={require("./img/checkbox-sel.png")}
-                onChange={this.handleNowPresentTwo}
-              >
-                <CheckBox
-                  value="0"
-                  style={{ marginRight: dp(157) }}
-                  iconStyle={styles.checkbox}
-                />
-                <CheckBox
-                  value="1"
-                  style={{ marginRight: dp(157) }}
-                  iconStyle={styles.checkbox}
-                />
-                <CheckBox
-                  value="2"
-                  style={{ marginRight: dp(157) }}
-                  iconStyle={styles.checkbox}
-                />
-                <CheckBox
-                  value="3"
-                  style={{ marginRight: dp(157) }}
-                  iconStyle={styles.checkbox}
-                />
-                <CheckBox
-                  value="4"
-                  style={{ marginRight: dp(157) }}
-                  iconStyle={styles.checkbox}
-                />
-              </CheckBox.CheckBoxGroup>
-            </View>
+            {radioStyles.map((item, index) => {
+              return (
+                <Radio.RadioGroup
+                  key={index}
+                  model={this.state.questionInfo[item["name"]]["answer"]}
+                  onChange={this.keyBoardChange.bind(this, item["name"])}
+                >
+                  <View
+                    style={{
+                      position: "absolute",
+                      top: item["oneTop"],
+                      left: item["left"],
+                      width: 50,
+                      height: 50,
+                      backgroundColor: "#fff"
+                    }}
+                  >
+                    <Radio value={1} style={styles.radio} />
+                  </View>
+                  <View
+                    style={{
+                      position: "absolute",
+                      width: 50,
+                      height: 49,
+                      top: item["twoTop"],
+                      left: item["left"],
+                      backgroundColor: "#fff"
+                    }}
+                  >
+                    <Radio value={0} style={styles.radio} />
+                  </View>
+                </Radio.RadioGroup>
+              );
+            })}
           </View>
         </View>
+        <View style={{ alignItems: "center", marginTop: dp(20) }} />
+        <View style={[styles.table]}>
+          <View style={styles.tableColumn1}>
+            <Image
+              style={{ width: dp(250), height: dp(320) }}
+              source={require("./img/doctor1.png")}
+            />
+          </View>
+          <View>
+            <View style={styles.tableRow}>
+              <Text style={[styles.tableCheckTh, styles.tdb]}>第二次 </Text>
+              <Text style={[styles.tableCheckTh, styles.tdb]}>面孔</Text>
+              <Text style={[styles.tableCheckTh, styles.tdb]}>天鹅绒</Text>
+              <Text style={[styles.tableCheckTh, styles.tdb]}>教堂</Text>
+              <Text style={[styles.tableCheckTh, styles.tdb]}>菊花</Text>
+              <Text style={[styles.tableCheckTh, styles.tdb]}>红色</Text>
+            </View>
+            <View style={styles.tableRow}>
+              <Text style={[styles.tableCheckTd, styles.tdb]}>正确</Text>
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+            </View>
+            <View style={styles.tableRow}>
+              <Text style={[styles.tableCheckTd, styles.tdb]}>错误</Text>
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+              <Text style={styles.tableCheckTd} />
+            </View>
+            {radioTwoStyles.map((item, index) => {
+              return (
+                <Radio.RadioGroup
+                  key={index}
+                  model={this.state.questionInfo[item["name"]]["answer"]}
+                  onChange={this.keyBoardChange.bind(this, item["name"])}
+                >
+                  <View
+                    style={{
+                      position: "absolute",
+                      top: item["oneTop"],
+                      left: item["left"],
+                      width: 50,
+                      height: 50,
+                      backgroundColor: "#fff"
+                    }}
+                  >
+                    <Radio value={1} style={styles.radio} />
+                  </View>
+                  <View
+                    style={{
+                      position: "absolute",
+                      width: 50,
+                      height: 49,
+                      top: item["twoTop"],
+                      left: item["left"],
+                      backgroundColor: "#fff"
+                    }}
+                  >
+                    <Radio value={0} style={styles.radio} />
+                  </View>
+                </Radio.RadioGroup>
+              );
+            })}
+          </View>
+        </View>
+
+        <View style={{ alignItems: "center", marginTop: dp(20) }} />
         <FrontAndBack goNext={this.goNext} goPrev={this.goPrev} />
       </React.Fragment>
     );
