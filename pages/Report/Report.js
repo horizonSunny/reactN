@@ -21,20 +21,80 @@ import { parseTime, diffTime } from "../../utils/handleTime";
 import { inject } from "mobx-react";
 import TopBar from "../../components/TopBar/TopBar";
 import Button from "../../components/Button/Button";
+import data from "./testData";
 
 @inject("rootStore")
 export default class Report extends Component {
   state = {
-    userInfo: {},
-    data: [],
-    pageIndex: 1,
-    isLoading: false,
-    resultData: {}
+    schemeData: [],
+    schemeTime: [],
+    currentTime: "",
+    currentScheme: ""
   };
   constructor(props) {
     super(props);
   }
-  componentDidMount() {}
+  componentDidMount() {
+    // 获取时间并且转换成数据对象
+    this.getTime();
+  }
+  //获取scheme时间并且转换成数组
+  getTime = () => {
+    this.setState(
+      {
+        schemeData: data.body
+      },
+      () => {
+        // 存放量表的时间，用于显示右边侧边栏
+        const schemeData = this.state.schemeData;
+        let timeArr = [];
+        for (let item = 0; item < schemeData.length; item++) {
+          const timeDetail = schemeData[item].assessmentDate;
+          // 这边要对时间进行切割，适应UI布局
+          const timeDate = timeDetail.split(" ");
+          const hourSecondes = timeDate[1];
+          const dayYear = timeDate[0].split("-");
+          const [year, month, day] = dayYear;
+          const time = {
+            hourSecondes,
+            year,
+            month,
+            day,
+            timeDetail
+          };
+          timeArr.push(time);
+        }
+        this.setState(
+          {
+            schemeTime: timeArr
+          },
+          () => {
+            console.log("this.state.schemeTime123_", this.state.schemeTime);
+          }
+        );
+      }
+    );
+  };
+  // 当点击的时候获取点击的“text”时间值
+  clickGetScheme(time) {
+    this.setState(
+      {
+        currentTime: time
+      },
+      () => {
+        const scheme = this.state.schemeData.filter(this.getSchemeFilter);
+        this.setState({
+          currentScheme: scheme
+        });
+      }
+    );
+  }
+  // 依据过滤的点击时间值返回scheme的数据
+  getSchemeFilter(item) {
+    if (this.state.currentTime === item.assessmentDate) {
+      return item;
+    }
+  }
   goNext = () => {};
   goPre = () => {
     BackHandler.exitApp();
@@ -48,6 +108,7 @@ export default class Report extends Component {
             <View>
               <Text style={styles.reportTitle}>脑健康评估报告</Text>
             </View>
+            {this.renderSlider()}
             <View
               style={{
                 height: dp(650)
@@ -68,17 +129,6 @@ export default class Report extends Component {
       </React.Fragment>
     );
   }
-  goToDetail = () => {
-    Alert.alert(`你点击了按钮`, "Hello World！", [
-      { text: "以后再说", onPress: () => console.log("Ask me later pressed") },
-      {
-        text: "取消",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel"
-      },
-      { text: "确定", onPress: () => console.log("OK Pressed") }
-    ]);
-  };
   renderTable() {
     const data = [
       {
@@ -164,6 +214,62 @@ export default class Report extends Component {
         </View>
       );
     });
+  }
+  renderSlider() {
+    return (
+      <View>
+        {this.state.schemeTime.map((item, index) => {
+          return (
+            <View key={index}>
+              <View style={[styles.td, styles.tdh]}>
+                <View
+                  style={{
+                    borderWidth: dp(1),
+                    borderColor: "#ddd",
+                    borderRadius: dp(10),
+                    height: dp(100),
+                    width: dp(300),
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                >
+                  <TouchableNativeFeedback
+                    background={TouchableNativeFeedback.Ripple(
+                      this.props.rippleColor
+                        ? this.props.rippleColor
+                        : "#a2a4a6",
+                      true
+                    )}
+                    onPress={this.handlePress}
+                  >
+                    <View
+                      style={{
+                        height: dp(40),
+                        width: dp(100),
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontSize: dp(20),
+                          justifyContent: "center",
+                          alignItems: "center"
+                        }}
+                      >
+                        {item.month}/{item.day} {item.hourSecondes}
+                        {"\n"}
+                        {item.year}
+                      </Text>
+                    </View>
+                  </TouchableNativeFeedback>
+                </View>
+              </View>
+            </View>
+          );
+        })}
+      </View>
+    );
   }
   render() {
     return (
