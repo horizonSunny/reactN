@@ -83,18 +83,24 @@ export default class Report extends Component {
       },
       () => {
         const scheme = this.state.schemeData.filter(this.getSchemeFilter);
-        this.setState({
-          currentScheme: scheme
-        });
+        this.setState(
+          {
+            currentScheme: scheme
+          },
+          () => {
+            console.log("------------------");
+            console.log("currentScheme_", this.state.currentScheme);
+          }
+        );
       }
     );
   }
   // 依据过滤的点击时间值返回scheme的数据
-  getSchemeFilter(item) {
+  getSchemeFilter = item => {
     if (this.state.currentTime === item.assessmentDate) {
       return item;
     }
-  }
+  };
   goNext = () => {};
   goPre = () => {
     BackHandler.exitApp();
@@ -240,7 +246,9 @@ export default class Report extends Component {
                         : "#a2a4a6",
                       true
                     )}
-                    onPress={this.handlePress}
+                    onPress={() => {
+                      this.clickGetScheme(item.timeDetail);
+                    }}
                   >
                     <View
                       style={{
