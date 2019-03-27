@@ -12,6 +12,7 @@ import React from "react";
 import MMSE from "../pages/scale/MMSE/MMSE";
 import ADL from "../pages/scale/ADL/ADL";
 import MOCA from "../pages/scale/MOCA/MOCA";
+import CDT from "../pages/scale/CDT/CDT";
 import Report from "../pages/Report/Report";
 
 import RNbridge from "../components/RNbridge/RNbridge";
@@ -35,7 +36,7 @@ function initData(res, rootStore) {
     rootStore.setUserInfo(userInfo);
   }
   console.log("info.scaleName === true_", info.scaleName.length);
-  info.scaleName.length !== 0 ? rootStore.setScaleNames(info.scaleName) : "";
+  info.scaleName.length !== 0 ? rootStore.setScaleNames(info.scaleName) : "CDT";
   judgeOperateProcess(info, rootStore);
 }
 
@@ -56,7 +57,7 @@ const Main = inject("rootStore")(props => {
     console.log("******", res);
     initData(res, props.rootStore);
     // 判断量表里面有没有东西，有的话走1，3，没有走2
-    firstPage = props.rootStore.scaleName.length !== 0 ? "MOCA" : "Report";
+    firstPage = props.rootStore.scaleName.length !== 0 ? "CDT" : "Report";
     console.log("firstPage_" + firstPage);
     const resetAction = StackActions.reset({
       index: 0,
@@ -79,6 +80,9 @@ const routes = {
   },
   MOCA: {
     screen: MOCA
+  },
+  CDT: {
+    screen: CDT
   },
   Report: {
     screen: Report

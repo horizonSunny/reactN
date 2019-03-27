@@ -24,7 +24,7 @@ import DoctorHelpConfirm from "../../../PageComponent/DoctorHelpConfirm/DoctorHe
 import styles from "../../../../../assets/css/common";
 import Radio from "../../../../components/Radio/src/Radio";
 import { DrawNumberCircle } from "../../../../utils/drawNumberCircle";
-import AnswerConfirm from "./ViewSpaceComponent/AnswerConfirm";
+import AnswerConfirm from "../../../PageComponent/AnswerConfirm/AnswerConfirm";
 import namedList from "./NamedComponent/namedComponent";
 import Audio from "../../../../components/Audio/Audio";
 import CheckBox from "../../../../components/CheckBox/src/CheckBox";

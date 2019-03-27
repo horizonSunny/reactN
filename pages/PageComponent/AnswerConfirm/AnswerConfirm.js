@@ -1,8 +1,8 @@
 import { Text, View, StyleSheet } from "react-native";
 import { Image } from "react-native/Libraries/Animated/src/Animated";
-import Radio from "../../../../../components/Radio/src/Radio";
+import Radio from "../../../components/Radio/src/Radio";
 import React from "react";
-import styles from "../../../../../../assets/css/common";
+import styles from "../../../../assets/css/common";
 
 export default class AnswerConfirm extends React.Component {
   constructor(props) {

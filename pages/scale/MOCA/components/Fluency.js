@@ -23,7 +23,7 @@ import FrontAndBack from "../../../PageComponent/frontAndBack/frontAndBack";
 import DoctorHelpConfirm from "../../../PageComponent/DoctorHelpConfirm/DoctorHelpConfirm";
 import styles from "../../../../../assets/css/common";
 import { DrawNumberCircle } from "../../../../utils/drawNumberCircle";
-import AnswerConfirm from "./ViewSpaceComponent/AnswerConfirm";
+import AnswerConfirm from "../../../PageComponent/AnswerConfirm/AnswerConfirm";
 import namedList from "./NamedComponent/namedComponent";
 import Audio from "../../../../components/Audio/Audio";
 export default class Fluency extends Component {

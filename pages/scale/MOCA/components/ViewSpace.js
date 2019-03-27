@@ -23,7 +23,7 @@ import Audio from "../../../../components/Audio/Audio";
 import styles from "../../../../../assets/css/common";
 import { DrawNumberCircle } from "../../../../utils/drawNumberCircle";
 import ligatureCoordinate from "./ViewSpaceComponent/ligatureCoordinate";
-import AnswerConfirm from "./ViewSpaceComponent/AnswerConfirm";
+import AnswerConfirm from "../../../PageComponent/AnswerConfirm/AnswerConfirm";
 
 export default class ViewSpace extends Component {
   constructor(props) {

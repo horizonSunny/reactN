@@ -17,11 +17,11 @@ import DoctorHelpWaring from "../../PageComponent/DoctorHelpWaring/DoctorHelpWar
 import { inject } from "mobx-react";
 import RNbridge from "../../../components/RNbridge/RNbridge";
 
-import ActiveScale from "./components/ActiveScale";
+import CdtScale from "./components/CdtScale";
 import styles from "../../../../assets/css/common";
 
 @inject("rootStore")
-export default class ADL extends React.Component {
+export default class CDT extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -57,7 +57,7 @@ export default class ADL extends React.Component {
                 textAlign: "center"
               }}
             >
-              日常生活能力测评{"\n"}ADL
+              画钟测验{"\n"}CDT
             </Text>
             <Text
               style={{
@@ -99,14 +99,14 @@ export default class ADL extends React.Component {
     );
   }
   renderQuestionPage() {
-    return <ActiveScale />;
+    return <CdtScale />;
   }
   render() {
     return (
       <View style={styles.container}>
         <TopBar
           onPress={this.onPress}
-          content={{ completeForm: "3", evaluationName: "ADl" }}
+          content={{ completeForm: "3", evaluationName: "CDT" }}
         />
         {this.state.homePage && this.renderHomePage()}
         {!this.state.homePage && this.renderQuestionPage()}
