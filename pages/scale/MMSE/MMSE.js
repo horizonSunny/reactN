@@ -165,6 +165,8 @@ export default class MMSE extends React.Component {
         ) {
           // 表示完成，rootStory保存量表信息
           const calculateResult = this.calculate();
+          console.log("-----------------------------");
+          console.log("calculateResult_", calculateResult);
           save(calculateResult, this.props.rootStore);
           return;
         }

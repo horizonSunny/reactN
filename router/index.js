@@ -14,6 +14,8 @@ import ADL from "../pages/scale/ADL/ADL";
 import MOCA from "../pages/scale/MOCA/MOCA";
 import CDT from "../pages/scale/CDT/CDT";
 import Report from "../pages/Report/Report";
+// detail
+import MMSE_Detail from "../pages/scaleDetail/MMSE_Detail";
 
 import RNbridge from "../components/RNbridge/RNbridge";
 import { inject } from "mobx-react";
@@ -36,7 +38,9 @@ function initData(res, rootStore) {
     rootStore.setUserInfo(userInfo);
   }
   console.log("info.scaleName === true_", info.scaleName.length);
-  info.scaleName.length !== 0 ? rootStore.setScaleNames(info.scaleName) : "CDT";
+  info.scaleName.length !== 0
+    ? rootStore.setScaleNames(info.scaleName)
+    : "MMSE";
   judgeOperateProcess(info, rootStore);
 }
 
@@ -57,7 +61,7 @@ const Main = inject("rootStore")(props => {
     console.log("******", res);
     initData(res, props.rootStore);
     // 判断量表里面有没有东西，有的话走1，3，没有走2
-    firstPage = props.rootStore.scaleName.length !== 0 ? "Report" : "Report";
+    firstPage = props.rootStore.scaleName.length !== 0 ? "MMSE" : "Report";
     console.log("firstPage_" + firstPage);
     const resetAction = StackActions.reset({
       index: 0,
@@ -86,6 +90,9 @@ const routes = {
   },
   Report: {
     screen: Report
+  },
+  MMSE_Detail: {
+    screen: MMSE_Detail
   }
 };
 const MainStack = createStackNavigator(routes, {
