@@ -82,7 +82,18 @@ export default class Report extends Component {
         currentTime: time
       },
       () => {
-        const scheme = this.state.schemeData.filter(this.getSchemeFilter);
+        //  filter 返回一个新数组
+        // const scheme = this.state.schemeData.filter(this.getSchemeFilter);
+        let scheme;
+        for (var i = 0; i < this.state.schemeData.length; i++) {
+          if (
+            this.state.currentTime ===
+            this.state.schemeData[i]["assessmentDate"]
+          ) {
+            scheme = this.state.schemeData[i];
+            break;
+          }
+        }
         this.setState(
           {
             currentScheme: scheme
@@ -112,23 +123,30 @@ export default class Report extends Component {
         <View style={{ alignItems: "center" }}>
           <View style={styles.mainCont}>
             <View>
-              <Text style={styles.reportTitle}>脑健康评估报告</Text>
-            </View>
-            {this.renderSlider()}
-            <View
-              style={{
-                height: dp(650)
-              }}
-            >
-              <View style={styles.tableRow} key={"111"}>
-                <Text style={[styles.tdh, styles.th, styles.tf]}>名称</Text>
-                <Text style={[styles.th, styles.tdh]}>内容</Text>
-                <Text style={[styles.th, styles.tdh]}>得分</Text>
-                <Text style={[styles.th, styles.tdh]}>正常参考值</Text>
-                <Text style={[styles.th, styles.tdh]}>结果</Text>
-                <Text style={[styles.th, styles.tdh]}>操作</Text>
+              {this.renderSlider()}
+              <View
+                style={{
+                  height: dp(650),
+                  borderColor: "#ddd",
+                  padding: dp(10),
+                  borderWidth: dp(3)
+                }}
+              >
+                <View style={{ alignItems: "center" }}>
+                  <Text style={styles.reportTitle}>脑健康评估报告</Text>
+                </View>
+                <View style={styles.tableRow}>
+                  <Text style={[styles.tdhSlider, styles.th, styles.tf]}>
+                    名称
+                  </Text>
+                  <Text style={[styles.th, styles.tdhSlider]}>内容</Text>
+                  <Text style={[styles.th, styles.tdhSlider]}>得分</Text>
+                  <Text style={[styles.th, styles.tdhSlider]}>正常参考值</Text>
+                  <Text style={[styles.th, styles.tdhSlider]}>结果</Text>
+                  <Text style={[styles.th, styles.tdhSlider]}>操作</Text>
+                </View>
+                <ScrollView>{this.renderTable()}</ScrollView>
               </View>
-              <ScrollView>{this.renderTable()}</ScrollView>
             </View>
           </View>
         </View>
@@ -162,22 +180,24 @@ export default class Report extends Component {
     return data.map((item, index) => {
       return (
         <View style={styles.tableRow} key={index + item.name}>
-          <Text style={[styles.td, styles.tdh, styles.tf, styles.tdf]}>
+          <Text style={[styles.td, styles.tdhSlider, styles.tf, styles.tdf]}>
             {item.name}
           </Text>
-          <Text style={[styles.td, styles.tdh]}>{item.content}</Text>
-          <Text style={[styles.td, styles.tdh]}>{item.score}</Text>
-          <Text style={[styles.td, styles.tdh]}>{item.referenceScore}</Text>
+          <Text style={[styles.td, styles.tdhSlider]}>{item.content}</Text>
+          <Text style={[styles.td, styles.tdhSlider]}>{item.score}</Text>
+          <Text style={[styles.td, styles.tdhSlider]}>
+            {item.referenceScore}
+          </Text>
           <Text
             style={[
               styles.td,
-              styles.tdh,
+              styles.tdhSlider,
               item.result === "正常" ? styles.tdl : styles.tdred
             ]}
           >
             {item.result}
           </Text>
-          <View style={[styles.td, styles.tdh]}>
+          <View style={[styles.td, styles.tdhSlider]}>
             <View
               style={{
                 borderWidth: dp(1),
@@ -333,6 +353,17 @@ const styles = StyleSheet.create({
   },
   tdh: {
     width: dp(240),
+    height: dp(80),
+    textAlign: "center",
+    textAlignVertical: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: dp(1),
+    borderColor: "#9ac0e5",
+    borderLeftWidth: dp(0)
+  },
+  tdhSlider: {
+    width: dp(200),
     height: dp(80),
     textAlign: "center",
     textAlignVertical: "center",
