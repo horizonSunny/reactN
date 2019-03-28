@@ -13,7 +13,8 @@ import {
   Modal,
   Alert,
   ActivityIndicator,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  TouchableWithoutFeedback
 } from "react-native";
 import { BackgroundImage } from "../../components/BackgroundImage/BackgroundImage";
 import ButtonImg from "../../components/ButtonImg/ButtonImg";
@@ -120,33 +121,47 @@ export default class Report extends Component {
     return (
       <React.Fragment>
         <TopBar />
-        <View style={{ alignItems: "center" }}>
-          <View style={styles.mainCont}>
-            <View>
+        <View>
+          <View style={[styles.mainCont, { position: "relative" }]}>
+            <View
+              style={{
+                position: "absolute",
+                top: dp(150),
+                left: dp(10),
+                height: dp(800),
+                width: dp(300),
+                alignItems: "center"
+              }}
+            >
               {this.renderSlider()}
-              <View
-                style={{
-                  height: dp(650),
-                  borderColor: "#ddd",
-                  padding: dp(10),
-                  borderWidth: dp(3)
-                }}
-              >
-                <View style={{ alignItems: "center" }}>
-                  <Text style={styles.reportTitle}>脑健康评估报告</Text>
-                </View>
-                <View style={styles.tableRow}>
-                  <Text style={[styles.tdhSlider, styles.th, styles.tf]}>
-                    名称
-                  </Text>
-                  <Text style={[styles.th, styles.tdhSlider]}>内容</Text>
-                  <Text style={[styles.th, styles.tdhSlider]}>得分</Text>
-                  <Text style={[styles.th, styles.tdhSlider]}>正常参考值</Text>
-                  <Text style={[styles.th, styles.tdhSlider]}>结果</Text>
-                  <Text style={[styles.th, styles.tdhSlider]}>操作</Text>
-                </View>
-                <ScrollView>{this.renderTable()}</ScrollView>
+            </View>
+            <View
+              style={{
+                position: "absolute",
+                top: dp(150),
+                right: dp(80),
+                borderColor: "#ddd",
+                padding: dp(10),
+                borderWidth: dp(3),
+                height: dp(800),
+                width: dp(1300),
+                alignItems: "center"
+              }}
+            >
+              <View style={{ alignItems: "center" }}>
+                <Text style={styles.reportTitle}>脑健康评估报告</Text>
               </View>
+              <View style={styles.tableRow}>
+                <Text style={[styles.tdhSlider, styles.th, styles.tf]}>
+                  名称
+                </Text>
+                <Text style={[styles.th, styles.tdhSlider]}>内容</Text>
+                <Text style={[styles.th, styles.tdhSlider]}>得分</Text>
+                <Text style={[styles.th, styles.tdhSlider]}>正常参考值</Text>
+                <Text style={[styles.th, styles.tdhSlider]}>结果</Text>
+                <Text style={[styles.th, styles.tdhSlider]}>操作</Text>
+              </View>
+              <ScrollView>{this.renderTable()}</ScrollView>
             </View>
           </View>
         </View>
@@ -214,7 +229,7 @@ export default class Report extends Component {
                   this.props.rippleColor ? this.props.rippleColor : "#a2a4a6",
                   true
                 )}
-                onPress={this.handlePress}
+                onPress={this.handleToD}
               >
                 <View
                   style={{
@@ -242,60 +257,93 @@ export default class Report extends Component {
     });
   }
   renderSlider() {
+    const imgArr = [
+      require("./img/selected.png"),
+      require("./img/unselected.png")
+    ];
     return (
-      <View>
-        {this.state.schemeTime.map((item, index) => {
-          return (
-            <View key={index}>
-              <View style={[styles.td, styles.tdh]}>
-                <View
-                  style={{
-                    borderWidth: dp(1),
-                    borderColor: "#ddd",
-                    borderRadius: dp(10),
-                    height: dp(100),
-                    width: dp(300),
-                    justifyContent: "center",
-                    alignItems: "center"
-                  }}
-                >
-                  <TouchableNativeFeedback
-                    background={TouchableNativeFeedback.Ripple(
-                      this.props.rippleColor
-                        ? this.props.rippleColor
-                        : "#a2a4a6",
-                      true
-                    )}
-                    onPress={() => {
-                      this.clickGetScheme(item.timeDetail);
+      <View
+        style={{
+          height: dp(800)
+        }}
+      >
+        <ScrollView>
+          {this.state.schemeTime.map((item, index) => {
+            return (
+              <View key={index}>
+                <View>
+                  <View
+                    style={{
+                      height: dp(100),
+                      width: dp(500),
+                      marginLeft: dp(50)
                     }}
                   >
-                    <View
-                      style={{
-                        height: dp(40),
-                        width: dp(100),
-                        justifyContent: "center",
-                        alignItems: "center"
+                    <TouchableWithoutFeedback
+                      onPress={() => {
+                        this.clickGetScheme(item.timeDetail);
                       }}
                     >
-                      <Text
+                      <View
                         style={{
-                          fontSize: dp(20),
-                          justifyContent: "center",
-                          alignItems: "center"
+                          height: dp(100),
+                          width: dp(200),
+                          position: "relative"
                         }}
                       >
-                        {item.month}/{item.day} {item.hourSecondes}
-                        {"\n"}
-                        {item.year}
-                      </Text>
-                    </View>
-                  </TouchableNativeFeedback>
+                        <View
+                          style={{
+                            position: "absolute",
+                            left: dp(20),
+                            top: dp(10),
+                            fontSize: dp(20),
+                            alignItems: "center"
+                          }}
+                        >
+                          <Image
+                            style={{ width: dp(20), height: dp(20) }}
+                            source={
+                              item.timeDetail === this.state.currentTime
+                                ? imgArr[0]
+                                : imgArr[1]
+                            }
+                          />
+                          {index !== this.state.schemeTime.length - 1 && (
+                            <Image
+                              style={{
+                                width: dp(5),
+                                height: dp(50),
+                                marginTop: dp(15)
+                              }}
+                              source={require("./img/timeline.png")}
+                            />
+                          )}
+                        </View>
+                        {/* 左侧时间右半部分 */}
+                        <View
+                          style={{
+                            position: "absolute",
+                            left: dp(50),
+                            fontSize: dp(20)
+                          }}
+                        >
+                          <Text>
+                            {item.month}/{item.day}
+                            <Text style={{ fontSize: dp(20) }}>
+                              {" "}
+                              {item.hourSecondes}
+                            </Text>
+                          </Text>
+                          <Text style={{ fontSize: dp(20) }}>{item.year}</Text>
+                        </View>
+                      </View>
+                    </TouchableWithoutFeedback>
+                  </View>
                 </View>
               </View>
-            </View>
-          );
-        })}
+            );
+          })}
+        </ScrollView>
       </View>
     );
   }
