@@ -48,11 +48,6 @@ export default class MOCA extends React.Component {
       "abstract",
       "delayRemeber",
       "directiveForce"
-      //   "read",
-      //   "understand",
-      //   "write",
-      //   "viewSpace",
-      //   "delayRecall"
     ];
     this.state = {
       homePage: true,
@@ -106,7 +101,49 @@ export default class MOCA extends React.Component {
   calculateAll = () => {};
 
   // 从子组件问题模块传上来的值，然后确定是向前还是向后
-  childrenInfo = (questionModel, questionInfo, totalScore, direction) => {};
+  childrenInfo = (questionModel, questionInfo, totalScore, direction) => {
+    console.log("have_in_questionModel", questionModel);
+    console.log("have_in_childrenInfo", questionInfo);
+    console.log("totalScore_", totalScore);
+    const qustionModelInfo = {
+      questionInfo,
+      totalScore
+    };
+
+    this.setState(
+      {
+        [questionModel]: qustionModelInfo
+      },
+      () => {
+        // 先判断是否是最前面一个或者最后面一个,forward表示上一个问题模块,backwards表示下一个问题模块
+        if (this.state.questionModelIndex === 0 && direction === "forward") {
+          return;
+        } else if (
+          this.state.questionModelIndex === this.state.questionModelNum - 1 &&
+          direction === "backwards"
+        ) {
+          // 表示完成，rootStory保存量表信息
+          const calculateResult = this.calculate();
+          save(calculateResult, this.props.rootStore);
+          return;
+        }
+        // 不是第一个和最后一个话，直接让question模块自增或者自减，
+        // directionForward 表示进入问题模块是从头进还是从尾进
+        if (direction === "forward") {
+          console.log('direction === "forward"');
+          this.setState({
+            questionModelIndex: --this.state.questionModelIndex,
+            directionForward: true
+          });
+        } else if (direction === "backwards") {
+          this.setState({
+            questionModelIndex: ++this.state.questionModelIndex,
+            directionForward: false
+          });
+        }
+      }
+    );
+  };
 
   // 必须绑定一个函数,设置不是首页，让取第一个测评问题模块页面
   startMeasurement = () => {
@@ -123,7 +160,7 @@ export default class MOCA extends React.Component {
   renderQuestionPage() {
     return (
       <View>
-        {this.state.questionModelIndex === 1 && (
+        {this.state.questionModelIndex === 0 && (
           <ViewSpace
             questionModel={this.state.viewSpace}
             directionForward={this.state.directionForward}
@@ -151,49 +188,49 @@ export default class MOCA extends React.Component {
             callBack={this.childrenInfo}
           />
         )}
-        {this.state.questionModelIndex === 3 && (
+        {this.state.questionModelIndex === 4 && (
           <RecordOne
             questionModel={this.state.recordOne}
             directionForward={this.state.directionForward}
             callBack={this.childrenInfo}
           />
         )}
-        {this.state.questionModelIndex === 4 && (
+        {this.state.questionModelIndex === 5 && (
           <Calculate
             questionModel={this.state.calculate}
             directionForward={this.state.directionForward}
             callBack={this.childrenInfo}
           />
         )}
-        {this.state.questionModelIndex === 5 && (
+        {this.state.questionModelIndex === 6 && (
           <RepeatRead
             questionModel={this.state.repeatRead}
             directionForward={this.state.directionForward}
             callBack={this.childrenInfo}
           />
         )}
-        {this.state.questionModelIndex === 6 && (
+        {this.state.questionModelIndex === 7 && (
           <Fluency
             questionModel={this.state.fluency}
             directionForward={this.state.directionForward}
             callBack={this.childrenInfo}
           />
         )}
-        {this.state.questionModelIndex === 7 && (
+        {this.state.questionModelIndex === 8 && (
           <Abstract
             questionModel={this.state.abstract}
             directionForward={this.state.directionForward}
             callBack={this.childrenInfo}
           />
         )}
-        {this.state.questionModelIndex === 8 && (
+        {this.state.questionModelIndex === 9 && (
           <DelayRemeber
             questionModel={this.state.delayRemeber}
             directionForward={this.state.directionForward}
             callBack={this.childrenInfo}
           />
         )}
-        {this.state.questionModelIndex === 0 && (
+        {this.state.questionModelIndex === 10 && (
           <DirectiveForce
             questionModel={this.state.directiveForce}
             directionForward={this.state.directionForward}
@@ -210,8 +247,7 @@ export default class MOCA extends React.Component {
         <View style={{ justifyContent: "center", marginTop: dp(60) }}>
           <BackgroundImage
             source={require("./components/img/bk1.png")}
-            style={{ height: dp(500), width: dp(1725), alignItems: "center" }}
-          >
+            style={{ height: dp(500), width: dp(1725), alignItems: "center" }}>
             <Text
               style={{
                 fontSize: font(100),
@@ -219,8 +255,7 @@ export default class MOCA extends React.Component {
                 marginTop: dp(120),
                 fontWeight: "900",
                 textAlign: "center"
-              }}
-            >
+              }}>
               MoCA认知测评
             </Text>
             <Text
@@ -228,8 +263,7 @@ export default class MOCA extends React.Component {
                 fontSize: font(36),
                 color: "#c4e1fe",
                 marginTop: dp(40)
-              }}
-            >
+              }}>
               本次测评大约需要10分钟
             </Text>
           </BackgroundImage>
@@ -246,15 +280,13 @@ export default class MOCA extends React.Component {
               borderRadius: dp(10),
               overflow: "hidden"
             }}
-            onPress={this.startMeasurement}
-          >
+            onPress={this.startMeasurement}>
             <Text
               style={{
                 fontSize: font(40),
                 fontWeight: "bold",
                 color: "#ffffff"
-              }}
-            >
+              }}>
               开始测评
             </Text>
           </ButtonImg>

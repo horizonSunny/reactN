@@ -66,11 +66,45 @@ export default class DelayRemeber extends Component {
     return;
   };
   goNext = () => {
+    let { keys, values, entries } = Object;
+    for (let value of values(this.state.questionInfo)) {
+      if (value["answer"] === "") {
+        androidToast("请选择选项");
+        return;
+      }
+    }
+    console.log("this.state.questionInfo_", this.state.questionInfo);
     this.calculateScore();
     return;
   };
-  calculateScore = () => {};
-
+  calculateScore = () => {
+    let questionInfo = objectClone(this.state.questionInfo);
+    questionInfo["face"]["score"] = parseInt(questionInfo["face"]["answer"]);
+    questionInfo["velvet"]["score"] = parseInt(
+      questionInfo["velvet"]["answer"]
+    );
+    questionInfo["church"]["score"] = parseInt(
+      questionInfo["church"]["answer"]
+    );
+    questionInfo["chrysanthemum"]["score"] = parseInt(
+      questionInfo["chrysanthemum"]["answer"]
+    );
+    questionInfo["red"]["score"] = parseInt(questionInfo["red"]["answer"]);
+    let values = Object.values(questionInfo);
+    let totalScore = 0;
+    for (let index = 0; index < values.length; index++) {
+      totalScore += Number(values[index].score);
+    }
+    this.setState(
+      {
+        questionInfo: questionInfo,
+        totalScore: totalScore
+      },
+      () => {
+        commonFunction.jumpWithParameter("backwards", this.state, this.props);
+      }
+    );
+  };
   render() {
     const radioStyles = [
       { oneTop: dp(110), twoTop: dp(220), left: dp(272), name: "face" },
@@ -91,8 +125,7 @@ export default class DelayRemeber extends Component {
             style={{
               backgroundColor: "white",
               marginTop: dp(50)
-            }}
-          >
+            }}>
             <PageOrderCode
               backgroundColor={"green"}
               index={this.state.questionIndex + 1}
@@ -105,8 +138,7 @@ export default class DelayRemeber extends Component {
                 alignItems: "center",
                 marginTop: dp(-570),
                 marginLeft: dp(300)
-              }}
-            >
+              }}>
               <Text style={[styles.questionText, { width: "100%" }]}>
                 3-1.(延时回忆，不能提醒)刚才我给您读了几个词让您记住，请您再尽量回忆一下，告诉我这些词都有什么？
               </Text>
@@ -121,8 +153,7 @@ export default class DelayRemeber extends Component {
                 right: dp(50),
                 height: dp(200),
                 width: dp(200)
-              }}
-            >
+              }}>
               <Audio src="moca_16.m4a" />
             </View>
           </View>
@@ -165,8 +196,7 @@ export default class DelayRemeber extends Component {
                 <Radio.RadioGroup
                   key={index}
                   model={this.state.questionInfo[item["name"]]["answer"]}
-                  onChange={this.keyBoardChange.bind(this, item["name"])}
-                >
+                  onChange={this.keyBoardChange.bind(this, item["name"])}>
                   <View
                     style={{
                       position: "absolute",
@@ -175,8 +205,7 @@ export default class DelayRemeber extends Component {
                       width: 50,
                       height: 50,
                       backgroundColor: "#fff"
-                    }}
-                  >
+                    }}>
                     <Radio value={1} style={styles.radio} />
                   </View>
                   <View
@@ -187,8 +216,7 @@ export default class DelayRemeber extends Component {
                       top: item["twoTop"],
                       left: item["left"],
                       backgroundColor: "#fff"
-                    }}
-                  >
+                    }}>
                     <Radio value={0} style={styles.radio} />
                   </View>
                 </Radio.RadioGroup>

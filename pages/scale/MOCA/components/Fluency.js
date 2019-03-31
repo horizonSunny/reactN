@@ -30,7 +30,9 @@ export default class Fluency extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionIndex: 0
+      questionModel: "fluency",
+      questionIndex: 6,
+      totalScore: 0
     };
   }
   componentWillMount() {
@@ -62,15 +64,34 @@ export default class Fluency extends Component {
     });
   };
   goNext = () => {
-    const questionTotal = Object.getOwnPropertyNames(this.state.questionInfo);
-    // 表示是否全部问题, 是否全部结束了
-    if (this.state.questionIndex === questionTotal.length - 1) {
-      this.calculateScore();
-      return;
+    let { keys, values, entries } = Object;
+    for (let value of values(this.state.questionInfo)) {
+      if (value["answer"] === "") {
+        androidToast("请选择选项");
+        return;
+      }
     }
-    this.setState({
-      questionIndex: ++this.state.questionIndex
-    });
+    this.calculateScore();
+  };
+  calculateScore = () => {
+    let questionInfo = objectClone(this.state.questionInfo);
+    questionInfo["fluency"]["score"] = parseInt(
+      questionInfo["fluency"]["answer"]
+    );
+    let values = Object.values(questionInfo);
+    let totalScore = 0;
+    for (let index = 0; index < values.length; index++) {
+      totalScore += Number(values[index].score);
+    }
+    this.setState(
+      {
+        questionInfo: questionInfo,
+        totalScore: totalScore
+      },
+      () => {
+        commonFunction.jumpWithParameter("backwards", this.state, this.props);
+      }
+    );
   };
   render() {
     const info = {
@@ -89,8 +110,7 @@ export default class Fluency extends Component {
             right: dp(50),
             height: dp(200),
             width: dp(200)
-          }}
-        >
+          }}>
           <Audio src="moca_13.m4a" />
         </View>
       );

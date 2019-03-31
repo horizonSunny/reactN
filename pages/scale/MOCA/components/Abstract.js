@@ -73,6 +73,29 @@ export default class Abstract extends Component {
       questionIndex: ++this.state.questionIndex
     });
   };
+  calculateScore = () => {
+    let questionInfo = objectClone(this.state.questionInfo);
+    questionInfo["transportation"]["score"] = parseInt(
+      questionInfo["transportation"]["answer"]
+    );
+    questionInfo["measure"]["score"] = parseInt(
+      questionInfo["measure"]["answer"]
+    );
+    let values = Object.values(questionInfo);
+    let totalScore = 0;
+    for (let index = 0; index < values.length; index++) {
+      totalScore += Number(values[index].score);
+    }
+    this.setState(
+      {
+        questionInfo: questionInfo,
+        totalScore: totalScore
+      },
+      () => {
+        commonFunction.jumpWithParameter("backwards", this.state, this.props);
+      }
+    );
+  };
   render() {
     const namedList = [
       {
@@ -100,8 +123,7 @@ export default class Abstract extends Component {
             right: dp(50),
             height: dp(200),
             width: dp(200)
-          }}
-        >
+          }}>
           {props.index === 13 && <Audio src="moca_13.m4a" />}
           {props.index === 14 && <Audio src="moca_14.m4a" />}
         </View>
@@ -120,8 +142,7 @@ export default class Abstract extends Component {
             keyBoardChange={this.keyBoardChange}
             goPrev={this.goPrev}
             goNext={this.goNext}
-            audio={<AudioShow index={this.state.questionIndex} />}
-          >
+            audio={<AudioShow index={this.state.questionIndex} />}>
             <View>
               <Text>{item["question"]}</Text>
             </View>

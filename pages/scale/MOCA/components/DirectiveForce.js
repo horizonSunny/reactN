@@ -77,6 +77,33 @@ export default class DirectiveForce extends Component {
       questionIndex: ++this.state.questionIndex
     });
   };
+  calculateScore = () => {
+    let questionInfo = objectClone(this.state.questionInfo);
+    questionInfo["year"]["score"] = parseInt(questionInfo["year"]["answer"]);
+    questionInfo["month"]["score"] = parseInt(questionInfo["month"]["answer"]);
+    questionInfo["day"]["score"] = parseInt(questionInfo["day"]["answer"]);
+    questionInfo["weekDay"]["score"] = parseInt(
+      questionInfo["weekDay"]["answer"]
+    );
+    questionInfo["company"]["score"] = parseInt(
+      questionInfo["company"]["answer"]
+    );
+    questionInfo["city"]["score"] = parseInt(questionInfo["city"]["answer"]);
+    let values = Object.values(questionInfo);
+    let totalScore = 0;
+    for (let index = 0; index < values.length; index++) {
+      totalScore += Number(values[index].score);
+    }
+    this.setState(
+      {
+        questionInfo: questionInfo,
+        totalScore: totalScore
+      },
+      () => {
+        commonFunction.jumpWithParameter("backwards", this.state, this.props);
+      }
+    );
+  };
   render() {
     const namedList = [
       {
@@ -116,8 +143,7 @@ export default class DirectiveForce extends Component {
             right: dp(50),
             height: dp(200),
             width: dp(200)
-          }}
-        >
+          }}>
           {props.index === 17 && <Audio src="moca_17.m4a" />}
           {props.index === 18 && <Audio src="moca_18.m4a" />}
           {props.index === 19 && <Audio src="moca_19.m4a" />}
@@ -140,8 +166,7 @@ export default class DirectiveForce extends Component {
             keyBoardChange={this.keyBoardChange}
             goPrev={this.goPrev}
             goNext={this.goNext}
-            audio={<AudioShow index={this.state.questionIndex + 1} />}
-          >
+            audio={<AudioShow index={this.state.questionIndex + 1} />}>
             <View style={{ marginTop: dp(100) }} />
           </DoctorHelpConfirm>
         )

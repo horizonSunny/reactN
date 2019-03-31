@@ -33,7 +33,7 @@ export default class RecordOne extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionModel: "directiveForce",
+      questionModel: "recordOne",
       questionIndex: 8,
       totalScore: 0
     };
@@ -73,6 +73,27 @@ export default class RecordOne extends Component {
         return;
       }
     }
+    this.calculateScore();
+  };
+  calculateScore = () => {
+    let questionInfo = objectClone(this.state.questionInfo);
+    questionInfo["haveOneNum"]["score"] = parseInt(
+      questionInfo["haveOneNum"]["answer"]
+    );
+    let values = Object.values(questionInfo);
+    let totalScore = 0;
+    for (let index = 0; index < values.length; index++) {
+      totalScore += Number(values[index].score);
+    }
+    this.setState(
+      {
+        questionInfo: questionInfo,
+        totalScore: totalScore
+      },
+      () => {
+        commonFunction.jumpWithParameter("backwards", this.state, this.props);
+      }
+    );
   };
   render() {
     return (
@@ -82,8 +103,7 @@ export default class RecordOne extends Component {
             style={{
               backgroundColor: "white",
               marginTop: dp(50)
-            }}
-          >
+            }}>
             <PageOrderCode
               backgroundColor={"green"}
               index={this.state.questionIndex + 1}
@@ -96,11 +116,9 @@ export default class RecordOne extends Component {
                 alignItems: "center",
                 marginTop: dp(-570),
                 marginLeft: dp(300)
-              }}
-            >
+              }}>
               <Text style={[styles.questionText, { width: "100%" }]}>
-                3-1.读出下列词语(每秒1个),后由患者{"\n"}
-                重复上述过程，重复两次，5分钟后回忆
+                3-1.每当数字1出现时，患者必须用手敲打一下桌面，错误数大于或者等于2个不给分
               </Text>
             </View>
             <View
@@ -113,8 +131,7 @@ export default class RecordOne extends Component {
                 right: dp(50),
                 height: dp(200),
                 width: dp(200)
-              }}
-            >
+              }}>
               <Audio src="moca_1.m4a" />
             </View>
           </View>
@@ -123,8 +140,7 @@ export default class RecordOne extends Component {
           style={[
             styles.table,
             { marginBottom: dp(30), marginTop: dp(50), marginLeft: dp(350) }
-          ]}
-        >
+          ]}>
           <View style={{ width: dp(70) }} />
           <View>
             <View style={styles.tableRow}>
@@ -145,8 +161,7 @@ export default class RecordOne extends Component {
                             styles.tableCheckTd,
                             styles.tdb,
                             { backgroundColor: "white" }
-                          ]}
-                        >
+                          ]}>
                           {itemInfo}
                         </Text>
                       );

@@ -30,10 +30,9 @@ export default class Memory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionModel: "directiveForce",
+      questionModel: "memory",
       questionIndex: 6,
-      totalScore: 0,
-      presentIllnessOne: []
+      totalScore: 0
     };
   }
   componentWillMount() {
@@ -74,8 +73,52 @@ export default class Memory extends Component {
     this.calculateScore();
     return;
   };
-  calculateScore = () => {};
-
+  calculateScore = () => {
+    let questionInfo = objectClone(this.state.questionInfo);
+    questionInfo["face"]["score"] = parseInt(questionInfo["face"]["answer"]);
+    questionInfo["velvet"]["score"] = parseInt(
+      questionInfo["velvet"]["answer"]
+    );
+    questionInfo["church"]["score"] = parseInt(
+      questionInfo["church"]["answer"]
+    );
+    questionInfo["chrysanthemum"]["score"] = parseInt(
+      questionInfo["chrysanthemum"]["answer"]
+    );
+    questionInfo["red"]["score"] = parseInt(questionInfo["red"]["answer"]);
+    questionInfo["faceTwo"]["score"] = parseInt(
+      questionInfo["faceTwo"]["answer"]
+    );
+    questionInfo["velvetTwo"]["score"] = parseInt(
+      questionInfo["velvetTwo"]["answer"]
+    );
+    questionInfo["velvet"]["score"] = parseInt(
+      questionInfo["velvet"]["answer"]
+    );
+    questionInfo["churchTwo"]["churchTwo"] = parseInt(
+      questionInfo["church"]["answer"]
+    );
+    questionInfo["chrysanthemumTwo"]["churchTwo"] = parseInt(
+      questionInfo["chrysanthemumTwo"]["answer"]
+    );
+    questionInfo["redTwo"]["churchTwo"] = parseInt(
+      questionInfo["redTwo"]["answer"]
+    );
+    let values = Object.values(questionInfo);
+    let totalScore = 0;
+    for (let index = 0; index < values.length; index++) {
+      totalScore += Number(values[index].score);
+    }
+    this.setState(
+      {
+        questionInfo: questionInfo,
+        totalScore: totalScore
+      },
+      () => {
+        commonFunction.jumpWithParameter("backwards", this.state, this.props);
+      }
+    );
+  };
   render() {
     const radioStyles = [
       { oneTop: dp(110), twoTop: dp(220), left: dp(272), name: "face" },
@@ -108,8 +151,7 @@ export default class Memory extends Component {
             style={{
               backgroundColor: "white",
               marginTop: dp(50)
-            }}
-          >
+            }}>
             <PageOrderCode
               backgroundColor={"green"}
               index={this.state.questionIndex + 1}
@@ -122,8 +164,7 @@ export default class Memory extends Component {
                 alignItems: "center",
                 marginTop: dp(-570),
                 marginLeft: dp(300)
-              }}
-            >
+              }}>
               <Text style={[styles.questionText, { width: "100%" }]}>
                 3-1.(记忆，不记分)读出下列词语(每秒一个)，患者重复2次，5分钟后回忆？
               </Text>
@@ -138,8 +179,7 @@ export default class Memory extends Component {
                 right: dp(50),
                 height: dp(200),
                 width: dp(200)
-              }}
-            >
+              }}>
               <Audio src="moca_16.m4a" />
             </View>
           </View>
@@ -182,8 +222,7 @@ export default class Memory extends Component {
                 <Radio.RadioGroup
                   key={index}
                   model={this.state.questionInfo[item["name"]]["answer"]}
-                  onChange={this.keyBoardChange.bind(this, item["name"])}
-                >
+                  onChange={this.keyBoardChange.bind(this, item["name"])}>
                   <View
                     style={{
                       position: "absolute",
@@ -192,8 +231,7 @@ export default class Memory extends Component {
                       width: 50,
                       height: 50,
                       backgroundColor: "#fff"
-                    }}
-                  >
+                    }}>
                     <Radio value={1} style={styles.radio} />
                   </View>
                   <View
@@ -204,8 +242,7 @@ export default class Memory extends Component {
                       top: item["twoTop"],
                       left: item["left"],
                       backgroundColor: "#fff"
-                    }}
-                  >
+                    }}>
                     <Radio value={0} style={styles.radio} />
                   </View>
                 </Radio.RadioGroup>
@@ -251,8 +288,7 @@ export default class Memory extends Component {
                 <Radio.RadioGroup
                   key={index}
                   model={this.state.questionInfo[item["name"]]["answer"]}
-                  onChange={this.keyBoardChange.bind(this, item["name"])}
-                >
+                  onChange={this.keyBoardChange.bind(this, item["name"])}>
                   <View
                     style={{
                       position: "absolute",
@@ -261,8 +297,7 @@ export default class Memory extends Component {
                       width: 50,
                       height: 50,
                       backgroundColor: "#fff"
-                    }}
-                  >
+                    }}>
                     <Radio value={1} style={styles.radio} />
                   </View>
                   <View
@@ -273,8 +308,7 @@ export default class Memory extends Component {
                       top: item["twoTop"],
                       left: item["left"],
                       backgroundColor: "#fff"
-                    }}
-                  >
+                    }}>
                     <Radio value={0} style={styles.radio} />
                   </View>
                 </Radio.RadioGroup>

@@ -67,13 +67,43 @@ export default class RepeatRead extends Component {
     return;
   };
   goNext = () => {
-    let { keys, values, entries } = Object;
-    for (let value of values(this.state.questionInfo)) {
-      if (value["answer"] === "") {
-        androidToast("请选择选项");
-        return;
-      }
+    const questionTotal = Object.getOwnPropertyNames(this.state.questionInfo);
+    // 判断是否为空，为空则return
+    const questionType = questionTotal[this.state.questionIndex - 10];
+    if (this.state.questionInfo[questionType]["answer"] === "") {
+      androidToast("请选择选项");
+      return;
     }
+    if (this.state.questionIndex === 11) {
+      this.calculateScore();
+      return;
+    }
+    this.setState({
+      questionIndex: ++this.state.questionIndex
+    });
+  };
+  calculateScore = () => {
+    let questionInfo = objectClone(this.state.questionInfo);
+    questionInfo["oneRepeat"]["score"] = parseInt(
+      questionInfo["oneRepeat"]["answer"]
+    );
+    questionInfo["twoRepeat"]["score"] = parseInt(
+      questionInfo["twoRepeat"]["answer"]
+    );
+    let values = Object.values(questionInfo);
+    let totalScore = 0;
+    for (let index = 0; index < values.length; index++) {
+      totalScore += Number(values[index].score);
+    }
+    this.setState(
+      {
+        questionInfo: questionInfo,
+        totalScore: totalScore
+      },
+      () => {
+        commonFunction.jumpWithParameter("backwards", this.state, this.props);
+      }
+    );
   };
   render() {
     return (
@@ -83,8 +113,7 @@ export default class RepeatRead extends Component {
             style={{
               backgroundColor: "white",
               marginTop: dp(50)
-            }}
-          >
+            }}>
             <PageOrderCode
               backgroundColor={"green"}
               index={this.state.questionIndex + 1}
@@ -97,8 +126,7 @@ export default class RepeatRead extends Component {
                 alignItems: "center",
                 marginTop: dp(-570),
                 marginLeft: dp(300)
-              }}
-            >
+              }}>
               <Text style={[styles.questionText, { width: "100%" }]}>
                 5-2.(语言)请重复下面的句子
               </Text>
@@ -113,8 +141,7 @@ export default class RepeatRead extends Component {
                 right: dp(50),
                 height: dp(200),
                 width: dp(200)
-              }}
-            >
+              }}>
               {this.state.questionIndex === 10 && <Audio src="moca_11.m4a" />}
               {this.state.questionIndex === 11 && <Audio src="moca_12.m4a" />}
             </View>
@@ -127,14 +154,12 @@ export default class RepeatRead extends Component {
               style={{
                 alignItems: "center",
                 marginBottom: dp(100)
-              }}
-            >
+              }}>
               <Text
                 style={{
                   marginTop: dp(200),
                   fontSize: 30
-                }}
-              >
+                }}>
                 我只知道今天张亮是来帮过忙的人
               </Text>
               <View
@@ -163,14 +188,12 @@ export default class RepeatRead extends Component {
                 style={{
                   alignItems: "center",
                   marginBottom: dp(100)
-                }}
-              >
+                }}>
                 <Text
                   style={{
                     marginTop: dp(200),
                     fontSize: 30
-                  }}
-                >
+                  }}>
                   狗在房间的时候，猫总是躺在沙发下面
                 </Text>
                 <View

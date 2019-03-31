@@ -64,8 +64,7 @@ const Main = inject("rootStore")(props => {
     console.log("******", res);
     initData(res, props.rootStore);
     // 判断量表里面有没有东西，有的话走1，3，没有走2
-    firstPage =
-      props.rootStore.scaleName.length !== 0 ? "CDT_Detail" : "Report";
+    firstPage = props.rootStore.scaleName.length !== 0 ? "MOCA" : "Report";
     console.log("firstPage_" + firstPage);
     const resetAction = StackActions.reset({
       index: 0,

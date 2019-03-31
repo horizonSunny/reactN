@@ -31,7 +31,9 @@ export default class Named extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionIndex: 0
+      questionModel: "named",
+      questionIndex: this.props.directionForward ? 3 : 0,
+      totalScore: 0
     };
   }
   componentWillMount() {
@@ -75,6 +77,28 @@ export default class Named extends React.Component {
       questionIndex: ++this.state.questionIndex
     });
   };
+  calculateScore = () => {
+    let questionInfo = objectClone(this.state.questionInfo);
+    questionInfo["lion"]["score"] = parseInt(questionInfo["lion"]["answer"]);
+    questionInfo["rhinoceros"]["score"] = parseInt(
+      questionInfo["rhinoceros"]["answer"]
+    );
+    questionInfo["camel"]["score"] = parseInt(questionInfo["camel"]["answer"]);
+    let values = Object.values(questionInfo);
+    let totalScore = 0;
+    for (let index = 0; index < values.length; index++) {
+      totalScore += Number(values[index].score);
+    }
+    this.setState(
+      {
+        questionInfo: questionInfo,
+        totalScore: totalScore
+      },
+      () => {
+        commonFunction.jumpWithParameter("backwards", this.state, this.props);
+      }
+    );
+  };
   render() {
     function AudioShow() {
       return (
@@ -88,8 +112,7 @@ export default class Named extends React.Component {
             right: dp(50),
             height: dp(200),
             width: dp(200)
-          }}
-        >
+          }}>
           <Audio src="moca_46.m4a" />
         </View>
       );
@@ -113,8 +136,7 @@ export default class Named extends React.Component {
             keyBoardChange={this.keyBoardChange}
             goPrev={this.goPrev}
             goNext={this.goNext}
-            audio={<AudioShow />}
-          >
+            audio={<AudioShow />}>
             <Image
               style={{ width: dp(250), height: dp(320), marginTop: dp(10) }}
               source={img_arr[index]}

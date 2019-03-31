@@ -28,12 +28,8 @@ import AnswerConfirm from "../../../PageComponent/AnswerConfirm/AnswerConfirm";
 export default class ViewSpace extends Component {
   constructor(props) {
     super(props);
-    let answerModel = {
-      score: 0,
-      answer: ""
-    };
     this.state = {
-      questionModel: "directiveForce",
+      questionModel: "viewSpace",
       questionIndex: this.props.directionForward ? 5 : 0,
       totalScore: 0
     };
@@ -75,9 +71,10 @@ export default class ViewSpace extends Component {
     });
   };
   goNext = () => {
-    const questionTotal = Object.getOwnPropertyNames(this.state.questionInfo);
+    const questionTotal = 5;
     // 表示是否全部问题, 是否全部结束了
-    if (this.state.questionIndex === questionTotal.length - 1) {
+    console.log("this.state.questionIndex_", this.state.questionIndex);
+    if (this.state.questionIndex === questionTotal) {
       this.calculateScore();
       return;
     }
@@ -85,7 +82,30 @@ export default class ViewSpace extends Component {
       questionIndex: ++this.state.questionIndex
     });
   };
-  calculateScore = () => {};
+  calculateScore = () => {
+    let questionInfo = objectClone(this.state.questionInfo);
+    questionInfo["ligature"]["score"] = parseInt(
+      questionInfo["ligature"]["answer"]
+    );
+    questionInfo["cube"]["score"] = parseInt(questionInfo["cube"]["answer"]);
+    questionInfo["horologe"]["score"] = parseInt(
+      questionInfo["horologe"]["answer"]
+    );
+    let values = Object.values(questionInfo);
+    let totalScore = 0;
+    for (let index = 0; index < values.length; index++) {
+      totalScore += Number(values[index].score);
+    }
+    this.setState(
+      {
+        questionInfo: questionInfo,
+        totalScore: totalScore
+      },
+      () => {
+        commonFunction.jumpWithParameter("backwards", this.state, this.props);
+      }
+    );
+  };
   getBase64 = base64 => {
     switch (this.state.questionIndex) {
       case 0:
@@ -118,8 +138,7 @@ export default class ViewSpace extends Component {
               style={{
                 backgroundColor: "#fff",
                 marginTop: dp(50)
-              }}
-            >
+              }}>
               <PageOrderCode
                 backgroundColor={"green"}
                 index={this.state.questionIndex + 1}
@@ -132,8 +151,7 @@ export default class ViewSpace extends Component {
                   alignItems: "center",
                   marginTop: dp(-570),
                   marginLeft: dp(300)
-                }}
-              >
+                }}>
                 <Text style={[styles.questionText, { width: "80%" }]}>
                   1-1.请您按照
                   <Text style={{ color: "black", fontSize: font(40) }}>
@@ -151,8 +169,7 @@ export default class ViewSpace extends Component {
                   right: dp(50),
                   height: dp(200),
                   width: dp(200)
-                }}
-              >
+                }}>
                 <Audio src="moca_1.m4a" />
               </View>
             </View>
@@ -164,8 +181,7 @@ export default class ViewSpace extends Component {
                 marginTop: dp(60),
                 height: dp(700),
                 zIndex: 999
-              }}
-            >
+              }}>
               <Canvas
                 getBase64={this.getBase64}
                 ref={this.canvasLigature}
@@ -173,8 +189,7 @@ export default class ViewSpace extends Component {
                 canvasStyle={{
                   width: dp(1300),
                   height: dp(700)
-                }}
-              >
+                }}>
                 {ligatureCoordinate.map((item, index) => {
                   return (
                     <DrawNumberCircle
@@ -229,8 +244,7 @@ export default class ViewSpace extends Component {
                 backgroundColor: "#fff",
                 marginTop: dp(50),
                 alignItems: "center"
-              }}
-            >
+              }}>
               <PageOrderCode
                 index={this.state.questionIndex + 1}
                 indexTotal={19}
@@ -242,8 +256,7 @@ export default class ViewSpace extends Component {
                   justifyContent: "center",
                   textAlign: "center",
                   alignItems: "center"
-                }}
-              >
+                }}>
                 <Text style={[styles.questionText, { width: "100%" }]}>
                   1-2.请画一个立方体
                   <Text style={{ color: "black", fontSize: font(40) }}>
@@ -260,8 +273,7 @@ export default class ViewSpace extends Component {
                 justifyContent: "center",
                 marginTop: dp(60),
                 height: dp(700)
-              }}
-            >
+              }}>
               <Canvas
                 getBase64={this.getBase64}
                 ref={this.canvasCube}
@@ -315,8 +327,7 @@ export default class ViewSpace extends Component {
                 backgroundColor: "#fff",
                 marginTop: dp(50),
                 alignItems: "center"
-              }}
-            >
+              }}>
               <PageOrderCode
                 index={this.state.questionIndex + 1}
                 indexTotal={19}
@@ -328,8 +339,7 @@ export default class ViewSpace extends Component {
                   justifyContent: "center",
                   textAlign: "center",
                   alignItems: "center"
-                }}
-              >
+                }}>
                 <Text style={[styles.questionText, { width: "100%" }]}>
                   1-2.画钟表
                   <Text style={{ color: "black", fontSize: font(40) }}>
@@ -346,8 +356,7 @@ export default class ViewSpace extends Component {
                 justifyContent: "center",
                 marginTop: dp(60),
                 height: dp(700)
-              }}
-            >
+              }}>
               <Canvas
                 getBase64={this.getBase64}
                 ref={this.canvasHorologe}
