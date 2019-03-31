@@ -7,7 +7,7 @@ export default class TableBorder extends Component {
   render() {
     return (
       <View
-        style={[{ borderWidth: dp(3), borderColor: "#000" }, this.props.style]}>
+        style={[{ borderWidth: dp(2), borderColor: "#000" }, this.props.style]}>
         {this.props.children}
       </View>
     );

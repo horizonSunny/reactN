@@ -5,10 +5,6 @@ export default class AnswerReverse extends Component {
     super(props);
   }
   render() {
-    return (
-      <View>
-        <Text>今年几月份？ {this.props.score === 1 ? "[ √ ]" : "[ × ]"}</Text>
-      </View>
-    );
+    return <Text>{this.props.score === 1 ? "[ √ ]" : "[ × ]"}</Text>;
   }
 }
