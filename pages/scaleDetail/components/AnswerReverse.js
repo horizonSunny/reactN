@@ -5,6 +5,11 @@ export default class AnswerReverse extends Component {
     super(props);
   }
   render() {
-    return <Text>{this.props.score === 1 ? "[ √ ]" : "[ × ]"}</Text>;
+    return (
+      <Text>
+        {"   "}
+        {this.props.score === 1 ? "[ √ ]" : "[ × ]"}
+      </Text>
+    );
   }
 }
