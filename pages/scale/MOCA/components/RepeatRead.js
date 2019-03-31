@@ -61,10 +61,16 @@ export default class RepeatRead extends Component {
     // console.log('this_state_questionInfo_',this.state.questionInfo);
   };
   goPrev = () => {
-    this.setState({ questionInfo: this.state.questionInfo });
-    console.log("immediatrly_", this.state.questionInfo);
-    commonFunction.jumpWithParameter("forward", this.state, this.props);
-    return;
+    if (this.state.questionIndex === 11) {
+      this.setState({
+        questionIndex: --this.state.questionIndex
+      });
+    } else {
+      this.setState({ questionInfo: this.state.questionInfo });
+      console.log("immediatrly_", this.state.questionInfo);
+      commonFunction.jumpWithParameter("forward", this.state, this.props);
+      return;
+    }
   };
   goNext = () => {
     const questionTotal = Object.getOwnPropertyNames(this.state.questionInfo);
@@ -114,11 +120,20 @@ export default class RepeatRead extends Component {
               backgroundColor: "white",
               marginTop: dp(50)
             }}>
-            <PageOrderCode
-              backgroundColor={"green"}
-              index={this.state.questionIndex + 1}
-              indexTotal={19}
-            />
+            {this.state.questionIndex === 10 && (
+              <PageOrderCode
+                backgroundColor={"green"}
+                index={11}
+                indexTotal={19}
+              />
+            )}
+            {this.state.questionIndex === 11 && (
+              <PageOrderCode
+                backgroundColor={"green"}
+                index={12}
+                indexTotal={19}
+              />
+            )}
             <View
               style={{
                 flexDirection: "row",

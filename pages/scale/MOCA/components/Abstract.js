@@ -30,7 +30,9 @@ export default class Abstract extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionIndex: 13
+      questionModel: "abstract",
+      questionIndex: this.props.directionForward ? 14 : 13,
+      totalScore: 0
     };
   }
   componentWillMount() {
@@ -54,7 +56,8 @@ export default class Abstract extends Component {
     this.setState({ questionInfo: questionInfo });
   };
   goPrev = () => {
-    if (this.state.questionIndex === 0) {
+    if (this.state.questionIndex === 13) {
+      this.setState({ questionInfo: this.state.questionInfo });
       commonFunction.jumpWithParameter("forward", this.state, this.props);
       return;
     }
@@ -64,8 +67,13 @@ export default class Abstract extends Component {
   };
   goNext = () => {
     const questionTotal = Object.getOwnPropertyNames(this.state.questionInfo);
+    const questionType = questionTotal[this.state.questionIndex - 13];
+    if (this.state.questionInfo[questionType]["answer"] === "") {
+      androidToast("请选择选项");
+      return;
+    }
     // 表示是否全部问题, 是否全部结束了
-    if (this.state.questionIndex === questionTotal.length - 1) {
+    if (this.state.questionIndex === 14) {
       this.calculateScore();
       return;
     }
@@ -138,7 +146,7 @@ export default class Abstract extends Component {
             questionType={item.questionType}
             indexTotal={19}
             questionInfo={this.state.questionInfo}
-            questionIndex={this.state.questionIndex + 4}
+            questionIndex={this.state.questionIndex}
             keyBoardChange={this.keyBoardChange}
             goPrev={this.goPrev}
             goNext={this.goNext}

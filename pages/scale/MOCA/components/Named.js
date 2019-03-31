@@ -32,7 +32,7 @@ export default class Named extends React.Component {
     super(props);
     this.state = {
       questionModel: "named",
-      questionIndex: this.props.directionForward ? 3 : 0,
+      questionIndex: this.props.directionForward ? 2 : 0,
       totalScore: 0
     };
   }
@@ -68,6 +68,13 @@ export default class Named extends React.Component {
   };
   goNext = () => {
     const questionTotal = Object.getOwnPropertyNames(this.state.questionInfo);
+    // 判断是否为空，为空则return,135,对应0，1，2
+    const questionType = questionTotal[this.state.questionIndex];
+    console.log("questionType_", questionType);
+    if (this.state.questionInfo[questionType]["answer"] === "") {
+      androidToast("请选择选项");
+      return;
+    }
     // 表示是否全部问题, 是否全部结束了
     if (this.state.questionIndex === questionTotal.length - 1) {
       this.calculateScore();
@@ -132,7 +139,7 @@ export default class Named extends React.Component {
             questionType={item.questionType}
             indexTotal={19}
             questionInfo={this.state.questionInfo}
-            questionIndex={this.state.questionIndex + 4}
+            questionIndex={this.state.questionIndex + 3}
             keyBoardChange={this.keyBoardChange}
             goPrev={this.goPrev}
             goNext={this.goNext}

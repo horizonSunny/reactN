@@ -26,11 +26,14 @@ import { DrawNumberCircle } from "../../../../utils/drawNumberCircle";
 import AnswerConfirm from "../../../PageComponent/AnswerConfirm/AnswerConfirm";
 import namedList from "./NamedComponent/namedComponent";
 import Audio from "../../../../components/Audio/Audio";
+
 export default class DirectiveForce extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionIndex: this.props.directionForward ? 21 : 16
+      questionIndex: this.props.directionForward ? 21 : 16,
+      questionModel: "directiveForce",
+      totalScore: 0
     };
   }
   componentWillMount() {
@@ -47,8 +50,10 @@ export default class DirectiveForce extends Component {
       city: objectClone(answerModel)
     };
     if (this.props.questionModel["questionInfo"] === "") {
+      console.log("directive_nothing");
       this.setState({ questionInfo: questionInfo });
     } else {
+      console.log("directive_nothing");
       this.setState({ questionInfo: this.props.questionModel["questionInfo"] });
     }
   }

@@ -70,6 +70,14 @@ export default class Memory extends Component {
     return;
   };
   goNext = () => {
+    let { keys, values, entries } = Object;
+    for (let value of values(this.state.questionInfo)) {
+      if (value["answer"] === "") {
+        androidToast("请选择选项");
+        return;
+      }
+    }
+    console.log("this.state.questionInfo_", this.state.questionInfo);
     this.calculateScore();
     return;
   };

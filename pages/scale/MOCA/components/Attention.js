@@ -34,7 +34,7 @@ export default class Attention extends Component {
     super(props);
     this.state = {
       questionModel: "attention",
-      questionIndex: 8,
+      questionIndex: 7,
       totalScore: 0
     };
   }

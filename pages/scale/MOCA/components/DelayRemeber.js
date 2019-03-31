@@ -31,7 +31,7 @@ export default class DelayRemeber extends Component {
     super(props);
     this.state = {
       questionModel: "directiveForce",
-      questionIndex: 17,
+      questionIndex: 15,
       totalScore: 0,
       presentIllnessOne: []
     };

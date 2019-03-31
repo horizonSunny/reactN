@@ -31,7 +31,7 @@ export default class Fluency extends Component {
     super(props);
     this.state = {
       questionModel: "fluency",
-      questionIndex: 6,
+      questionIndex: 12,
       totalScore: 0
     };
   }
@@ -55,13 +55,9 @@ export default class Fluency extends Component {
     this.setState({ questionInfo: questionInfo });
   };
   goPrev = () => {
-    if (this.state.questionIndex === 0) {
-      commonFunction.jumpWithParameter("forward", this.state, this.props);
-      return;
-    }
-    this.setState({
-      questionIndex: --this.state.questionIndex
-    });
+    this.setState({ questionInfo: this.state.questionInfo });
+    commonFunction.jumpWithParameter("forward", this.state, this.props);
+    return;
   };
   goNext = () => {
     let { keys, values, entries } = Object;
@@ -121,7 +117,7 @@ export default class Fluency extends Component {
         questionType={info.questionType}
         indexTotal={19}
         questionInfo={this.state.questionInfo}
-        questionIndex={this.state.questionIndex + 4}
+        questionIndex={this.state.questionIndex}
         keyBoardChange={this.keyBoardChange}
         goPrev={this.goPrev}
         goNext={this.goNext}

@@ -71,10 +71,20 @@ export default class ViewSpace extends Component {
     });
   };
   goNext = () => {
-    const questionTotal = 5;
+    const questionLength = 5;
     // 表示是否全部问题, 是否全部结束了
+    const questionTotal = Object.getOwnPropertyNames(this.state.questionInfo);
+    // 判断是否为空，为空则return,135,对应0，1，2
+    const typeIndex = (this.state.questionIndex + 1) / 2 - 1;
+    console.log("typeIndex_", typeIndex);
+    const questionType = questionTotal[typeIndex];
+    console.log("questionType_", questionType);
+    if (this.state.questionInfo[questionType]["answer"] === "") {
+      androidToast("请选择选项");
+      return;
+    }
     console.log("this.state.questionIndex_", this.state.questionIndex);
-    if (this.state.questionIndex === questionTotal) {
+    if (this.state.questionIndex === questionLength) {
       this.calculateScore();
       return;
     }
@@ -245,10 +255,7 @@ export default class ViewSpace extends Component {
                 marginTop: dp(50),
                 alignItems: "center"
               }}>
-              <PageOrderCode
-                index={this.state.questionIndex + 1}
-                indexTotal={19}
-              />
+              <PageOrderCode index={2} indexTotal={19} />
               <View
                 style={{
                   width: dp(1000),
@@ -328,10 +335,7 @@ export default class ViewSpace extends Component {
                 marginTop: dp(50),
                 alignItems: "center"
               }}>
-              <PageOrderCode
-                index={this.state.questionIndex + 1}
-                indexTotal={19}
-              />
+              <PageOrderCode index={3} indexTotal={19} />
               <View
                 style={{
                   width: dp(1000),

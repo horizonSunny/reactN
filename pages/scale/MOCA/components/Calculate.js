@@ -26,7 +26,7 @@ export default class Calculate extends React.Component {
     this.state = {
       reduceSeven: 5,
       questionModel: "calculAteattention",
-      questionIndex: 10
+      questionIndex: 9
     };
   }
   componentWillMount() {
@@ -150,7 +150,12 @@ export default class Calculate extends React.Component {
         break;
     }
   };
-
+  goPrev = () => {
+    this.setState({ questionInfo: this.state.questionInfo });
+    console.log("immediatrly_", this.state.questionInfo);
+    commonFunction.jumpWithParameter("forward", this.state, this.props);
+    return;
+  };
   reduce() {
     // if(this.state.reduceSeven === 5){
     return (
@@ -163,8 +168,7 @@ export default class Calculate extends React.Component {
                 flexDirection: "row",
                 justifyContent: "flex-end",
                 marginTop: dp(40)
-              }}
-            >
+              }}>
               <Text style={{ fontSize: font(60) }}>
                 {item === "ninetyThree" ? "100-7:" : "继续减7:"}
               </Text>
@@ -209,8 +213,7 @@ export default class Calculate extends React.Component {
             backgroundColor: "#fff",
             marginTop: dp(50),
             alignItems: "center"
-          }}
-        >
+          }}>
           <PageOrderCode index={this.state.questionIndex + 1} indexTotal={19} />
           <View
             style={{
@@ -218,8 +221,7 @@ export default class Calculate extends React.Component {
               marginTop: dp(-570),
               justifyContent: "center",
               textAlign: "center"
-            }}
-          >
+            }}>
             <Text style={[styles.questionText, { width: "100%" }]}>
               请您计算100连续减去7
             </Text>
