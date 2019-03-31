@@ -95,7 +95,8 @@ export default class MMSE_Detail extends PureComponent {
               </View>
             </View>
           </TableBorder>
-          <TableBorder style={{ width: dp(1300), height: dp(150) }}>
+          <TableBorder
+            style={{ width: dp(1300), height: dp(150), borderTopWidth: dp(0) }}>
             <Text>
               <Text style={{ fontSize: 14, color: "#000", fontWeight: "100" }}>
                 即刻回忆:
@@ -125,7 +126,8 @@ export default class MMSE_Detail extends PureComponent {
               </Text>
             </View>
           </TableBorder>
-          <TableBorder style={{ width: dp(1300), height: dp(150) }}>
+          <TableBorder
+            style={{ width: dp(1300), height: dp(150), borderTopWidth: dp(0) }}>
             <Text>
               <Text style={{ fontSize: 14, color: "#000", fontWeight: "100" }}>
                 计算和注意力:
@@ -159,7 +161,8 @@ export default class MMSE_Detail extends PureComponent {
               </Text>
             </View>
           </TableBorder>
-          <TableBorder style={{ width: dp(1300), height: dp(150) }}>
+          <TableBorder
+            style={{ width: dp(1300), height: dp(150), borderTopWidth: dp(0) }}>
             <Text>
               <Text style={{ fontSize: 14, color: "#000", fontWeight: "100" }}>
                 命名:
@@ -178,7 +181,8 @@ export default class MMSE_Detail extends PureComponent {
               </Text>
             </View>
           </TableBorder>
-          <TableBorder style={{ width: dp(1300), height: dp(150) }}>
+          <TableBorder
+            style={{ width: dp(1300), height: dp(150), borderTopWidth: dp(0) }}>
             <Text>
               <Text style={{ fontSize: 14, color: "#000", fontWeight: "100" }}>
                 复述:
@@ -196,7 +200,8 @@ export default class MMSE_Detail extends PureComponent {
               </Text>
             </View>
           </TableBorder>
-          <TableBorder style={{ width: dp(1300), height: dp(150) }}>
+          <TableBorder
+            style={{ width: dp(1300), height: dp(150), borderTopWidth: dp(0) }}>
             <Text>
               <Text style={{ fontSize: 14, color: "#000", fontWeight: "100" }}>
                 阅读:
@@ -214,7 +219,8 @@ export default class MMSE_Detail extends PureComponent {
               </Text>
             </View>
           </TableBorder>
-          <TableBorder style={{ width: dp(1300), height: dp(150) }}>
+          <TableBorder
+            style={{ width: dp(1300), height: dp(150), borderTopWidth: dp(0) }}>
             <Text>
               <Text style={{ fontSize: 14, color: "#000", fontWeight: "100" }}>
                 理解:
@@ -240,7 +246,8 @@ export default class MMSE_Detail extends PureComponent {
               </Text>
             </View>
           </TableBorder>
-          <TableBorder style={{ width: dp(1300), height: dp(150) }}>
+          <TableBorder
+            style={{ width: dp(1300), height: dp(150), borderTopWidth: dp(0) }}>
             <Text>
               <Text style={{ fontSize: 14, color: "#000", fontWeight: "100" }}>
                 书写:
@@ -258,7 +265,8 @@ export default class MMSE_Detail extends PureComponent {
               </Text>
             </View>
           </TableBorder>
-          <TableBorder style={{ width: dp(1300), height: dp(450) }}>
+          <TableBorder
+            style={{ width: dp(1300), height: dp(450), borderTopWidth: dp(0) }}>
             <Text>
               <Text style={{ fontSize: 14, color: "#000", fontWeight: "100" }}>
                 视空间知觉:
@@ -286,7 +294,8 @@ export default class MMSE_Detail extends PureComponent {
               </Text>
             </View>
           </TableBorder>
-          <TableBorder style={{ width: dp(1300), height: dp(150) }}>
+          <TableBorder
+            style={{ width: dp(1300), height: dp(150), borderTopWidth: dp(0) }}>
             <Text>
               <Text style={{ fontSize: 14, color: "#000", fontWeight: "100" }}>
                 延迟回忆:
