@@ -63,7 +63,7 @@ const Main = inject("rootStore")(props => {
     initData(res, props.rootStore);
     // 判断量表里面有没有东西，有的话走1，3，没有走2
     firstPage =
-      props.rootStore.scaleName.length !== 0 ? "MOCA_Detail" : "Report";
+      props.rootStore.scaleName.length !== 0 ? "MMSE_Detail" : "Report";
     console.log("firstPage_" + firstPage);
     const resetAction = StackActions.reset({
       index: 0,

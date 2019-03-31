@@ -10,6 +10,9 @@ import {
 } from "react-native";
 import React, { PureComponent } from "react";
 import data from "./testData";
+import AnswerReverse from "./components/AnswerReverse";
+import TableBorder from "./components/TableBorder";
+
 export default class MMSE_Detail extends PureComponent {
   constructor(props) {
     super(props);
@@ -41,20 +44,13 @@ export default class MMSE_Detail extends PureComponent {
     console.log("this.state.directiveForce_", this.state.directiveForce);
     return (
       <View>
-        <View>
-          {/* 一个模块左边的地方 */}
-          <View>
-            <Text>
-              今年几月份？{" "}
-              {this.state.questionModel.directiveForce.questionInfo.thisYear
-                .score === 1
-                ? "[ √ ]"
-                : "[ × ]"}
-            </Text>
-          </View>
-          {/* 一个模块右边的地方 */}
-          <View />
-        </View>
+        {/* 一个模块左边的地方 */}
+        <TableBorder style={{ width: dp(100), height: dp(100) }}>
+          <AnswerReverse score={1} />
+        </TableBorder>
+
+        {/* 一个模块右边的地方 */}
+        <View />
       </View>
     );
   }
