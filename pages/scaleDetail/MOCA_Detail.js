@@ -58,7 +58,8 @@ export default class MOCA_Detail extends PureComponent {
         <ScrollView>
           <View
             style={{
-              width: dp(1300)
+              width: dp(1300),
+              height: dp(1900)
             }}>
             <TableBorder
               style={{
@@ -212,7 +213,7 @@ export default class MOCA_Detail extends PureComponent {
             <TableBorder
               style={{
                 width: dp(1300),
-                height: dp(420),
+                height: dp(200),
                 borderTopWidth: dp(0)
               }}>
               <Text
@@ -245,7 +246,7 @@ export default class MOCA_Detail extends PureComponent {
                 style={[
                   {
                     position: "absolute",
-                    left: dp(400)
+                    left: dp(398)
                   }
                 ]}>
                 <View
@@ -318,7 +319,56 @@ export default class MOCA_Detail extends PureComponent {
             <TableBorder
               style={{
                 width: dp(1300),
-                height: dp(200),
+                height: dp(100),
+                borderTopWidth: dp(0)
+              }}>
+              <Text
+                style={{
+                  width: dp(150),
+                  backgroundColor: "#ddd",
+                  fontWeight: "100",
+                  paddingLeft: dp(20)
+                }}>
+                <Text
+                  style={{
+                    fontSize: 14,
+                    color: "#fff",
+                    backgroundColor: "#000",
+                    fontWeight: "100"
+                  }}>
+                  注意:
+                </Text>
+              </Text>
+              <Text
+                style={{
+                  width: dp(500),
+                  height: dp(140),
+                  left: dp(150),
+                  position: "absolute"
+                }}>
+                读出下列数字，请患者重复{"\n"}(每秒一个)
+              </Text>
+              <View
+                style={[
+                  {
+                    position: "absolute",
+                    left: dp(700)
+                  }
+                ]}>
+                <Text>
+                  顺背
+                  <AnswerReverse score={0} /> 2 1 8 5 4
+                </Text>
+                <Text>
+                  倒背
+                  <AnswerReverse score={0} /> 7 4 2
+                </Text>
+              </View>
+            </TableBorder>
+            <TableBorder
+              style={{
+                width: dp(1300),
+                height: dp(100),
                 borderTopWidth: dp(0)
               }}>
               <Text
@@ -340,7 +390,7 @@ export default class MOCA_Detail extends PureComponent {
             <TableBorder
               style={{
                 width: dp(1300),
-                height: dp(200),
+                height: dp(100),
                 borderTopWidth: dp(0)
               }}>
               <Text
@@ -374,7 +424,7 @@ export default class MOCA_Detail extends PureComponent {
             <TableBorder
               style={{
                 width: dp(1300),
-                height: dp(200),
+                height: dp(150),
                 borderTopWidth: dp(0)
               }}>
               <Text
@@ -423,7 +473,7 @@ export default class MOCA_Detail extends PureComponent {
             <TableBorder
               style={{
                 width: dp(1300),
-                height: dp(100),
+                height: dp(50),
                 borderTopWidth: dp(0)
               }}>
               <Text
@@ -440,7 +490,7 @@ export default class MOCA_Detail extends PureComponent {
                     backgroundColor: "#000",
                     fontWeight: "100"
                   }}>
-                  语言:
+                  抽象:
                 </Text>
               </Text>
               <Text
@@ -499,7 +549,7 @@ export default class MOCA_Detail extends PureComponent {
                     style={[
                       styles.tableDisplay,
                       styles.tdb,
-                      { width: dp(250) }
+                      { width: dp(248) }
                     ]}>
                     回忆时不能提示
                   </Text>
@@ -537,7 +587,7 @@ export default class MOCA_Detail extends PureComponent {
                     style={[
                       styles.tableDisplay,
                       styles.tdb,
-                      { width: dp(250) }
+                      { width: dp(248) }
                     ]}>
                     分类提示
                   </Text>
@@ -562,7 +612,7 @@ export default class MOCA_Detail extends PureComponent {
                     style={[
                       styles.tableDisplay,
                       styles.tdb,
-                      { width: dp(250) }
+                      { width: dp(248) }
                     ]}>
                     多选提示
                   </Text>
@@ -580,7 +630,7 @@ export default class MOCA_Detail extends PureComponent {
             <TableBorder
               style={{
                 width: dp(1300),
-                height: dp(100),
+                height: dp(50),
                 borderTopWidth: dp(0)
               }}>
               <Text
@@ -681,7 +731,7 @@ export default class MOCA_Detail extends PureComponent {
             <TableBorder
               style={{
                 width: dp(100),
-                height: dp(400),
+                height: dp(200),
                 borderWidth: dp(0),
                 borderBottomWidth: dp(2),
                 alignItems: "center"
@@ -691,10 +741,168 @@ export default class MOCA_Detail extends PureComponent {
                   width: dp(100),
                   height: dp(50),
                   position: "relative",
-                  top: dp(317),
+                  top: dp(130),
                   textAlign: "center"
                 }}>
                 3/5
+              </Text>
+            </TableBorder>
+            <TableBorder
+              style={{
+                width: dp(100),
+                height: dp(100),
+                borderWidth: dp(0),
+                borderBottomWidth: dp(2),
+                alignItems: "center"
+              }}>
+              <Text
+                style={{
+                  width: dp(100),
+                  height: dp(50),
+                  position: "relative",
+                  top: dp(50),
+                  textAlign: "center"
+                }}>
+                3/5
+              </Text>
+            </TableBorder>
+            <TableBorder
+              style={{
+                width: dp(100),
+                height: dp(100),
+                borderWidth: dp(0),
+                borderBottomWidth: dp(2),
+                alignItems: "center"
+              }}>
+              <Text
+                style={{
+                  width: dp(100),
+                  height: dp(50),
+                  position: "relative",
+                  top: dp(50),
+                  textAlign: "center"
+                }}>
+                3/5
+              </Text>
+            </TableBorder>
+            <TableBorder
+              style={{
+                width: dp(100),
+                height: dp(100),
+                borderWidth: dp(0),
+                borderBottomWidth: dp(2),
+                alignItems: "center"
+              }}>
+              <Text
+                style={{
+                  width: dp(100),
+                  height: dp(50),
+                  position: "relative",
+                  top: dp(50),
+                  textAlign: "center"
+                }}>
+                3/5
+              </Text>
+            </TableBorder>
+            <TableBorder
+              style={{
+                width: dp(100),
+                height: dp(150),
+                borderWidth: dp(0),
+                borderBottomWidth: dp(2),
+                alignItems: "center"
+              }}>
+              <Text
+                style={{
+                  width: dp(100),
+                  height: dp(100),
+                  position: "relative",
+                  top: dp(80),
+                  textAlign: "center"
+                }}>
+                3/5
+              </Text>
+            </TableBorder>
+            <TableBorder
+              style={{
+                width: dp(100),
+                height: dp(50),
+                borderWidth: dp(0),
+                borderBottomWidth: dp(2),
+                alignItems: "center"
+              }}>
+              <Text
+                style={{
+                  width: dp(100),
+                  height: dp(100),
+                  position: "relative",
+                  top: dp(10),
+                  textAlign: "center"
+                }}>
+                3/5
+              </Text>
+            </TableBorder>
+            <TableBorder
+              style={{
+                width: dp(100),
+                height: dp(200),
+                borderWidth: dp(0),
+                borderBottomWidth: dp(2),
+                alignItems: "center"
+              }}>
+              <Text
+                style={{
+                  width: dp(100),
+                  height: dp(100),
+                  position: "relative",
+                  top: dp(140),
+                  textAlign: "center"
+                }}>
+                3/5
+              </Text>
+            </TableBorder>
+            <TableBorder
+              style={{
+                width: dp(100),
+                height: dp(50),
+                borderWidth: dp(0),
+                borderBottomWidth: dp(2),
+                alignItems: "center"
+              }}>
+              <Text
+                style={{
+                  width: dp(100),
+                  height: dp(100),
+                  position: "relative",
+                  top: dp(10),
+                  textAlign: "center"
+                }}>
+                3/5
+              </Text>
+            </TableBorder>
+          </View>
+          {/*总分数 */}
+          <View
+            style={{
+              width: dp(500),
+              position: "absolute",
+              left: dp(1100)
+            }}>
+            <TableBorder
+              style={{
+                width: dp(300),
+                height: dp(100),
+                borderTopWidth: dp(0),
+                alignItems: "center",
+                top: dp(1750)
+              }}>
+              <Text
+                style={{
+                  position: "relative",
+                  top: dp(30)
+                }}>
+                总分
+                <Text>{"    "}3/30</Text>
               </Text>
             </TableBorder>
           </View>
