@@ -7,7 +7,12 @@ import Http from "../utils/http";
 
 class Store {
   // 存储从安卓传来的量表名字,表示要做那几个测评量表，可以理解为一个schedule
-  @observable scaleName = [];
+  @observable scaleName = [
+    { assessmentName: "CDT", assessmentUid: 0 },
+    { assessmentName: "MMSE", assessmentUid: 0 },
+    { assessmentName: "MOCA", assessmentUid: 0 },
+    { assessmentName: "ADL", assessmentUid: 0 }
+  ];
   @action.bound
   setScaleNames(scaleName) {
     this.scaleName.replace(scaleName);
@@ -19,8 +24,8 @@ class Store {
   }
   // 设置当前量表index,依据index获取scaleName,确保路由跳转
   @observable scaleCurrentIndex = 0;
-  setScaleIndex(nextIndex) {
-    this.scaleCurrentIndex = nextIndex;
+  setScaleIndex() {
+    this.scaleCurrentIndex += 1;
   }
   // 是否是脑健康管理师自测，是否有用户信息
   @observable haveUser = false;
