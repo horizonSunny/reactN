@@ -106,7 +106,8 @@ export default class Fluency extends Component {
             right: dp(50),
             height: dp(200),
             width: dp(200)
-          }}>
+          }}
+        >
           <Audio src="moca_13.m4a" />
         </View>
       );
@@ -115,7 +116,7 @@ export default class Fluency extends Component {
       <DoctorHelpConfirm
         question={info.question}
         questionType={info.questionType}
-        indexTotal={19}
+        indexTotal={22}
         questionInfo={this.state.questionInfo}
         questionIndex={this.state.questionIndex}
         keyBoardChange={this.keyBoardChange}

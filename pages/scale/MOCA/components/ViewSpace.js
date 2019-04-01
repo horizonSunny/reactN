@@ -148,11 +148,12 @@ export default class ViewSpace extends Component {
               style={{
                 backgroundColor: "#fff",
                 marginTop: dp(50)
-              }}>
+              }}
+            >
               <PageOrderCode
                 backgroundColor={"green"}
                 index={this.state.questionIndex + 1}
-                indexTotal={19}
+                indexTotal={22}
               />
               <View
                 style={{
@@ -161,7 +162,8 @@ export default class ViewSpace extends Component {
                   alignItems: "center",
                   marginTop: dp(-570),
                   marginLeft: dp(300)
-                }}>
+                }}
+              >
                 <Text style={[styles.questionText, { width: "80%" }]}>
                   1-1.请您按照
                   <Text style={{ color: "black", fontSize: font(40) }}>
@@ -179,7 +181,8 @@ export default class ViewSpace extends Component {
                   right: dp(50),
                   height: dp(200),
                   width: dp(200)
-                }}>
+                }}
+              >
                 <Audio src="moca_1.m4a" />
               </View>
             </View>
@@ -191,7 +194,8 @@ export default class ViewSpace extends Component {
                 marginTop: dp(60),
                 height: dp(700),
                 zIndex: 999
-              }}>
+              }}
+            >
               <Canvas
                 getBase64={this.getBase64}
                 ref={this.canvasLigature}
@@ -199,7 +203,8 @@ export default class ViewSpace extends Component {
                 canvasStyle={{
                   width: dp(1300),
                   height: dp(700)
-                }}>
+                }}
+              >
                 {ligatureCoordinate.map((item, index) => {
                   return (
                     <DrawNumberCircle
@@ -254,8 +259,9 @@ export default class ViewSpace extends Component {
                 backgroundColor: "#fff",
                 marginTop: dp(50),
                 alignItems: "center"
-              }}>
-              <PageOrderCode index={2} indexTotal={19} />
+              }}
+            >
+              <PageOrderCode index={2} indexTotal={22} />
               <View
                 style={{
                   width: dp(1000),
@@ -263,7 +269,8 @@ export default class ViewSpace extends Component {
                   justifyContent: "center",
                   textAlign: "center",
                   alignItems: "center"
-                }}>
+                }}
+              >
                 <Text style={[styles.questionText, { width: "100%" }]}>
                   1-2.请画一个立方体
                   <Text style={{ color: "black", fontSize: font(40) }}>
@@ -280,7 +287,8 @@ export default class ViewSpace extends Component {
                 justifyContent: "center",
                 marginTop: dp(60),
                 height: dp(700)
-              }}>
+              }}
+            >
               <Canvas
                 getBase64={this.getBase64}
                 ref={this.canvasCube}
@@ -334,8 +342,9 @@ export default class ViewSpace extends Component {
                 backgroundColor: "#fff",
                 marginTop: dp(50),
                 alignItems: "center"
-              }}>
-              <PageOrderCode index={3} indexTotal={19} />
+              }}
+            >
+              <PageOrderCode index={3} indexTotal={22} />
               <View
                 style={{
                   width: dp(1000),
@@ -343,7 +352,8 @@ export default class ViewSpace extends Component {
                   justifyContent: "center",
                   textAlign: "center",
                   alignItems: "center"
-                }}>
+                }}
+              >
                 <Text style={[styles.questionText, { width: "100%" }]}>
                   1-2.画钟表
                   <Text style={{ color: "black", fontSize: font(40) }}>
@@ -360,7 +370,8 @@ export default class ViewSpace extends Component {
                 justifyContent: "center",
                 marginTop: dp(60),
                 height: dp(700)
-              }}>
+              }}
+            >
               <Canvas
                 getBase64={this.getBase64}
                 ref={this.canvasHorologe}

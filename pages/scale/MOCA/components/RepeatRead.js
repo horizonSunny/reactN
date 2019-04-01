@@ -119,19 +119,20 @@ export default class RepeatRead extends Component {
             style={{
               backgroundColor: "white",
               marginTop: dp(50)
-            }}>
+            }}
+          >
             {this.state.questionIndex === 10 && (
               <PageOrderCode
                 backgroundColor={"green"}
                 index={11}
-                indexTotal={19}
+                indexTotal={22}
               />
             )}
             {this.state.questionIndex === 11 && (
               <PageOrderCode
                 backgroundColor={"green"}
                 index={12}
-                indexTotal={19}
+                indexTotal={22}
               />
             )}
             <View
@@ -141,7 +142,8 @@ export default class RepeatRead extends Component {
                 alignItems: "center",
                 marginTop: dp(-570),
                 marginLeft: dp(300)
-              }}>
+              }}
+            >
               <Text style={[styles.questionText, { width: "100%" }]}>
                 5-2.(语言)请重复下面的句子
               </Text>
@@ -156,7 +158,8 @@ export default class RepeatRead extends Component {
                 right: dp(50),
                 height: dp(200),
                 width: dp(200)
-              }}>
+              }}
+            >
               {this.state.questionIndex === 10 && <Audio src="moca_11.m4a" />}
               {this.state.questionIndex === 11 && <Audio src="moca_12.m4a" />}
             </View>
@@ -169,12 +172,14 @@ export default class RepeatRead extends Component {
               style={{
                 alignItems: "center",
                 marginBottom: dp(100)
-              }}>
+              }}
+            >
               <Text
                 style={{
                   marginTop: dp(200),
                   fontSize: 30
-                }}>
+                }}
+              >
                 我只知道今天张亮是来帮过忙的人
               </Text>
               <View
@@ -203,12 +208,14 @@ export default class RepeatRead extends Component {
                 style={{
                   alignItems: "center",
                   marginBottom: dp(100)
-                }}>
+                }}
+              >
                 <Text
                   style={{
                     marginTop: dp(200),
                     fontSize: 30
-                  }}>
+                  }}
+                >
                   狗在房间的时候，猫总是躺在沙发下面
                 </Text>
                 <View

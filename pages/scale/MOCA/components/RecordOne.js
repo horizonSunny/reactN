@@ -103,11 +103,12 @@ export default class RecordOne extends Component {
             style={{
               backgroundColor: "white",
               marginTop: dp(50)
-            }}>
+            }}
+          >
             <PageOrderCode
               backgroundColor={"green"}
               index={this.state.questionIndex + 1}
-              indexTotal={19}
+              indexTotal={22}
             />
             <View
               style={{
@@ -116,7 +117,8 @@ export default class RecordOne extends Component {
                 alignItems: "center",
                 marginTop: dp(-570),
                 marginLeft: dp(300)
-              }}>
+              }}
+            >
               <Text style={[styles.questionText, { width: "100%" }]}>
                 3-1.每当数字1出现时，患者必须用手敲打一下桌面，错误数大于或者等于2个不给分
               </Text>
@@ -131,7 +133,8 @@ export default class RecordOne extends Component {
                 right: dp(50),
                 height: dp(200),
                 width: dp(200)
-              }}>
+              }}
+            >
               <Audio src="moca_1.m4a" />
             </View>
           </View>
@@ -140,7 +143,8 @@ export default class RecordOne extends Component {
           style={[
             styles.table,
             { marginBottom: dp(30), marginTop: dp(50), marginLeft: dp(350) }
-          ]}>
+          ]}
+        >
           <View style={{ width: dp(70) }} />
           <View>
             <View style={styles.tableRow}>
@@ -161,7 +165,8 @@ export default class RecordOne extends Component {
                             styles.tableCheckTd,
                             styles.tdb,
                             { backgroundColor: "white" }
-                          ]}>
+                          ]}
+                        >
                           {itemInfo}
                         </Text>
                       );

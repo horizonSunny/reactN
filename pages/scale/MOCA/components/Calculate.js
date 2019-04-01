@@ -168,7 +168,8 @@ export default class Calculate extends React.Component {
                 flexDirection: "row",
                 justifyContent: "flex-end",
                 marginTop: dp(40)
-              }}>
+              }}
+            >
               <Text style={{ fontSize: font(60) }}>
                 {item === "ninetyThree" ? "100-7:" : "继续减7:"}
               </Text>
@@ -213,15 +214,17 @@ export default class Calculate extends React.Component {
             backgroundColor: "#fff",
             marginTop: dp(50),
             alignItems: "center"
-          }}>
-          <PageOrderCode index={this.state.questionIndex + 1} indexTotal={19} />
+          }}
+        >
+          <PageOrderCode index={this.state.questionIndex + 1} indexTotal={22} />
           <View
             style={{
               width: dp(800),
               marginTop: dp(-570),
               justifyContent: "center",
               textAlign: "center"
-            }}>
+            }}
+          >
             <Text style={[styles.questionText, { width: "100%" }]}>
               请您计算100连续减去7
             </Text>

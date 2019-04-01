@@ -109,11 +109,12 @@ export default class Attention extends Component {
             style={{
               backgroundColor: "white",
               marginTop: dp(50)
-            }}>
+            }}
+          >
             <PageOrderCode
               backgroundColor={"green"}
               index={this.state.questionIndex + 1}
-              indexTotal={19}
+              indexTotal={22}
             />
             <View
               style={{
@@ -122,7 +123,8 @@ export default class Attention extends Component {
                 alignItems: "center",
                 marginTop: dp(-570),
                 marginLeft: dp(300)
-              }}>
+              }}
+            >
               <Text style={[styles.questionText, { width: "100%" }]}>
                 3-1.读出下列词语(每秒1个),后由患者{"\n"}
                 重复上述过程，重复两次，5分钟后回忆
@@ -138,13 +140,15 @@ export default class Attention extends Component {
                 right: dp(50),
                 height: dp(200),
                 width: dp(200)
-              }}>
+              }}
+            >
               <Audio src="moca_1.m4a" />
             </View>
           </View>
         </View>
         <View
-          style={[styles.table, { marginBottom: dp(30), marginTop: dp(50) }]}>
+          style={[styles.table, { marginBottom: dp(30), marginTop: dp(50) }]}
+        >
           <View style={{ width: dp(70) }} />
           <View>
             <View style={styles.tableRow}>
@@ -157,7 +161,8 @@ export default class Attention extends Component {
                       styles.tableCheckTd,
                       styles.tdb,
                       { backgroundColor: "white" }
-                    ]}>
+                    ]}
+                  >
                     {item}
                   </Text>
                 );
@@ -173,7 +178,8 @@ export default class Attention extends Component {
                       styles.tableCheckTd,
                       styles.tdb,
                       { backgroundColor: "white" }
-                    ]}>
+                    ]}
+                  >
                     {item}
                   </Text>
                 );
@@ -198,7 +204,8 @@ export default class Attention extends Component {
               <Text style={[styles.td, styles.tdb]}>顺背</Text>
               <Radio.RadioGroup
                 model={this.state.questionInfo["orderRead"]["answer"]}
-                onChange={this.keyBoardChange.bind(this, "orderRead")}>
+                onChange={this.keyBoardChange.bind(this, "orderRead")}
+              >
                 <View style={styles.td}>
                   <Radio value={1} style={styles.radio} />
                 </View>
@@ -211,7 +218,8 @@ export default class Attention extends Component {
               <Text style={[styles.td, styles.tdb]}>倒背</Text>
               <Radio.RadioGroup
                 model={this.state.questionInfo["invertedOrder"]["answer"]}
-                onChange={this.keyBoardChange.bind(this, "invertedOrder")}>
+                onChange={this.keyBoardChange.bind(this, "invertedOrder")}
+              >
                 <View style={styles.td}>
                   <Radio value={1} style={styles.radio} />
                 </View>

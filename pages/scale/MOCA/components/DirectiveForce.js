@@ -53,7 +53,7 @@ export default class DirectiveForce extends Component {
       console.log("directive_nothing");
       this.setState({ questionInfo: questionInfo });
     } else {
-      console.log("directive_nothing");
+      console.log("directive_have");
       this.setState({ questionInfo: this.props.questionModel["questionInfo"] });
     }
   }
@@ -73,8 +73,14 @@ export default class DirectiveForce extends Component {
   };
   goNext = () => {
     const questionTotal = Object.getOwnPropertyNames(this.state.questionInfo);
+    const index = this.state.questionIndex - 16;
+    const questionType = questionTotal[index];
+    if (this.state.questionInfo[questionType]["answer"] === "") {
+      androidToast("请选择选项");
+      return;
+    }
     // 表示是否全部问题, 是否全部结束了
-    if (this.state.questionIndex === questionTotal.length - 1) {
+    if (index === questionTotal.length - 1) {
       this.calculateScore();
       return;
     }
@@ -148,7 +154,8 @@ export default class DirectiveForce extends Component {
             right: dp(50),
             height: dp(200),
             width: dp(200)
-          }}>
+          }}
+        >
           {props.index === 17 && <Audio src="moca_17.m4a" />}
           {props.index === 18 && <Audio src="moca_18.m4a" />}
           {props.index === 19 && <Audio src="moca_19.m4a" />}
@@ -165,13 +172,14 @@ export default class DirectiveForce extends Component {
             key={index}
             question={item.question}
             questionType={item.questionType}
-            indexTotal={19}
+            indexTotal={22}
             questionInfo={this.state.questionInfo}
-            questionIndex={this.state.questionIndex + 1}
+            questionIndex={this.state.questionIndex}
             keyBoardChange={this.keyBoardChange}
             goPrev={this.goPrev}
             goNext={this.goNext}
-            audio={<AudioShow index={this.state.questionIndex + 1} />}>
+            audio={<AudioShow index={this.state.questionIndex + 1} />}
+          >
             <View style={{ marginTop: dp(100) }} />
           </DoctorHelpConfirm>
         )

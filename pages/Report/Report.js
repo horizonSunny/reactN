@@ -23,6 +23,8 @@ import { inject } from "mobx-react";
 import TopBar from "../../components/TopBar/TopBar";
 import Button from "../../components/Button/Button";
 import data from "./testData";
+import NavigationService from "../../router/NavigationService";
+import http from "../../utils/http/index";
 
 @inject("rootStore")
 export default class Report extends Component {
@@ -38,6 +40,18 @@ export default class Report extends Component {
   componentDidMount() {
     // 获取时间并且转换成数据对象
     this.getTime();
+    a;
+  }
+  // 从后端方案的数据
+  getData() {
+    http
+      .get("/rest/assessmentRecord/{patientUid}")
+      .then(function(response) {
+        console.log("response_", response);
+      })
+      .catch(function(error) {
+        console.log("error_", error);
+      });
   }
   //获取scheme时间并且转换成数组
   getTime = () => {
@@ -75,6 +89,10 @@ export default class Report extends Component {
         );
       }
     );
+  };
+  // 点击跳转详情页面
+  handleToDetails = () => {
+    NavigationService.navigate("CDT_Detail", { name: "123" });
   };
   // 当点击的时候获取点击的“text”时间值
   clickGetScheme(time) {
@@ -229,7 +247,7 @@ export default class Report extends Component {
                   this.props.rippleColor ? this.props.rippleColor : "#a2a4a6",
                   true
                 )}
-                onPress={this.handleToD}
+                onPress={this.handleToDetails}
               >
                 <View
                   style={{

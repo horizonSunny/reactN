@@ -14,12 +14,18 @@ import data from "./testData";
 import AnswerReverse from "./components/AnswerReverse";
 import TableBorder from "./components/TableBorder";
 import styles from "../../../assets/css/common";
+// import NavigationService from "../../router/NavigationService";
+import { NavigationActions } from "react-navigation";
 
 export default class CDT_Detail extends PureComponent {
   constructor(props) {
     super(props);
+    // 获取参数，test测试
+    let name = this.props.navigation.state.params.name;
+    console.log("-----------------------");
+    console.log("name", name);
     // const propsInfo = this.props.Info;
-    console.log("data.assessmentAnswer_", data);
+    // console.log("data.assessmentAnswer_", data);
     const propsInfo = data.assessmentAnswer;
     const score = data.score;
     const result = data.result;

@@ -119,16 +119,17 @@ export default class Named extends React.Component {
             right: dp(50),
             height: dp(200),
             width: dp(200)
-          }}>
+          }}
+        >
           <Audio src="moca_46.m4a" />
         </View>
       );
     }
     console.log("namedList_", namedList);
     const img_arr = [
-      require("./img/doctor1.png"),
-      require("./img/doctor1.png"),
-      require("./img/doctor1.png")
+      require("./img/lion.png"),
+      require("./img/rhinoceros.png"),
+      require("./img/camel.png")
     ];
     return namedList.map((item, index) => {
       return (
@@ -137,15 +138,21 @@ export default class Named extends React.Component {
             key={index}
             question={item.question}
             questionType={item.questionType}
-            indexTotal={19}
+            indexTotal={22}
             questionInfo={this.state.questionInfo}
             questionIndex={this.state.questionIndex + 3}
             keyBoardChange={this.keyBoardChange}
             goPrev={this.goPrev}
             goNext={this.goNext}
-            audio={<AudioShow />}>
+            audio={<AudioShow />}
+          >
             <Image
-              style={{ width: dp(250), height: dp(320), marginTop: dp(10) }}
+              style={{
+                width: dp(400),
+                height: dp(300),
+                marginTop: dp(10),
+                resizeMode: "cover"
+              }}
               source={img_arr[index]}
             />
           </DoctorHelpConfirm>

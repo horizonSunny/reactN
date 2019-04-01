@@ -164,7 +164,7 @@ export default class Memory extends Component {
             <PageOrderCode
               backgroundColor={"green"}
               index={this.state.questionIndex + 1}
-              indexTotal={19}
+              indexTotal={22}
             />
             <View
               style={{

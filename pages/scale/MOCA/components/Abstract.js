@@ -131,7 +131,8 @@ export default class Abstract extends Component {
             right: dp(50),
             height: dp(200),
             width: dp(200)
-          }}>
+          }}
+        >
           {props.index === 13 && <Audio src="moca_13.m4a" />}
           {props.index === 14 && <Audio src="moca_14.m4a" />}
         </View>
@@ -144,13 +145,14 @@ export default class Abstract extends Component {
             key={index}
             question={item.questionTitl}
             questionType={item.questionType}
-            indexTotal={19}
+            indexTotal={22}
             questionInfo={this.state.questionInfo}
             questionIndex={this.state.questionIndex}
             keyBoardChange={this.keyBoardChange}
             goPrev={this.goPrev}
             goNext={this.goNext}
-            audio={<AudioShow index={this.state.questionIndex} />}>
+            audio={<AudioShow index={this.state.questionIndex} />}
+          >
             <View>
               <Text>{item["question"]}</Text>
             </View>
