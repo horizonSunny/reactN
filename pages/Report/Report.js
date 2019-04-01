@@ -40,12 +40,12 @@ export default class Report extends Component {
   componentDidMount() {
     // 获取时间并且转换成数据对象
     this.getTime();
-    a;
+    this.getData();
   }
   // 从后端方案的数据
   getData() {
     http
-      .get("/rest/assessmentRecord/{patientUid}")
+      .get("http://192.168.5.185:8081/rest/assessmentRecord/1")
       .then(function(response) {
         console.log("response_", response);
       })

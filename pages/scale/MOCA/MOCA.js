@@ -98,7 +98,52 @@ export default class MOCA extends React.Component {
    * @description 进行总分计算，并且判断痴呆程度
    * @returns
    */
-  calculateAll = () => {};
+  calculateAll = () => {
+    console.log("this.state_", this.state);
+    let totalPoints = 0;
+    let values = Object.values(this.state);
+    for (let item = 0; item < values.length; item++) {
+      if (values[item].totalScore) {
+        totalPoints += values[item].totalScore;
+      } else {
+        continue;
+      }
+    }
+    console.log("totalPoints_moca_", totalPoints);
+    console.log("directiveForce_moca_123_", this.state.directiveForce);
+    const obj = {
+      viewSpace: this.state.viewSpace,
+      named: this.state.named,
+
+      memory: this.state.memory,
+      attention: this.state.attention,
+
+      recordOne: this.state.recordOne,
+      calculate: this.state.calculate,
+
+      repeatRead: this.state.repeatRead,
+      fluency: this.state.fluency,
+      abstract: this.state.abstract,
+      delayRemeber: this.state.delayRemeber,
+      directiveForce: this.state.directiveForce
+    };
+    const questionInfoTotal = Object.assign({}, obj);
+    console.log("questionInfo_MOCA_", questionInfoTotal);
+    // 依据总分判断状态
+    let status;
+    if (totalPoints > 26) {
+      status = "正常";
+    } else {
+      status = "重度";
+    }
+    // this.props.rootStore.setReportData(reportData)
+    const MOCA = {
+      assessmentAnswer: JSON.stringify(questionInfoTotal),
+      result: status,
+      score: totalPoints
+    };
+    return MOCA;
+  };
 
   // 从子组件问题模块传上来的值，然后确定是向前还是向后
   childrenInfo = (questionModel, questionInfo, totalScore, direction) => {
@@ -123,7 +168,7 @@ export default class MOCA extends React.Component {
           direction === "backwards"
         ) {
           // 表示完成，rootStory保存量表信息
-          const calculateResult = this.calculate();
+          const calculateResult = this.calculateAll();
           save(calculateResult, this.props.rootStore);
           return;
         }
@@ -247,7 +292,8 @@ export default class MOCA extends React.Component {
         <View style={{ justifyContent: "center", marginTop: dp(60) }}>
           <BackgroundImage
             source={require("./components/img/bk1.png")}
-            style={{ height: dp(500), width: dp(1725), alignItems: "center" }}>
+            style={{ height: dp(500), width: dp(1725), alignItems: "center" }}
+          >
             <Text
               style={{
                 fontSize: font(100),
@@ -255,7 +301,8 @@ export default class MOCA extends React.Component {
                 marginTop: dp(120),
                 fontWeight: "900",
                 textAlign: "center"
-              }}>
+              }}
+            >
               MoCA认知测评
             </Text>
             <Text
@@ -263,7 +310,8 @@ export default class MOCA extends React.Component {
                 fontSize: font(36),
                 color: "#c4e1fe",
                 marginTop: dp(40)
-              }}>
+              }}
+            >
               本次测评大约需要10分钟
             </Text>
           </BackgroundImage>
@@ -280,13 +328,15 @@ export default class MOCA extends React.Component {
               borderRadius: dp(10),
               overflow: "hidden"
             }}
-            onPress={this.startMeasurement}>
+            onPress={this.startMeasurement}
+          >
             <Text
               style={{
                 fontSize: font(40),
                 fontWeight: "bold",
                 color: "#ffffff"
-              }}>
+              }}
+            >
               开始测评
             </Text>
           </ButtonImg>

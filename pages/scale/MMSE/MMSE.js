@@ -134,7 +134,7 @@ export default class MMSE extends React.Component {
     }
     // this.props.rootStore.setReportData(reportData)
     const MMSE = {
-      assessmentAnswer: questionInfoTotal,
+      assessmentAnswer: JSON.stringify(questionInfoTotal),
       result: status,
       score: totalPoints
     };

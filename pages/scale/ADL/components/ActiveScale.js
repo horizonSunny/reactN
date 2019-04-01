@@ -127,6 +127,11 @@ export default class ActiveScale extends React.Component {
       //   obstacle += 1;
       // }
     });
+    const info = {
+      adl: {
+        questionInfo: questionInfoTotal
+      }
+    };
     console.log("questionInfoTotal_", questionInfoTotal);
     let status;
     if (totalPoints <= 26) {
@@ -135,7 +140,7 @@ export default class ActiveScale extends React.Component {
       status = "不正常";
     }
     const ADL = {
-      assessmentAnswer: questionInfoTotal,
+      assessmentAnswer: JSON.stringify(info),
       result: status,
       score: totalPoints
     };

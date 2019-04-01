@@ -55,16 +55,57 @@ export default class CdtScale extends React.Component {
     questionInfo[key]["answer"] = value;
     this.setState({ questionInfo: questionInfo });
   };
-  goNext = () => {};
-  goPrev = () => {
-    if (this.state.questionIndex === 0) {
-      return;
+  goNext = () => {
+    let { keys, values, entries } = Object;
+    for (let value of values(this.state.questionInfo)) {
+      if (value["answer"] === "") {
+        androidToast("请选择选项");
+        return;
+      }
     }
-    this.setState((prevState, props) => {
-      questionIndex: prevState.questionIndex - 1;
+    console.log("this.state.questionInfo_", this.state.questionInfo);
+    const calculateResult = this.calculate();
+    save(calculateResult, this.props.rootStore);
+  };
+  goPrev = () => {
+    console.log("1223_hahah");
+    this.setState({
+      questionIndex: this.state.questionIndex - 1
     });
   };
-  calculate = () => {};
+  calculate = () => {
+    let questionInfoTotal = Object.assign({}, this.state.questionInfo);
+    let totalPoints = 0;
+    // 障碍个数，有一个单项大于2分则障碍个数加一
+    // let obstacle = 0;
+    Object.keys(questionInfoTotal).map(key => {
+      // 所有的answer都必须是string 类型
+      questionInfoTotal[key].answer += "";
+      questionInfoTotal[key].score = parseInt(questionInfoTotal[key].answer);
+      totalPoints += questionInfoTotal[key].score;
+      // if (questionInfoTotal[key].score > 2) {
+      //   obstacle += 1;
+      // }
+    });
+    const info = {
+      cdt: {
+        questionInfo: questionInfoTotal
+      }
+    };
+    console.log("questionInfoTotal_", questionInfoTotal);
+    let status;
+    if (totalPoints >= 4) {
+      status = "正常";
+    } else {
+      status = "异常";
+    }
+    const CDT = {
+      assessmentAnswer: JSON.stringify(info),
+      result: status,
+      score: totalPoints
+    };
+    return CDT;
+  };
   canvasCdt = React.createRef();
   getBase64 = base64 => {
     this.setState({
@@ -92,7 +133,7 @@ export default class CdtScale extends React.Component {
             >
               <PageOrderCode
                 index={this.state.questionIndex + 1}
-                indexTotal={19}
+                indexTotal={1}
               />
               <View
                 style={{
