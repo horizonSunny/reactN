@@ -159,7 +159,8 @@ export default class Memory extends Component {
             style={{
               backgroundColor: "white",
               marginTop: dp(50)
-            }}>
+            }}
+          >
             <PageOrderCode
               backgroundColor={"green"}
               index={this.state.questionIndex + 1}
@@ -172,7 +173,8 @@ export default class Memory extends Component {
                 alignItems: "center",
                 marginTop: dp(-570),
                 marginLeft: dp(300)
-              }}>
+              }}
+            >
               <Text style={[styles.questionText, { width: "100%" }]}>
                 3-1.(记忆，不记分)读出下列词语(每秒一个)，患者重复2次，5分钟后回忆？
               </Text>
@@ -187,7 +189,8 @@ export default class Memory extends Component {
                 right: dp(50),
                 height: dp(200),
                 width: dp(200)
-              }}>
+              }}
+            >
               <Audio src="moca_16.m4a" />
             </View>
           </View>
@@ -201,7 +204,7 @@ export default class Memory extends Component {
             />
           </View>
           <View>
-            <View style={styles.tableRow}>
+            <View style={[styles.tableRow, { heigth: dp(100) }]}>
               <Text style={[styles.tableCheckTh, styles.tdb]}>第一次 </Text>
               <Text style={[styles.tableCheckTh, styles.tdb]}>面孔</Text>
               <Text style={[styles.tableCheckTh, styles.tdb]}>天鹅绒</Text>
@@ -209,7 +212,7 @@ export default class Memory extends Component {
               <Text style={[styles.tableCheckTh, styles.tdb]}>菊花</Text>
               <Text style={[styles.tableCheckTh, styles.tdb]}>红色</Text>
             </View>
-            <View style={styles.tableRow}>
+            <View style={[styles.tableRow, { heigth: dp(100) }]}>
               <Text style={[styles.tableCheckTd, styles.tdb]}>正确</Text>
               <Text style={styles.tableCheckTd} />
               <Text style={styles.tableCheckTd} />
@@ -230,7 +233,8 @@ export default class Memory extends Component {
                 <Radio.RadioGroup
                   key={index}
                   model={this.state.questionInfo[item["name"]]["answer"]}
-                  onChange={this.keyBoardChange.bind(this, item["name"])}>
+                  onChange={this.keyBoardChange.bind(this, item["name"])}
+                >
                   <View
                     style={{
                       position: "absolute",
@@ -239,7 +243,8 @@ export default class Memory extends Component {
                       width: 50,
                       height: 50,
                       backgroundColor: "#fff"
-                    }}>
+                    }}
+                  >
                     <Radio value={1} style={styles.radio} />
                   </View>
                   <View
@@ -250,7 +255,8 @@ export default class Memory extends Component {
                       top: item["twoTop"],
                       left: item["left"],
                       backgroundColor: "#fff"
-                    }}>
+                    }}
+                  >
                     <Radio value={0} style={styles.radio} />
                   </View>
                 </Radio.RadioGroup>
@@ -296,7 +302,8 @@ export default class Memory extends Component {
                 <Radio.RadioGroup
                   key={index}
                   model={this.state.questionInfo[item["name"]]["answer"]}
-                  onChange={this.keyBoardChange.bind(this, item["name"])}>
+                  onChange={this.keyBoardChange.bind(this, item["name"])}
+                >
                   <View
                     style={{
                       position: "absolute",
@@ -305,7 +312,8 @@ export default class Memory extends Component {
                       width: 50,
                       height: 50,
                       backgroundColor: "#fff"
-                    }}>
+                    }}
+                  >
                     <Radio value={1} style={styles.radio} />
                   </View>
                   <View
@@ -316,7 +324,8 @@ export default class Memory extends Component {
                       top: item["twoTop"],
                       left: item["left"],
                       backgroundColor: "#fff"
-                    }}>
+                    }}
+                  >
                     <Radio value={0} style={styles.radio} />
                   </View>
                 </Radio.RadioGroup>

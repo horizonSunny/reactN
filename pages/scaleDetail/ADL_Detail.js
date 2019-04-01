@@ -13,6 +13,7 @@ import React, { PureComponent } from "react";
 import data from "./testData";
 import AnswerReverse from "./components/AnswerReverse";
 import TableBorder from "./components/TableBorder";
+import styles from "../../../assets/css/common";
 
 export default class ADL_Detail extends PureComponent {
   constructor(props) {
@@ -65,42 +66,80 @@ export default class ADL_Detail extends PureComponent {
       { question: "20.独自在家", score: "3" }
     ];
     return (
-      <View
-        style={{
-          width: dp(1400),
-          height: dp(1000),
-          borderWidth: dp(2),
-          borderColor: "#000"
-        }}>
-        <ScrollView>
-          <View>
-            <Text style={{ marginBottom: dp(20) }}>
-              现在为想问些有关于您平常每天需要做的事情，我想知道，您可以自己做这些事情还是需要你家人的帮助，或者您根本没法做这些事？
-              {"\n"}评分:(1)自己可以做;(2)有些困难;(3)需要帮助;(4)根本没法做;
-            </Text>
-            {adlInfo.map((item, index) => {
-              return (
-                <React.Fragment key={index}>
-                  <View
-                    style={{
-                      flexDirection: "row"
-                    }}>
-                    <Text
-                      style={{
-                        marginTop: dp(10),
-                        width: "49%"
-                      }}>
-                      {item.question}
-                    </Text>
-                    <Text
-                      style={{
-                        textAlign: "right",
-                        width: "49%"
-                      }}>
-                      [{item.score}]
-                    </Text>
-                  </View>
-                  {/* <View
+      <React.Fragment>
+        <View style={{ alignItems: "center" }}>
+          <View
+            style={{
+              width: dp(1400),
+              height: dp(200),
+              borderWidth: dp(2),
+              borderColor: "#000",
+              alignItems: "center"
+            }}
+          >
+            <Text>MoCa量表评估报告</Text>
+            <View style={styles.tableRow}>
+              <Text style={[styles.tableDetial, styles.tdb]}>项目 </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>内容</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>得分</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>正常参考值</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>结果</Text>
+            </View>
+            <View style={styles.tableRow}>
+              <Text style={[styles.tableDetial, styles.tdb]}>MoCa量表 </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>情景记忆</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>87.0</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>>61.2</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>正常</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              width: dp(1400),
+              height: dp(50)
+            }}
+          />
+          <View
+            style={{
+              width: dp(1400),
+              height: dp(900),
+              borderWidth: dp(2),
+              borderColor: "#000"
+            }}
+          >
+            <ScrollView>
+              <View>
+                <Text style={{ marginBottom: dp(20) }}>
+                  现在为想问些有关于您平常每天需要做的事情，我想知道，您可以自己做这些事情还是需要你家人的帮助，或者您根本没法做这些事？
+                  {"\n"}
+                  评分:(1)自己可以做;(2)有些困难;(3)需要帮助;(4)根本没法做;
+                </Text>
+                {adlInfo.map((item, index) => {
+                  return (
+                    <React.Fragment key={index}>
+                      <View
+                        style={{
+                          flexDirection: "row"
+                        }}
+                      >
+                        <Text
+                          style={{
+                            marginTop: dp(10),
+                            width: "49%"
+                          }}
+                        >
+                          {item.question}
+                        </Text>
+                        <Text
+                          style={{
+                            textAlign: "right",
+                            width: "49%"
+                          }}
+                        >
+                          [{item.score}]
+                        </Text>
+                      </View>
+                      {/* <View
                     style={{
                       backgroundColor: "yellow",
                       width: dp(500),
@@ -108,12 +147,14 @@ export default class ADL_Detail extends PureComponent {
                     }}>
                     <Text>[{item.score}]</Text>
                   </View> */}
-                </React.Fragment>
-              );
-            })}
+                    </React.Fragment>
+                  );
+                })}
+              </View>
+            </ScrollView>
           </View>
-        </ScrollView>
-      </View>
+        </View>
+      </React.Fragment>
     );
   }
 }

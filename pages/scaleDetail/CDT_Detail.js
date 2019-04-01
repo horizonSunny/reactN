@@ -13,6 +13,7 @@ import React, { PureComponent } from "react";
 import data from "./testData";
 import AnswerReverse from "./components/AnswerReverse";
 import TableBorder from "./components/TableBorder";
+import styles from "../../../assets/css/common";
 
 export default class CDT_Detail extends PureComponent {
   constructor(props) {
@@ -50,67 +51,108 @@ export default class CDT_Detail extends PureComponent {
     ];
     return (
       <React.Fragment>
-        <View
-          style={{
-            width: dp(1400),
-            flexDirection: "row"
-          }}>
-          <Text
+        <View style={{ alignItems: "center" }}>
+          <View
             style={{
-              width: "60%",
-              height: dp(50),
+              width: dp(1400),
+              height: dp(200),
+              borderWidth: dp(2),
               borderColor: "#000",
-              borderTopWidth: dp(3),
-              borderBottomWidth: dp(2),
-              textAlign: "center",
-              textAlignVertical: "center"
-            }}>
-            项目
-          </Text>
-          <Text
+              alignItems: "center"
+            }}
+          >
+            <Text>MoCa量表评估报告</Text>
+            <View style={styles.tableRow}>
+              <Text style={[styles.tableDetial, styles.tdb]}>项目 </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>内容</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>得分</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>正常参考值</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>结果</Text>
+            </View>
+            <View style={styles.tableRow}>
+              <Text style={[styles.tableDetial, styles.tdb]}>MoCa量表 </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>情景记忆</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>87.0</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>>61.2</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>正常</Text>
+            </View>
+          </View>
+          <View
             style={{
-              width: "40%",
-              height: dp(50),
-              borderColor: "#000",
-              borderTopWidth: dp(3),
-              borderBottomWidth: dp(2),
-              textAlign: "center",
-              textAlignVertical: "center"
-            }}>
-            得分
-          </Text>
-        </View>
-        {cdtInfo.map((item, index) => {
-          return (
+              width: dp(1400),
+              height: dp(50)
+            }}
+          />
+          <View style={{ alignItems: "center" }}>
             <View
               style={{
                 width: dp(1400),
-                height: dp(100),
-                borderColor: "#000",
                 flexDirection: "row"
               }}
-              key={index}>
+            >
               <Text
                 style={{
                   width: "60%",
                   height: dp(50),
+                  borderColor: "#000",
+                  borderTopWidth: dp(3),
+                  borderBottomWidth: dp(2),
                   textAlign: "center",
                   textAlignVertical: "center"
-                }}>
-                {item.question}
+                }}
+              >
+                项目
               </Text>
               <Text
                 style={{
                   width: "40%",
                   height: dp(50),
+                  borderColor: "#000",
+                  borderTopWidth: dp(3),
+                  borderBottomWidth: dp(2),
                   textAlign: "center",
                   textAlignVertical: "center"
-                }}>
-                <AnswerReverse score={item["score"]} />
+                }}
+              >
+                得分
               </Text>
             </View>
-          );
-        })}
+            {cdtInfo.map((item, index) => {
+              return (
+                <View
+                  style={{
+                    width: dp(1400),
+                    height: dp(100),
+                    borderColor: "#000",
+                    flexDirection: "row"
+                  }}
+                  key={index}
+                >
+                  <Text
+                    style={{
+                      width: "60%",
+                      height: dp(50),
+                      textAlign: "center",
+                      textAlignVertical: "center"
+                    }}
+                  >
+                    {item.question}
+                  </Text>
+                  <Text
+                    style={{
+                      width: "40%",
+                      height: dp(50),
+                      textAlign: "center",
+                      textAlignVertical: "center"
+                    }}
+                  >
+                    <AnswerReverse score={item["score"]} />
+                  </Text>
+                </View>
+              );
+            })}
+          </View>
+        </View>
       </React.Fragment>
     );
   }
