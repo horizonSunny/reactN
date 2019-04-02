@@ -25,7 +25,7 @@ export default class Calculate extends React.Component {
     super(props);
     this.state = {
       reduceSeven: 5,
-      questionModel: "calculAteattention",
+      questionModel: "calculate",
       questionIndex: 9
     };
   }

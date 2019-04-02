@@ -622,19 +622,54 @@ export default class MOCA_Detail extends PureComponent {
                   >
                     100连续减7
                     <Text style={{ marginLeft: dp(150) }}>
-                      <AnswerReverse score={1} /> 93
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["calculate"]["questionInfo"][
+                            "ninetyThree"
+                          ]["score"]
+                        }
+                      />{" "}
+                      93
                     </Text>
                     <Text style={{ marginLeft: dp(150) }}>
-                      <AnswerReverse score={1} /> 86
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["calculate"]["questionInfo"][
+                            "eightySix"
+                          ]["score"]
+                        }
+                      />{" "}
+                      86
                     </Text>
                     <Text style={{ marginLeft: dp(150) }}>
-                      <AnswerReverse score={1} /> 79
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["calculate"]["questionInfo"][
+                            "seventyNine"
+                          ]["score"]
+                        }
+                      />{" "}
+                      79
                     </Text>
                     <Text style={{ marginLeft: dp(150) }}>
-                      <AnswerReverse score={1} /> 72
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["calculate"]["questionInfo"][
+                            "seventyTwo"
+                          ]["score"]
+                        }
+                      />{" "}
+                      72
                     </Text>
                     <Text style={{ marginLeft: dp(150) }}>
-                      <AnswerReverse score={1} /> 65
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["calculate"]["questionInfo"][
+                            "sixtyFive"
+                          ]["score"]
+                        }
+                      />{" "}
+                      65
                     </Text>
                   </Text>
                   <View style={{ flexDirection: "row", marginTop: dp(10) }}>
@@ -1178,7 +1213,7 @@ export default class MOCA_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    {this.state.questionModel["calculate"]["totalScore"]}/3
                   </Text>
                 </TableBorder>
                 <TableBorder

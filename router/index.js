@@ -28,25 +28,20 @@ function initData(res, rootStore) {
   console.log("initScaleData", res);
   // 这边判断是有没有用户信息和量表信息
   const info = res;
-  if (
-    info.age !== undefined &&
-    info.sex !== undefined &&
-    info.name !== undefined
-  ) {
+  if (info.userInfo !== undefined) {
     let userInfo = {
-      sex: info.sex,
-      age: info.age,
-      name: info.name,
-      phone: info.mobilephonenum,
-      idNumber: info.idNumber
+      sex: info.userInfo.sex,
+      age: info.userInfo.age,
+      name: info.userInfo.name,
+      phone: info.userInfo.phone
     };
     rootStore.setUserInfo(userInfo);
   }
   console.log("info.scaleName === true_", info.scaleName.length);
-  // info.scaleName.length !== 0
-  //   ? rootStore.setScaleNames(info.scaleName)
-  //   : "report";
-  // judgeOperateProcess(info, rootStore);
+  info.scaleName.length !== 0
+    ? rootStore.setScaleNames(info.scaleName)
+    : "report";
+  judgeOperateProcess(info, rootStore);
 }
 
 /**
