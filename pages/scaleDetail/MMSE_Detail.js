@@ -25,8 +25,6 @@ export default class MMSE_Detail extends PureComponent {
     console.log("item", item);
 
     const propsInfo = JSON.parse(item.assessmentAnswer);
-    const score = data.score;
-    const result = data.result;
     // const questionModel = propsInfo.adl.questionInfo;
 
     const questionModel = {

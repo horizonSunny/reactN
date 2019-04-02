@@ -18,28 +18,33 @@ import styles from "../../../assets/css/common";
 export default class MOCA_Detail extends PureComponent {
   constructor(props) {
     super(props);
-    // const propsInfo = this.props.Info;
-    console.log("data.assessmentAnswer_", data);
-    const propsInfo = data.assessmentAnswer;
-    const score = data.score;
-    const result = data.result;
+    let item = this.props.navigation.state.params.item;
+    console.log("-----------------------");
+    console.log("item", item);
+
+    const propsInfo = JSON.parse(item.assessmentAnswer);
+
     const questionModel = {
-      directiveForce: propsInfo.directiveForce,
-      ImmediatelyRecall: propsInfo.ImmediatelyRecall,
-      calculAteattention: propsInfo.calculAteattention,
-      named: propsInfo.named,
-      retell: propsInfo.retell,
-      read: propsInfo.read,
-      understand: propsInfo.understand,
-      write: propsInfo.write,
       viewSpace: propsInfo.viewSpace,
-      delayRecall: propsInfo.delayRecall
+      named: propsInfo.named,
+      memory: propsInfo.memory,
+      attention: propsInfo.attention,
+      recordOne: propsInfo.recordOne,
+      calculate: propsInfo.calculate,
+      repeatRead: propsInfo.repeatRead,
+      fluency: propsInfo.fluency,
+      abstract: propsInfo.abstract,
+      delayRemeber: propsInfo.delayRemeber,
+      directiveForce: propsInfo.directiveForce
     };
     // 头部预留，可能要修改
     this.state = {
       questionModel: questionModel,
-      totalScore: score,
-      result: result
+      assessmentName: item.assessmentName,
+      assessmentContent: item.assessmentContent,
+      score: item.score,
+      referenceValue: item.referenceValue,
+      result: item.result
     };
   }
   render() {
@@ -68,11 +73,21 @@ export default class MOCA_Detail extends PureComponent {
               <Text style={[styles.tableDetial, styles.tdb]}>结果</Text>
             </View>
             <View style={styles.tableRow}>
-              <Text style={[styles.tableDetial, styles.tdb]}>MoCa量表 </Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>情景记忆</Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>87.0</Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>>61.2</Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>正常</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.assessmentName}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.assessmentContent}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.score}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.referenceValue}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.result}
+              </Text>
             </View>
           </View>
           <View
@@ -164,23 +179,53 @@ export default class MOCA_Detail extends PureComponent {
                   <View style={{ flexDirection: "row", marginTop: dp(30) }}>
                     <Text style={{ marginLeft: dp(130) }}>
                       连线
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["viewSpace"]["questionInfo"][
+                            "ligature"
+                          ]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(300) }}>
                       立方体
-                      <AnswerReverse score={1} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["viewSpace"]["questionInfo"][
+                            "cube"
+                          ]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(150) }}>
                       轮廓
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["viewSpace"]["questionInfo"][
+                            "horologe"
+                          ]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(20) }}>
                       数字
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["viewSpace"]["questionInfo"][
+                            "horologe"
+                          ]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(20) }}>
                       指针
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["viewSpace"]["questionInfo"][
+                            "horologe"
+                          ]["score"]
+                        }
+                      />
                     </Text>
                   </View>
                 </TableBorder>
@@ -247,13 +292,31 @@ export default class MOCA_Detail extends PureComponent {
                   </View>
                   <View style={{ flexDirection: "row", marginTop: dp(30) }}>
                     <Text style={{ marginLeft: dp(130) }}>
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["named"]["questionInfo"][
+                            "lion"
+                          ]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(370) }}>
-                      <AnswerReverse score={1} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["named"]["questionInfo"][
+                            "rhinoceros"
+                          ]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(370) }}>
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["named"]["questionInfo"][
+                            "camel"
+                          ]["score"]
+                        }
+                      />
                     </Text>
                   </View>
                 </TableBorder>
@@ -340,19 +403,49 @@ export default class MOCA_Detail extends PureComponent {
                         第一次{" "}
                       </Text>
                       <Text style={[styles.tableDisplay, styles.tdb]}>
-                        <AnswerReverse score={0} />
+                        <AnswerReverse
+                          score={
+                            this.state.questionModel["memory"]["questionInfo"][
+                              "face"
+                            ]["score"]
+                          }
+                        />
                       </Text>
                       <Text style={[styles.tableDisplay, styles.tdb]}>
-                        <AnswerReverse score={0} />
+                        <AnswerReverse
+                          score={
+                            this.state.questionModel["memory"]["questionInfo"][
+                              "velvet"
+                            ]["score"]
+                          }
+                        />
                       </Text>
                       <Text style={[styles.tableDisplay, styles.tdb]}>
-                        <AnswerReverse score={0} />
+                        <AnswerReverse
+                          score={
+                            this.state.questionModel["memory"]["questionInfo"][
+                              "church"
+                            ]["score"]
+                          }
+                        />
                       </Text>
                       <Text style={[styles.tableDisplay, styles.tdb]}>
-                        <AnswerReverse score={0} />
+                        <AnswerReverse
+                          score={
+                            this.state.questionModel["memory"]["questionInfo"][
+                              "chrysanthemum"
+                            ]["score"]
+                          }
+                        />
                       </Text>
                       <Text style={[styles.tableDisplay, styles.tdb]}>
-                        <AnswerReverse score={0} />
+                        <AnswerReverse
+                          score={
+                            this.state.questionModel["memory"]["questionInfo"][
+                              "red"
+                            ]["score"]
+                          }
+                        />
                       </Text>
                     </View>
                     <View
@@ -368,19 +461,49 @@ export default class MOCA_Detail extends PureComponent {
                         第二次{" "}
                       </Text>
                       <Text style={[styles.tableDisplay, styles.tdb]}>
-                        <AnswerReverse score={0} />
+                        <AnswerReverse
+                          score={
+                            this.state.questionModel["memory"]["questionInfo"][
+                              "faceTwo"
+                            ]["score"]
+                          }
+                        />
                       </Text>
                       <Text style={[styles.tableDisplay, styles.tdb]}>
-                        <AnswerReverse score={0} />
+                        <AnswerReverse
+                          score={
+                            this.state.questionModel["memory"]["questionInfo"][
+                              "velvetTwo"
+                            ]["score"]
+                          }
+                        />
                       </Text>
                       <Text style={[styles.tableDisplay, styles.tdb]}>
-                        <AnswerReverse score={0} />
+                        <AnswerReverse
+                          score={
+                            this.state.questionModel["memory"]["questionInfo"][
+                              "churchTwo"
+                            ]["score"]
+                          }
+                        />
                       </Text>
                       <Text style={[styles.tableDisplay, styles.tdb]}>
-                        <AnswerReverse score={0} />
+                        <AnswerReverse
+                          score={
+                            this.state.questionModel["memory"]["questionInfo"][
+                              "chrysanthemumTwo"
+                            ]["score"]
+                          }
+                        />
                       </Text>
                       <Text style={[styles.tableDisplay, styles.tdb]}>
-                        <AnswerReverse score={0} />
+                        <AnswerReverse
+                          score={
+                            this.state.questionModel["memory"]["questionInfo"][
+                              "redTwo"
+                            ]["score"]
+                          }
+                        />
                       </Text>
                     </View>
                   </View>
@@ -431,11 +554,25 @@ export default class MOCA_Detail extends PureComponent {
                   >
                     <Text>
                       顺背
-                      <AnswerReverse score={0} /> 2 1 8 5 4
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["attention"]["questionInfo"][
+                            "orderRead"
+                          ]["score"]
+                        }
+                      />{" "}
+                      2 1 8 5 4
                     </Text>
                     <Text>
                       倒背
-                      <AnswerReverse score={0} /> 7 4 2
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["attention"]["questionInfo"][
+                            "invertedOrder"
+                          ]["score"]
+                        }
+                      />{" "}
+                      7 4 2
                     </Text>
                   </View>
                 </TableBorder>
@@ -455,7 +592,13 @@ export default class MOCA_Detail extends PureComponent {
                   </Text>
                   <View style={{ flexDirection: "row", marginTop: dp(10) }}>
                     <Text style={{ marginLeft: dp(130) }}>
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["recordOne"]["questionInfo"][
+                            "haveOneNum"
+                          ]["score"]
+                        }
+                      />
                       <Text>
                         {" "}
                         5 2 1 3 9 4 1 1 8 0 6 2 1 5 1 9 4 5 1 1 1 4 1 9 0 5 1 1
@@ -479,19 +622,19 @@ export default class MOCA_Detail extends PureComponent {
                   >
                     100连续减7
                     <Text style={{ marginLeft: dp(150) }}>
-                      <AnswerReverse score={0} /> 93
+                      <AnswerReverse score={1} /> 93
                     </Text>
                     <Text style={{ marginLeft: dp(150) }}>
-                      <AnswerReverse score={0} /> 86
+                      <AnswerReverse score={1} /> 86
                     </Text>
                     <Text style={{ marginLeft: dp(150) }}>
-                      <AnswerReverse score={0} /> 79
+                      <AnswerReverse score={1} /> 79
                     </Text>
                     <Text style={{ marginLeft: dp(150) }}>
-                      <AnswerReverse score={0} /> 72
+                      <AnswerReverse score={1} /> 72
                     </Text>
                     <Text style={{ marginLeft: dp(150) }}>
-                      <AnswerReverse score={0} /> 65
+                      <AnswerReverse score={1} /> 65
                     </Text>
                   </Text>
                   <View style={{ flexDirection: "row", marginTop: dp(10) }}>
@@ -546,14 +689,52 @@ export default class MOCA_Detail extends PureComponent {
                   >
                     <Text>
                       重复:我只知道今天是张亮过来帮过忙的人
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["repeatRead"][
+                            "questionInfo"
+                          ]["oneRepeat"]["score"]
+                        }
+                      />
                     </Text>
                     <Text>
                       {"         "}狗在房间的时候，猫总是躺在沙发下面
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["repeatRead"][
+                            "questionInfo"
+                          ]["twoRepeat"]["score"]
+                        }
+                      />
                     </Text>
                   </View>
                 </TableBorder>
+
+                <TableBorder
+                  style={{
+                    width: dp(1300),
+                    height: dp(50),
+                    borderTopWidth: dp(0)
+                  }}
+                >
+                  <View style={{ flexDirection: "row", marginTop: dp(10) }}>
+                    <Text
+                      style={{
+                        paddingLeft: dp(20)
+                      }}
+                    >
+                      流畅性：在一分钟内尽可能多的说出动物的名字
+                    </Text>
+                    <AnswerReverse
+                      score={
+                        this.state.questionModel["fluency"]["questionInfo"][
+                          "fluency"
+                        ]["score"]
+                      }
+                    />
+                  </View>
+                </TableBorder>
+
                 <TableBorder
                   style={{
                     width: dp(1300),
@@ -589,9 +770,21 @@ export default class MOCA_Detail extends PureComponent {
                     }}
                   >
                     词语相似性:如香蕉-橘子=水果
-                    <AnswerReverse score={0} />
+                    <AnswerReverse
+                      score={
+                        this.state.questionModel["abstract"]["questionInfo"][
+                          "transportation"
+                        ]["score"]
+                      }
+                    />
                     火车-自行车
-                    <AnswerReverse score={0} />
+                    <AnswerReverse
+                      score={
+                        this.state.questionModel["abstract"]["questionInfo"][
+                          "measure"
+                        ]["score"]
+                      }
+                    />
                     手表-尺子
                   </Text>
                 </TableBorder>
@@ -649,24 +842,54 @@ export default class MOCA_Detail extends PureComponent {
                       </Text>
                       <Text style={[styles.tableDisplay, styles.tdb]}>
                         {"   "}面孔{"\n"}
-                        <AnswerReverse score={0} />
+                        <AnswerReverse
+                          score={
+                            this.state.questionModel["delayRemeber"][
+                              "questionInfo"
+                            ]["face"]["score"]
+                          }
+                        />
                       </Text>
                       <Text style={[styles.tableDisplay, styles.tdb]}>
                         {"  "}
                         天鹅绒{"\n"}
-                        <AnswerReverse score={0} />
+                        <AnswerReverse
+                          score={
+                            this.state.questionModel["delayRemeber"][
+                              "questionInfo"
+                            ]["velvet"]["score"]
+                          }
+                        />
                       </Text>
                       <Text style={[styles.tableDisplay, styles.tdb]}>
                         {"   "}教堂{"\n"}
-                        <AnswerReverse score={0} />
+                        <AnswerReverse
+                          score={
+                            this.state.questionModel["delayRemeber"][
+                              "questionInfo"
+                            ]["church"]["score"]
+                          }
+                        />
                       </Text>
                       <Text style={[styles.tableDisplay, styles.tdb]}>
                         {"   "}菊花{"\n"}
-                        <AnswerReverse score={0} />
+                        <AnswerReverse
+                          score={
+                            this.state.questionModel["delayRemeber"][
+                              "questionInfo"
+                            ]["chrysanthemum"]["score"]
+                          }
+                        />
                       </Text>
                       <Text style={[styles.tableDisplay, styles.tdb]}>
                         {"   "}红色{"\n"}
-                        <AnswerReverse score={0} />
+                        <AnswerReverse
+                          score={
+                            this.state.questionModel["delayRemeber"][
+                              "questionInfo"
+                            ]["red"]["score"]
+                          }
+                        />
                       </Text>
                     </View>
                     <View
@@ -759,22 +982,58 @@ export default class MOCA_Detail extends PureComponent {
                       position: "absolute"
                     }}
                   >
-                    <AnswerReverse score={0} />
+                    <AnswerReverse
+                      score={
+                        this.state.questionModel["directiveForce"][
+                          "questionInfo"
+                        ]["year"]["score"]
+                      }
+                    />
                     日期
-                    <AnswerReverse score={0} />
+                    <AnswerReverse
+                      score={
+                        this.state.questionModel["directiveForce"][
+                          "questionInfo"
+                        ]["month"]["score"]
+                      }
+                    />
                     月份
-                    <AnswerReverse score={0} />
+                    <AnswerReverse
+                      score={
+                        this.state.questionModel["directiveForce"][
+                          "questionInfo"
+                        ]["day"]["score"]
+                      }
+                    />
                     年代
-                    <AnswerReverse score={0} />
+                    <AnswerReverse
+                      score={
+                        this.state.questionModel["directiveForce"][
+                          "questionInfo"
+                        ]["weekDay"]["score"]
+                      }
+                    />
                     星期几
-                    <AnswerReverse score={0} />
+                    <AnswerReverse
+                      score={
+                        this.state.questionModel["directiveForce"][
+                          "questionInfo"
+                        ]["company"]["score"]
+                      }
+                    />
                     地点
-                    <AnswerReverse score={0} />
+                    <AnswerReverse
+                      score={
+                        this.state.questionModel["directiveForce"][
+                          "questionInfo"
+                        ]["city"]["score"]
+                      }
+                    />
                     城市
                   </Text>
                 </TableBorder>
               </View>
-              {/* 右边分数 */}
+              {/*  右边分数 */}
               <View
                 style={{
                   width: dp(300),
@@ -814,7 +1073,7 @@ export default class MOCA_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    {this.state.questionModel["viewSpace"]["totalScore"]}/5
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -835,7 +1094,7 @@ export default class MOCA_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    {this.state.questionModel["named"]["totalScore"]}/3
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -856,7 +1115,7 @@ export default class MOCA_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    不记分
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -877,7 +1136,7 @@ export default class MOCA_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    {this.state.questionModel["attention"]["totalScore"]}/2
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -898,7 +1157,7 @@ export default class MOCA_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    {this.state.questionModel["recordOne"]["totalScore"]}/1
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -940,9 +1199,31 @@ export default class MOCA_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    {this.state.questionModel["repeatRead"]["totalScore"]}/2
                   </Text>
                 </TableBorder>
+                <TableBorder
+                  style={{
+                    width: dp(100),
+                    height: dp(50),
+                    borderWidth: dp(0),
+                    borderBottomWidth: dp(2),
+                    alignItems: "center"
+                  }}
+                >
+                  <Text
+                    style={{
+                      width: dp(100),
+                      height: dp(50),
+                      position: "relative",
+                      top: dp(10),
+                      textAlign: "center"
+                    }}
+                  >
+                    {this.state.questionModel["fluency"]["totalScore"]}/1
+                  </Text>
+                </TableBorder>
+
                 <TableBorder
                   style={{
                     width: dp(100),
@@ -961,7 +1242,7 @@ export default class MOCA_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    {this.state.questionModel["abstract"]["totalScore"]}/2
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -982,7 +1263,7 @@ export default class MOCA_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    {this.state.questionModel["delayRemeber"]["totalScore"]}/5
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -1003,11 +1284,11 @@ export default class MOCA_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    {this.state.questionModel["directiveForce"]["totalScore"]}/6
                   </Text>
                 </TableBorder>
               </View>
-              {/*总分数 */}
+              {/*总分数*/}
               <View
                 style={{
                   width: dp(500),
@@ -1033,7 +1314,9 @@ export default class MOCA_Detail extends PureComponent {
                     }}
                   >
                     总分
-                    <Text>{"    "}3/30</Text>
+                    <Text>
+                      {"    "} {this.state.score}/30
+                    </Text>
                   </Text>
                 </TableBorder>
               </View>
