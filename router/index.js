@@ -38,10 +38,10 @@ function initData(res, rootStore) {
     rootStore.setUserInfo(userInfo);
   }
   console.log("info.scaleName === true_", info.scaleName.length);
-  info.scaleName.length !== 0
-    ? rootStore.setScaleNames(info.scaleName)
-    : "report";
-  judgeOperateProcess(info, rootStore);
+  // info.scaleName.length !== 0
+  //   ? rootStore.setScaleNames(info.scaleName)
+  //   : "report";
+  // judgeOperateProcess(info, rootStore);
 }
 
 /**

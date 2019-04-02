@@ -32,35 +32,37 @@ export default class Report extends Component {
     schemeData: [],
     schemeTime: [],
     currentTime: "",
-    currentScheme: ""
+    currentScheme: "",
+    reportData: ""
   };
   constructor(props) {
     super(props);
   }
   componentDidMount() {
     // 获取时间并且转换成数据对象
-    this.getTime();
-    this.getData();
-  }
-  // 从后端方案的数据
-  getData() {
+    let self = this;
     http
-      .get("http://192.168.5.185:8081/rest/assessmentRecord/1")
+      .get("http://192.168.5.185:8081/rest/assessmentRecord/2")
       .then(function(response) {
+        console.log("11111111111111111111");
         console.log("response_", response);
+        self.setState({ reportData: response }, () => {
+          console.log("reportData__", self.state.reportData);
+          self.getTime();
+        });
       })
-      .catch(function(error) {
-        console.log("error_", error);
-      });
+      .catch(function(error) {});
   }
   //获取scheme时间并且转换成数组
   getTime = () => {
     this.setState(
       {
-        schemeData: data.body
+        schemeData: this.state.reportData.body
       },
       () => {
         // 存放量表的时间，用于显示右边侧边栏
+        console.log("22222222222222222222222");
+        console.log("schemeData_", this.state.schemeData);
         const schemeData = this.state.schemeData;
         let timeArr = [];
         for (let item = 0; item < schemeData.length; item++) {
@@ -79,6 +81,16 @@ export default class Report extends Component {
           };
           timeArr.push(time);
         }
+        // 将第一个显示
+        this.setState(
+          {
+            currentScheme: this.state.schemeData[0].items
+          },
+          () => {
+            console.log("------------------");
+            console.log("currentScheme_", this.state.currentScheme);
+          }
+        );
         this.setState(
           {
             schemeTime: timeArr
@@ -92,7 +104,10 @@ export default class Report extends Component {
   };
   // 点击跳转详情页面
   handleToDetails = () => {
-    NavigationService.navigate("CDT_Detail", { name: "123" });
+    console.log("info_", this.state.currentScheme);
+    const item = this.state.currentScheme;
+    NavigationService.navigate(item.assessmentName + "_Detail", { item });
+    // NavigationService.navigate("CDT" + "_Detail", { name: "123" });
   };
   // 当点击的时候获取点击的“text”时间值
   clickGetScheme(time) {
@@ -187,39 +202,18 @@ export default class Report extends Component {
     );
   }
   renderTable() {
-    const data = [
-      {
-        name: "MOCA量表",
-        content: "情景记忆",
-        score: "61",
-        referenceScore: ">61",
-        result: "正常"
-      },
-      {
-        name: "MOCA量表",
-        content: "情景记忆",
-        score: "61",
-        referenceScore: ">61",
-        result: "正常"
-      },
-      {
-        name: "MOCA量表",
-        content: "情景记忆",
-        score: "61",
-        referenceScore: ">61",
-        result: "正常"
-      }
-    ];
-    return data.map((item, index) => {
+    return this.state.currentScheme.map((item, index) => {
       return (
-        <View style={styles.tableRow} key={index + item.name}>
+        <View style={styles.tableRow} key={index}>
           <Text style={[styles.td, styles.tdhSlider, styles.tf, styles.tdf]}>
-            {item.name}
+            {item.assessmentName}
           </Text>
-          <Text style={[styles.td, styles.tdhSlider]}>{item.content}</Text>
+          <Text style={[styles.td, styles.tdhSlider]}>
+            {item.assessmentContent}
+          </Text>
           <Text style={[styles.td, styles.tdhSlider]}>{item.score}</Text>
           <Text style={[styles.td, styles.tdhSlider]}>
-            {item.referenceScore}
+            {item.referenceValue}
           </Text>
           <Text
             style={[
@@ -247,7 +241,9 @@ export default class Report extends Component {
                   this.props.rippleColor ? this.props.rippleColor : "#a2a4a6",
                   true
                 )}
-                onPress={this.handleToDetails}
+                onPress={() => {
+                  this.setState({ currentScheme: item }, this.handleToDetails);
+                }}
               >
                 <View
                   style={{

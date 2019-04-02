@@ -13,7 +13,7 @@ class Store {
     this.scaleName.replace(scaleName);
   }
   // 操作流程，1 表示有用户有量表，2表示无用户有量表， 3表示有用户无量表
-  @observable operateProcess = 1;
+  @observable operateProcess = 2;
   @action.bound
   setOperateProcess(process) {
     this.operateProcess = process;

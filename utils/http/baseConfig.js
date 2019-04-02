@@ -10,7 +10,7 @@ const CONFIG = {
     "X-Requested-With": "XMLHttpRequest", //设置该请求为ajax异步请求，区分传统页面请求等等
     "Content-Type": "application/json; charset=UTF-8", //这是contentType
     Token:
-      "Bearer PljrxWrgimC/2dppb7zfepF/CLYsO/x0iOkHD49XeF4rEsvkgAhtETOtiYwJ0bMuqWu7OFjeEUwIW753q0BQ2w==" //待设置
+      "Bearer xL3fwCRNgiB2W9PsUbm3npF/CLYsO/x0iOkHD49XeF4rEsvkgAhtETOtiYwJ0bMuQrvoMeMJAwtddwdqNBj0CA==" //待设置
   },
   paramsSerializer: function(params) {
     //序列化get请求参数
