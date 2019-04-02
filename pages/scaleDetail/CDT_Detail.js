@@ -21,39 +21,42 @@ export default class CDT_Detail extends PureComponent {
   constructor(props) {
     super(props);
     // 获取参数，test测试
-    let name = this.props.navigation.state.params.name;
+    let item = this.props.navigation.state.params.item;
     console.log("-----------------------");
-    console.log("name", name);
-    // const propsInfo = this.props.Info;
-    // console.log("data.assessmentAnswer_", data);
-    const propsInfo = data.assessmentAnswer;
+    console.log("item", item);
+
+    const propsInfo = JSON.parse(item.assessmentAnswer);
     const score = data.score;
     const result = data.result;
-    const questionModel = {
-      directiveForce: propsInfo.directiveForce,
-      ImmediatelyRecall: propsInfo.ImmediatelyRecall,
-      calculAteattention: propsInfo.calculAteattention,
-      named: propsInfo.named,
-      retell: propsInfo.retell,
-      read: propsInfo.read,
-      understand: propsInfo.understand,
-      write: propsInfo.write,
-      viewSpace: propsInfo.viewSpace,
-      delayRecall: propsInfo.delayRecall
-    };
+    const questionModel = propsInfo.cdt.questionInfo;
     // 头部预留，可能要修改
     this.state = {
       questionModel: questionModel,
-      totalScore: score,
-      result: result
+      assessmentName: item.assessmentName,
+      assessmentContent: item.assessmentContent,
+      score: item.score,
+      referenceValue: item.referenceValue,
+      result: item.result
     };
   }
   render() {
     const cdtInfo = [
-      { question: "画好一个封闭的圆", score: 0 },
-      { question: "12个数字均没有遗漏", score: 1 },
-      { question: "数字的位置及顺序准确", score: 0 },
-      { question: "将指针置于正确的位置", score: 1 }
+      {
+        question: "画好一个封闭的圆",
+        score: this.state.questionModel["haveCircle"]["score"]
+      },
+      {
+        question: "12个数字均没有遗漏",
+        score: this.state.questionModel["twelveNum"]["score"]
+      },
+      {
+        question: "数字的位置及顺序准确",
+        score: this.state.questionModel["ordinalPosition"]["score"]
+      },
+      {
+        question: "将指针置于正确的位置",
+        score: this.state.questionModel["pointer"]["score"]
+      }
     ];
     return (
       <React.Fragment>
@@ -76,11 +79,21 @@ export default class CDT_Detail extends PureComponent {
               <Text style={[styles.tableDetial, styles.tdb]}>结果</Text>
             </View>
             <View style={styles.tableRow}>
-              <Text style={[styles.tableDetial, styles.tdb]}>MoCa量表 </Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>情景记忆</Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>87.0</Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>>61.2</Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>正常</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.assessmentName}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.assessmentContent}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.score}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.referenceValue}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.result}
+              </Text>
             </View>
           </View>
           <View

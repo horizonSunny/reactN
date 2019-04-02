@@ -13,7 +13,9 @@ import MMSE from "../pages/scale/MMSE/MMSE";
 import ADL from "../pages/scale/ADL/ADL";
 import MOCA from "../pages/scale/MOCA/MOCA";
 import CDT from "../pages/scale/CDT/CDT";
+// report
 import Report from "../pages/Report/Report";
+import ReportFromScale from "../pages/Report/ReportFromScale";
 // detail
 import MMSE_Detail from "../pages/scaleDetail/MMSE_Detail";
 import MOCA_Detail from "../pages/scaleDetail/MOCA_Detail";
@@ -43,7 +45,7 @@ function initData(res, rootStore) {
   console.log("info.scaleName === true_", info.scaleName.length);
   // info.scaleName.length !== 0
   //   ? rootStore.setScaleNames(info.scaleName)
-  //   : "MMSE";
+  //   : "report";
   // judgeOperateProcess(info, rootStore);
 }
 
@@ -96,6 +98,9 @@ const routes = {
   },
   Report: {
     screen: Report
+  },
+  ReportFromScale: {
+    screen: ReportFromScale
   },
   MMSE_Detail: {
     screen: MMSE_Detail

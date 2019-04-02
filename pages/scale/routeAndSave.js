@@ -31,14 +31,19 @@ export function save(calculateResult, rootStore) {
       items: rootStore.finishedScale,
       patientUid: 2
     };
-    http
-      .post("http://192.168.5.185:8081/rest/assessmentRecord", obj)
-      .then(function(response) {
-        console.log("response_", response);
-      })
-      .catch(function(error) {
-        console.log("error_", error);
-      });
+    //表示有用户有量表，这边只有1，3能进.2是直接到档案列表页面
+    if (rootStore.operateProcess === 1) {
+      http
+        .post("http://192.168.5.185:8081/rest/assessmentRecord", obj)
+        .then(function(response) {
+          console.log("response_", response);
+        })
+        .catch(function(error) {
+          console.log("error_", error);
+        });
+    }
+    NavigationService.navigate("ReportFromScale", { info: obj });
+    // this.rootStore.finishedScale
   } else {
     console.log("rootStore_scaleCurrentIndex", rootStore.scaleCurrentIndex);
     const nextScale =
