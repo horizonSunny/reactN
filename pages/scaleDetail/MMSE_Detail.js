@@ -19,10 +19,16 @@ export default class MMSE_Detail extends PureComponent {
   constructor(props) {
     super(props);
     // const propsInfo = this.props.Info;
-    console.log("data.assessmentAnswer_", data);
-    const propsInfo = data.assessmentAnswer;
+    super(props);
+    let item = this.props.navigation.state.params.item;
+    console.log("-----------------------");
+    console.log("item", item);
+
+    const propsInfo = JSON.parse(item.assessmentAnswer);
     const score = data.score;
     const result = data.result;
+    // const questionModel = propsInfo.adl.questionInfo;
+
     const questionModel = {
       directiveForce: propsInfo.directiveForce,
       ImmediatelyRecall: propsInfo.ImmediatelyRecall,
@@ -38,22 +44,75 @@ export default class MMSE_Detail extends PureComponent {
     // 头部预留，可能要修改
     this.state = {
       questionModel: questionModel,
-      totalScore: score,
-      result: result
+      assessmentName: item.assessmentName,
+      assessmentContent: item.assessmentContent,
+      score: item.score,
+      referenceValue: item.referenceValue,
+      result: item.result
     };
   }
   render() {
     const directive = [
-      { question: "1.今年的年份?", answer: 1 },
-      { question: "2.现在是什么季节?", answer: 1 },
-      { question: "3.现在是几月?", answer: 1 },
-      { question: "4.今天是几号?", answer: 1 },
-      { question: "5.今天是星期几?", answer: 1 },
-      { question: "6.您现在住在那个城市?", answer: 1 },
-      { question: "7.您现在住在什么区县?", answer: 1 },
-      { question: "8.您现在住在什么街道?", answer: 1 },
-      { question: "9.我们现在是在第几层楼?", answer: 1 },
-      { question: "10.我们这是什么单位?", answer: 1 }
+      {
+        question: "1.今年的年份?",
+        score: this.state.questionModel["directiveForce"]["questionInfo"][
+          "thisYear"
+        ]["score"]
+      },
+      {
+        question: "2.现在是什么季节?",
+        score: this.state.questionModel["directiveForce"]["questionInfo"][
+          "thisSeason"
+        ]["score"]
+      },
+      {
+        question: "3.现在是几月?",
+        score: this.state.questionModel["directiveForce"]["questionInfo"][
+          "thisMonth"
+        ]["score"]
+      },
+      {
+        question: "4.今天是几号?",
+        score: this.state.questionModel["directiveForce"]["questionInfo"][
+          "today"
+        ]["score"]
+      },
+      {
+        question: "5.今天是星期几?",
+        score: this.state.questionModel["directiveForce"]["questionInfo"][
+          "weekDay"
+        ]["score"]
+      },
+      {
+        question: "6.您现在住在那个城市?",
+        score: this.state.questionModel["directiveForce"]["questionInfo"][
+          "city"
+        ]["score"]
+      },
+      {
+        question: "7.您现在住在什么区县?",
+        score: this.state.questionModel["directiveForce"]["questionInfo"][
+          "county"
+        ]["score"]
+      },
+      {
+        question: "8.您现在住在什么街道?",
+        score: this.state.questionModel["directiveForce"]["questionInfo"][
+          "street"
+        ]["score"]
+      },
+      {
+        question: "9.我们现在是在第几层楼?",
+        score: this.state.questionModel["directiveForce"]["questionInfo"][
+          "floor"
+        ]["score"]
+      },
+      {
+        question: "10.我们这是什么单位?",
+        score: this.state.questionModel["directiveForce"]["questionInfo"][
+          "organization"
+        ]["score"]
+      }
     ];
     return (
       <React.Fragment>
@@ -76,11 +135,21 @@ export default class MMSE_Detail extends PureComponent {
               <Text style={[styles.tableDetial, styles.tdb]}>结果</Text>
             </View>
             <View style={styles.tableRow}>
-              <Text style={[styles.tableDetial, styles.tdb]}>MoCa量表 </Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>情景记忆</Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>87.0</Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>>61.2</Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>正常</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.assessmentName}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.assessmentContent}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.score}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.referenceValue}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.result}
+              </Text>
             </View>
           </View>
           <View
@@ -122,7 +191,7 @@ export default class MMSE_Detail extends PureComponent {
                           return (
                             <Text key={index}>
                               {item.question}{" "}
-                              <AnswerReverse score={item.answer} />
+                              <AnswerReverse score={item.scroe} />
                             </Text>
                           );
                         }
@@ -173,15 +242,33 @@ export default class MMSE_Detail extends PureComponent {
                   <View style={{ flexDirection: "row" }}>
                     <Text style={{ marginLeft: dp(50) }}>
                       皮球
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["ImmediatelyRecall"][
+                            "questionInfo"
+                          ]["ball"]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(100) }}>
                       国旗
-                      <AnswerReverse score={1} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["ImmediatelyRecall"][
+                            "questionInfo"
+                          ]["nationalFlag"]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(100) }}>
                       树木
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["ImmediatelyRecall"][
+                            "questionInfo"
+                          ]["trees"]["score"]
+                        }
+                      />
                     </Text>
                   </View>
                 </TableBorder>
@@ -207,23 +294,53 @@ export default class MMSE_Detail extends PureComponent {
                   <View style={{ flexDirection: "row" }}>
                     <Text style={{ marginLeft: dp(50) }}>
                       93
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["calculAteattention"][
+                            "questionInfo"
+                          ]["ninetyThree"]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(100) }}>
                       86
-                      <AnswerReverse score={1} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["calculAteattention"][
+                            "questionInfo"
+                          ]["eightySix"]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(100) }}>
                       79
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["calculAteattention"][
+                            "questionInfo"
+                          ]["seventyNine"]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(100) }}>
                       72
-                      <AnswerReverse score={1} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["calculAteattention"][
+                            "questionInfo"
+                          ]["seventyTwo"]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(100) }}>
                       65
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["calculAteattention"][
+                            "questionInfo"
+                          ]["sixtyFive"]["score"]
+                        }
+                      />
                     </Text>
                   </View>
                 </TableBorder>
@@ -244,13 +361,25 @@ export default class MMSE_Detail extends PureComponent {
                   <View>
                     <Text>
                       14.(主试出示手表)请问这是什么?{"    "}手表
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["named"]["questionInfo"][
+                            "watches"
+                          ]["score"]
+                        }
+                      />
                     </Text>
                   </View>
                   <View>
                     <Text>
                       (出示铅笔)请问这是什么?{"    "}铅笔
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["named"]["questionInfo"][
+                            "pencil"
+                          ]["score"]
+                        }
+                      />
                     </Text>
                   </View>
                 </TableBorder>
@@ -276,7 +405,13 @@ export default class MMSE_Detail extends PureComponent {
                   <View style={{ flexDirection: "row" }}>
                     <Text style={{ marginLeft: dp(50) }}>
                       四十四只石狮子
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["retell"]["questionInfo"][
+                            "retell"
+                          ]["score"]
+                        }
+                      />
                     </Text>
                   </View>
                 </TableBorder>
@@ -302,7 +437,13 @@ export default class MMSE_Detail extends PureComponent {
                   <View style={{ flexDirection: "row" }}>
                     <Text style={{ marginLeft: dp(50) }}>
                       闭上你的眼睛
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["read"]["questionInfo"][
+                            "closeEyes"
+                          ]["score"]
+                        }
+                      />
                     </Text>
                   </View>
                 </TableBorder>
@@ -328,15 +469,33 @@ export default class MMSE_Detail extends PureComponent {
                   <View style={{ flexDirection: "row" }}>
                     <Text style={{ marginLeft: dp(50) }}>
                       请用右手拿这张纸
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["understand"][
+                            "questionInfo"
+                          ]["holdPaper"]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(100) }}>
                       把纸对折
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["understand"][
+                            "questionInfo"
+                          ]["foldedInHalf"]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(100) }}>
                       将纸放在地面上
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["understand"][
+                            "questionInfo"
+                          ]["onTheLeg"]["score"]
+                        }
+                      />
                     </Text>
                   </View>
                 </TableBorder>
@@ -362,7 +521,13 @@ export default class MMSE_Detail extends PureComponent {
                   <View style={{ flexDirection: "row" }}>
                     <Text style={{ marginLeft: dp(50) }}>
                       句子
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["write"]["questionInfo"][
+                            "sentence"
+                          ]["score"]
+                        }
+                      />
                     </Text>
                   </View>
                 </TableBorder>
@@ -398,7 +563,13 @@ export default class MMSE_Detail extends PureComponent {
                   <View style={{ flexDirection: "row" }}>
                     <Text style={{ marginLeft: dp(50) }}>
                       画图
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["viewSpace"]["questionInfo"][
+                            "draw"
+                          ]["score"]
+                        }
+                      />
                     </Text>
                   </View>
                 </TableBorder>
@@ -424,15 +595,33 @@ export default class MMSE_Detail extends PureComponent {
                   <View style={{ flexDirection: "row" }}>
                     <Text style={{ marginLeft: dp(50) }}>
                       皮球
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["delayRecall"][
+                            "questionInfo"
+                          ]["ball"]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(100) }}>
                       国旗
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["delayRecall"][
+                            "questionInfo"
+                          ]["nationalFlag"]["score"]
+                        }
+                      />
                     </Text>
                     <Text style={{ marginLeft: dp(100) }}>
                       树木
-                      <AnswerReverse score={0} />
+                      <AnswerReverse
+                        score={
+                          this.state.questionModel["delayRecall"][
+                            "questionInfo"
+                          ]["trees"]["score"]
+                        }
+                      />
                     </Text>
                   </View>
                 </TableBorder>
@@ -474,7 +663,8 @@ export default class MMSE_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    {this.state.questionModel["directiveForce"]["totalScore"]}
+                    /10
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -495,7 +685,12 @@ export default class MMSE_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    {
+                      this.state.questionModel["ImmediatelyRecall"][
+                        "totalScore"
+                      ]
+                    }
+                    /3
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -516,7 +711,12 @@ export default class MMSE_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    4/5
+                    {
+                      this.state.questionModel["calculAteattention"][
+                        "totalScore"
+                      ]
+                    }
+                    /5
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -537,7 +737,7 @@ export default class MMSE_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    5/5
+                    {this.state.questionModel["named"]["totalScore"]}/2
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -558,7 +758,7 @@ export default class MMSE_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    2/5
+                    {this.state.questionModel["retell"]["totalScore"]}/1
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -579,7 +779,7 @@ export default class MMSE_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    1/5
+                    {this.state.questionModel["read"]["totalScore"]}/1
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -600,7 +800,7 @@ export default class MMSE_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    {this.state.questionModel["understand"]["totalScore"]}/3
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -621,7 +821,7 @@ export default class MMSE_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    {this.state.questionModel["write"]["totalScore"]}/1
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -642,7 +842,7 @@ export default class MMSE_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    {this.state.questionModel["viewSpace"]["totalScore"]}/1
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -663,7 +863,7 @@ export default class MMSE_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    3/5
+                    {this.state.questionModel["delayRecall"]["totalScore"]}/3
                   </Text>
                 </TableBorder>
               </View>
@@ -690,7 +890,10 @@ export default class MMSE_Detail extends PureComponent {
                     }}
                   >
                     总分
-                    <Text>{"    "}3/30</Text>
+                    <Text>
+                      {"    "}
+                      {this.state.score}/30
+                    </Text>
                   </Text>
                 </TableBorder>
               </View>
