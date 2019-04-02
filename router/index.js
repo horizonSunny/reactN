@@ -41,10 +41,10 @@ function initData(res, rootStore) {
     rootStore.setUserInfo(userInfo);
   }
   console.log("info.scaleName === true_", info.scaleName.length);
-  info.scaleName.length !== 0
-    ? rootStore.setScaleNames(info.scaleName)
-    : "MMSE";
-  judgeOperateProcess(info, rootStore);
+  // info.scaleName.length !== 0
+  //   ? rootStore.setScaleNames(info.scaleName)
+  //   : "MMSE";
+  // judgeOperateProcess(info, rootStore);
 }
 
 /**
@@ -61,10 +61,13 @@ function judgeOperateProcess(info, rootStore) {
 }
 const Main = inject("rootStore")(props => {
   RNbridge.init().then(res => {
-    console.log("******", res);
+    console.log("******", props.rootStore.operateProcess);
     initData(res, props.rootStore);
     // 判断量表里面有没有东西，有的话走1，3，没有走2
-    firstPage = props.rootStore.scaleName.length !== 0 ? "CDT" : "Report";
+    firstPage =
+      props.rootStore.operateProcess !== 2
+        ? props.rootStore.scaleName[0]["assessmentName"]
+        : "Report";
     console.log("firstPage_" + firstPage);
     const resetAction = StackActions.reset({
       index: 0,

@@ -19,16 +19,19 @@ class Store {
   }
   // 操作流程，1 表示有用户有量表，2表示无用户有量表， 3表示有用户无量表
   @observable operateProcess = 1;
+  @action.bound
   setOperateProcess(process) {
     this.operateProcess = process;
   }
   // 设置当前量表index,依据index获取scaleName,确保路由跳转
   @observable scaleCurrentIndex = 0;
+  @action.bound
   setScaleIndex() {
     this.scaleCurrentIndex += 1;
   }
   // 是否是脑健康管理师自测，是否有用户信息
   @observable haveUser = false;
+  @action.bound
   setUser() {
     this.haveUser = true;
   }

@@ -5,10 +5,11 @@ import NavigationService from "../../router/NavigationService";
 export function save(calculateResult, rootStore) {
   // console.log("calculateResult_", calculateResult, "_rootStore_", rootStore);
   const scaleScheduleIndex = rootStore.scaleCurrentIndex;
-  const currentScaleName = rootStore.scaleName["scaleScheduleIndex"];
+  const currentScaleName =
+    rootStore.scaleName[scaleScheduleIndex]["assessmentName"];
   console.log(
     'rootStore.scaleName[scaleScheduleIndex]["assessmentName"]_',
-    rootStore.scaleName[scaleScheduleIndex]
+    rootStore.scaleName[scaleScheduleIndex]["assessmentName"]
   );
   // 获取一些信息
   const scaleMessage = message[currentScaleName];
@@ -24,7 +25,7 @@ export function save(calculateResult, rootStore) {
   // currentindex +1
   rootStore.setScaleIndex();
   //
-  if (rootStore.scaleCurrentIndex === rootStore.scaleName.length - 1) {
+  if (rootStore.scaleCurrentIndex === rootStore.scaleName.length) {
     const obj = {
       assessmentPlanUid: 1,
       items: rootStore.finishedScale,
@@ -39,7 +40,9 @@ export function save(calculateResult, rootStore) {
         console.log("error_", error);
       });
   } else {
-    const nextScale = rootStore.scaleName[scaleScheduleIndex]["assessmentName"];
+    console.log("rootStore_scaleCurrentIndex", rootStore.scaleCurrentIndex);
+    const nextScale =
+      rootStore.scaleName[rootStore.scaleCurrentIndex]["assessmentName"];
     NavigationService.navigate(nextScale);
   }
 }
