@@ -27,6 +27,8 @@ import { inject } from "mobx-react";
 function initData(res, rootStore) {
   console.log("initScaleData", res);
   // 这边判断是有没有用户信息和量表信息
+  // const info = res.respInfo;
+  // const info = JSON.parse(response);
   const info = res;
   if (info.userInfo !== undefined) {
     let userInfo = {

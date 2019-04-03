@@ -29,11 +29,12 @@ import http from "../../utils/http/index";
 @inject("rootStore")
 export default class Report extends Component {
   state = {
+    resData: [],
     schemeData: [],
     schemeTime: [],
+    scaleArr: [],
     currentTime: "",
-    currentScheme: "",
-    reportData: ""
+    currentScheme: ""
   };
   constructor(props) {
     super(props);
@@ -46,8 +47,8 @@ export default class Report extends Component {
       .then(function(response) {
         console.log("11111111111111111111");
         console.log("response_", response);
-        self.setState({ reportData: response }, () => {
-          console.log("reportData__", self.state.reportData);
+        self.setState({ resData: response }, () => {
+          console.log("resData__", self.state.resData);
           self.getTime();
         });
       })
@@ -57,7 +58,7 @@ export default class Report extends Component {
   getTime = () => {
     this.setState(
       {
-        schemeData: this.state.reportData.body
+        schemeData: this.state.resData.body
       },
       () => {
         // 存放量表的时间，用于显示右边侧边栏
@@ -84,11 +85,11 @@ export default class Report extends Component {
         // 将第一个显示
         this.setState(
           {
-            currentScheme: this.state.schemeData[0].items
+            scaleArr: this.state.schemeData[0].items
           },
           () => {
             console.log("------------------");
-            console.log("currentScheme_", this.state.currentScheme);
+            console.log("schemeArr_", this.state.schemeArr);
           }
         );
         this.setState(
@@ -202,73 +203,74 @@ export default class Report extends Component {
     );
   }
   renderTable() {
-    return this.state.currentScheme.map((item, index) => {
-      return (
-        <View style={styles.tableRow} key={index}>
-          <Text style={[styles.td, styles.tdhSlider, styles.tf, styles.tdf]}>
-            {item.assessmentName}
-          </Text>
-          <Text style={[styles.td, styles.tdhSlider]}>
-            {item.assessmentContent}
-          </Text>
-          <Text style={[styles.td, styles.tdhSlider]}>{item.score}</Text>
-          <Text style={[styles.td, styles.tdhSlider]}>
-            {item.referenceValue}
-          </Text>
-          <Text
-            style={[
-              styles.td,
-              styles.tdhSlider,
-              item.result === "正常" ? styles.tdl : styles.tdred
-            ]}
-          >
-            {item.result}
-          </Text>
-          <View style={[styles.td, styles.tdhSlider]}>
-            <View
-              style={{
-                borderWidth: dp(1),
-                borderColor: "#ddd",
-                borderRadius: dp(10),
-                height: dp(40),
-                width: dp(100),
-                justifyContent: "center",
-                alignItems: "center"
-              }}
-            >
-              <TouchableNativeFeedback
-                background={TouchableNativeFeedback.Ripple(
-                  this.props.rippleColor ? this.props.rippleColor : "#a2a4a6",
-                  true
-                )}
-                onPress={() => {
-                  this.setState({ currentScheme: item }, this.handleToDetails);
-                }}
-              >
-                <View
-                  style={{
-                    height: dp(40),
-                    width: dp(100),
-                    justifyContent: "center",
-                    alignItems: "center"
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize: dp(20),
-                      justifyContent: "center",
-                      alignItems: "center"
-                    }}
-                  >
-                    查看详情
-                  </Text>
-                </View>
-              </TouchableNativeFeedback>
-            </View>
-          </View>
-        </View>
-      );
-    });
+    return;
+    // return this.state.schemeArr.map((item, index) => {
+    //   return (
+    //     <View style={styles.tableRow} key={index}>
+    //       <Text style={[styles.td, styles.tdhSlider, styles.tf, styles.tdf]}>
+    //         {item.assessmentName}
+    //       </Text>
+    //       <Text style={[styles.td, styles.tdhSlider]}>
+    //         {item.assessmentContent}
+    //       </Text>
+    //       <Text style={[styles.td, styles.tdhSlider]}>{item.score}</Text>
+    //       <Text style={[styles.td, styles.tdhSlider]}>
+    //         {item.referenceValue}
+    //       </Text>
+    //       <Text
+    //         style={[
+    //           styles.td,
+    //           styles.tdhSlider,
+    //           item.result === "正常" ? styles.tdl : styles.tdred
+    //         ]}
+    //       >
+    //         {item.result}
+    //       </Text>
+    //       <View style={[styles.td, styles.tdhSlider]}>
+    //         <View
+    //           style={{
+    //             borderWidth: dp(1),
+    //             borderColor: "#ddd",
+    //             borderRadius: dp(10),
+    //             height: dp(40),
+    //             width: dp(100),
+    //             justifyContent: "center",
+    //             alignItems: "center"
+    //           }}
+    //         >
+    //           <TouchableNativeFeedback
+    //             background={TouchableNativeFeedback.Ripple(
+    //               this.props.rippleColor ? this.props.rippleColor : "#a2a4a6",
+    //               true
+    //             )}
+    //             onPress={() => {
+    //               this.setState({ currentScheme: item }, this.handleToDetails);
+    //             }}
+    //           >
+    //             <View
+    //               style={{
+    //                 height: dp(40),
+    //                 width: dp(100),
+    //                 justifyContent: "center",
+    //                 alignItems: "center"
+    //               }}
+    //             >
+    //               <Text
+    //                 style={{
+    //                   fontSize: dp(20),
+    //                   justifyContent: "center",
+    //                   alignItems: "center"
+    //                 }}
+    //               >
+    //                 查看详情
+    //               </Text>
+    //             </View>
+    //           </TouchableNativeFeedback>
+    //         </View>
+    //       </View>
+    //     </View>
+    //   );
+    // });
   }
   renderSlider() {
     const imgArr = [
