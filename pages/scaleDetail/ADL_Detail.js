@@ -128,7 +128,7 @@ export default class ADL_Detail extends PureComponent {
               alignItems: "center"
             }}
           >
-            <Text>MoCa量表评估报告</Text>
+            <Text>ADL量表评估报告</Text>
             <View style={styles.tableRow}>
               <Text style={[styles.tableDetial, styles.tdb]}>项目 </Text>
               <Text style={[styles.tableDetial, styles.tdb]}>内容</Text>
@@ -137,11 +137,21 @@ export default class ADL_Detail extends PureComponent {
               <Text style={[styles.tableDetial, styles.tdb]}>结果</Text>
             </View>
             <View style={styles.tableRow}>
-              <Text style={[styles.tableDetial, styles.tdb]}>MoCa量表 </Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>情景记忆</Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>87.0</Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>>61.2</Text>
-              <Text style={[styles.tableDetial, styles.tdb]}>正常</Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.assessmentName}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.assessmentContent}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.score}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.referenceValue}
+              </Text>
+              <Text style={[styles.tableDetial, styles.tdb]}>
+                {this.state.result}
+              </Text>
             </View>
           </View>
           <View

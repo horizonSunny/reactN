@@ -20,6 +20,7 @@ import RNbridge from "../../../components/RNbridge/RNbridge";
 import ActiveScale from "./components/ActiveScale";
 import styles from "../../../../assets/css/common";
 
+
 @inject("rootStore")
 export default class ADL extends React.Component {
   constructor(props) {

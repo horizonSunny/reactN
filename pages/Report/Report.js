@@ -42,6 +42,7 @@ export default class Report extends Component {
   componentDidMount() {
     // 获取时间并且转换成数据对象
     let self = this;
+    console.log("11111111111111111111");
     http
       .get("http://192.168.5.185:8081/rest/assessmentRecord/2")
       .then(function(response) {
@@ -154,7 +155,6 @@ export default class Report extends Component {
   renderPages() {
     return (
       <React.Fragment>
-        <TopBar />
         <View>
           <View style={[styles.mainCont, { position: "relative" }]}>
             <View

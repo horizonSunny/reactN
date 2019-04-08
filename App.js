@@ -62,7 +62,6 @@ export default class App extends React.PureComponent {
         <Provider rootStore={rootStore}>
           <RouterView
             ref={navigatorRef => {
-              console.log(navigatorRef);
               NavigationService.setTopLevelNavigator(navigatorRef);
             }}
           />

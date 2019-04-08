@@ -70,7 +70,7 @@ export default class CDT_Detail extends PureComponent {
               alignItems: "center"
             }}
           >
-            <Text>MoCa量表评估报告</Text>
+            <Text>CDT量表评估报告</Text>
             <View style={styles.tableRow}>
               <Text style={[styles.tableDetial, styles.tdb]}>项目 </Text>
               <Text style={[styles.tableDetial, styles.tdb]}>内容</Text>

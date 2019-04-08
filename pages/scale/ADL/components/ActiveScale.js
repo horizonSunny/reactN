@@ -106,11 +106,12 @@ export default class ActiveScale extends React.Component {
     );
   };
   goPrev = () => {
+    console.log('this.state.questionCurrentIndex_',this.state.questionCurrentIndex);
     if (this.state.questionCurrentIndex === 0) {
       return;
     }
-    this.setState((prevState, props) => {
-      questionCurrentIndex: prevState.questionCurrentIndex - 1;
+    this.setState({
+      questionCurrentIndex: this.state.questionCurrentIndex - 1
     });
   };
   calculate = () => {

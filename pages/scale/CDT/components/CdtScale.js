@@ -172,7 +172,7 @@ export default class CdtScale extends React.Component {
                 }}
               />
             </View>
-            <View style={{ alignItems: "center", marginTop: dp(100) }} />
+            <View style={{ alignItems: "center", marginTop: dp(50) }} />
             <FrontAndBack
               goNext={() => {
                 this.canvasCdt.current.buildImg();
