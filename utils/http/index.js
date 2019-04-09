@@ -7,6 +7,7 @@ import { ToastAndroid } from "react-native";
 import { CONFIG } from "./baseConfig";
 import { checkStatus } from "./checkStatus";
 import { Methods } from "./methods";
+
 const axiosInstance = axios.create(CONFIG);
 
 /**

@@ -24,6 +24,7 @@ import CDT_Detail from "../pages/scaleDetail/CDT_Detail";
 
 import RNbridge from "../components/RNbridge/RNbridge";
 import { inject } from "mobx-react";
+import { storage } from '../utils/storage';
 function initData(res, rootStore) {
   console.log("initScaleData", res);
   // 这边判断是有没有用户信息和量表信息
@@ -39,6 +40,7 @@ function initData(res, rootStore) {
     };
     rootStore.setUserInfo(userInfo);
   }
+  storage.save('accesstoken','Bearer xL3fwCRNgiB2W9PsUbm3npF/CLYsO/x0iOkHD49XeF4rEsvkgAhtETOtiYwJ0bMuQrvoMeMJAwtddwdqNBj0CA==')
   console.log("info.scaleName === true_", info.scaleName.length);
   // info.scaleName.length !== 0
   //   ? rootStore.setScaleNames(info.scaleName)

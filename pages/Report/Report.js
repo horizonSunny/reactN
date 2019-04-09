@@ -25,6 +25,7 @@ import Button from "../../components/Button/Button";
 import data from "./testData";
 import NavigationService from "../../router/NavigationService";
 import http from "../../utils/http/index";
+import { url } from '../../utils/globalUrl';
 
 @inject("rootStore")
 export default class Report extends Component {
@@ -42,18 +43,23 @@ export default class Report extends Component {
   componentDidMount() {
     // 获取时间并且转换成数据对象
     let self = this;
-    console.log("11111111111111111111");
+    const urlAll = url+"/rest/assessmentRecord/2"
+    console.log("urlAll_",urlAll);
     http
-      .get("http://192.168.5.185:8081/rest/assessmentRecord/2")
+      .get(urlAll)
       .then(function(response) {
         console.log("11111111111111111111");
-        console.log("response_", response);
-        self.setState({ resData: response }, () => {
+        console.log("response_", data);
+        self.setState({ resData: data }, () => {
           console.log("resData__", self.state.resData);
           self.getTime();
         });
       })
       .catch(function(error) {});
+    // console.log('url____',url)
+    // this.setState({ resData: data },()=>{
+    //   this.getTime();
+    // })
   }
   //获取scheme时间并且转换成数组
   getTime = () => {
@@ -90,7 +96,8 @@ export default class Report extends Component {
           },
           () => {
             console.log("------------------");
-            console.log("schemeArr_", this.state.schemeArr);
+            console.log("schemeArr_true", this.state.scaleArr);
+            console.log("schemeArr_", this.state.schemeData[0].items);
           }
         );
         this.setState(
@@ -137,6 +144,9 @@ export default class Report extends Component {
           () => {
             console.log("------------------");
             console.log("currentScheme_", this.state.currentScheme);
+            this.setState({
+              schemeArr: this.state.currentScheme[items]
+            })
           }
         );
       }
@@ -203,7 +213,8 @@ export default class Report extends Component {
     );
   }
   renderTable() {
-    return;
+    console.log('abcderrffdasdasdasd')
+    console.log('this.state.schemeArr_',this.state.schemeArr)
     // return this.state.schemeArr.map((item, index) => {
     //   return (
     //     <View style={styles.tableRow} key={index}>

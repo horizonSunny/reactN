@@ -1,6 +1,7 @@
 import http from "../../utils/http/index";
 import * as message from "./scaleMessage";
 import NavigationService from "../../router/NavigationService";
+import { url } from '../../utils/globalUrl';
 
 export function save(calculateResult, rootStore) {
   // console.log("calculateResult_", calculateResult, "_rootStore_", rootStore);
@@ -32,9 +33,10 @@ export function save(calculateResult, rootStore) {
       patientUid: 2
     };
     //表示有用户有量表，这边只有1，3能进.2是直接到档案列表页面
+    const urlAll = url+"/rest/assessmentRecord"
     if (rootStore.operateProcess === 1) {
       http
-        .post("http://192.168.5.185:8081/rest/assessmentRecord", obj)
+        .post(urlAll, obj)
         .then(function(response) {
           console.log("response_", response);
         })
