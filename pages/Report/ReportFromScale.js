@@ -57,43 +57,7 @@ export default class ReportFromScale extends Component {
     NavigationService.navigate(item.assessmentName + "_Detail", { item });
     // NavigationService.navigate("CDT" + "_Detail", { name: "123" });
   };
-  // 当点击的时候获取点击的“text”时间值
-  clickGetScheme(time) {
-    this.setState(
-      {
-        currentTime: time
-      },
-      () => {
-        //  filter 返回一个新数组
-        // const scheme = this.state.schemeData.filter(this.getSchemeFilter);
-        let scheme;
-        for (var i = 0; i < this.state.schemeData.length; i++) {
-          if (
-            this.state.currentTime ===
-            this.state.schemeData[i]["assessmentDate"]
-          ) {
-            scheme = this.state.schemeData[i];
-            break;
-          }
-        }
-        this.setState(
-          {
-            currentScheme: scheme
-          },
-          () => {
-            console.log("------------------");
-            console.log("currentScheme_", this.state.currentScheme);
-          }
-        );
-      }
-    );
-  }
-  // 依据过滤的点击时间值返回scheme的数据
-  getSchemeFilter = item => {
-    if (this.state.currentTime === item.assessmentDate) {
-      return item;
-    }
-  };
+
   renderPages() {
     return (
       <React.Fragment>
