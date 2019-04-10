@@ -48,8 +48,6 @@ export default class Report extends Component {
     http
       .get(urlAll)
       .then(function(response) {
-        console.log("11111111111111111111");
-        console.log("response_", data);
         self.setState({ resData: data }, () => {
           console.log("resData__", self.state.resData);
           self.getTime();
@@ -69,8 +67,6 @@ export default class Report extends Component {
       },
       () => {
         // 存放量表的时间，用于显示右边侧边栏
-        console.log("22222222222222222222222");
-        console.log("schemeData_", this.state.schemeData);
         const schemeData = this.state.schemeData;
         let timeArr = [];
         for (let item = 0; item < schemeData.length; item++) {

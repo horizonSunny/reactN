@@ -7,13 +7,16 @@ import {
   ToastAndroid,
   Modal,
   TouchableNativeFeedback,
-  ScrollView
+  ScrollView,
+  ImageBackground
 } from "react-native";
+import ButtomImg from "../../components/ButtonImg/ButtonImg";
 import React, { PureComponent } from "react";
 import data from "./testData";
 import AnswerReverse from "./components/AnswerReverse";
 import TableBorder from "./components/TableBorder";
 import styles from "../../../assets/css/common";
+import { StackActions } from "react-navigation";
 
 export default class MMSE_Detail extends PureComponent {
   constructor(props) {
@@ -48,6 +51,12 @@ export default class MMSE_Detail extends PureComponent {
       referenceValue: item.referenceValue,
       result: item.result
     };
+  }
+  goBack=()=>{
+    const popAction = StackActions.pop({
+      n: 1,
+    });
+    this.props.navigation.dispatch(popAction);
   }
   render() {
     const directive = [
@@ -114,14 +123,36 @@ export default class MMSE_Detail extends PureComponent {
     ];
     return (
       <React.Fragment>
-        <View style={{ alignItems: "center" }}>
+      <View style={{height: dp(90),backgroundColor: "#33455d"}}>
+            <ImageBackground source={require("./img/top.png")} style={{
+                width: "100%",
+                height: "100%",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center"
+              }}>
+              <ButtomImg
+              onPress={this.goBack}
+              style={{
+                width: dp(36),
+                height: dp(38),
+                marginLeft: dp(40),
+                marginRight: dp(40)
+              }}
+              source={require("./img/back.png")}
+            />
+            </ImageBackground>
+        </View>
+        <View style={{ alignItems: "center" , backgroundColor: '#fff',height: dp(1300),paddingTop:dp(20)}}>
           <View
             style={{
               width: dp(1400),
               height: dp(200),
               borderWidth: dp(2),
-              borderColor: "#000",
-              alignItems: "center"
+              borderColor: "#ddd",
+              alignItems: "center",
+              paddingTop:dp(10),
+              paddingBottom:dp(10)
             }}
           >
             <Text>MMSE量表评估报告</Text>
@@ -159,9 +190,9 @@ export default class MMSE_Detail extends PureComponent {
           <View
             style={{
               width: dp(1400),
-              height: dp(900),
+              height: dp(790),
               borderWidth: dp(2),
-              borderColor: "#000"
+              borderColor: "#ddd"
             }}
           >
             <ScrollView>
@@ -174,7 +205,7 @@ export default class MMSE_Detail extends PureComponent {
                 <TableBorder style={{ width: dp(1300), height: dp(300) }}>
                   <Text>
                     <Text
-                      style={{ fontSize: 14, color: "#000", fontWeight: "100" }}
+                      style={{ fontSize: 14, color: "#ddd", fontWeight: "100" }}
                     >
                       定向力:
                     </Text>
@@ -218,7 +249,7 @@ export default class MMSE_Detail extends PureComponent {
                 >
                   <Text>
                     <Text
-                      style={{ fontSize: 14, color: "#000", fontWeight: "100" }}
+                      style={{ fontSize: 14, color: "#ddd", fontWeight: "100" }}
                     >
                       即刻回忆:
                     </Text>
@@ -229,7 +260,7 @@ export default class MMSE_Detail extends PureComponent {
                       <Text
                         style={{
                           fontSize: 12,
-                          color: "#000",
+                          color: "#ddd",
                           fontWeight: "100"
                         }}
                       >
@@ -279,7 +310,7 @@ export default class MMSE_Detail extends PureComponent {
                 >
                   <Text>
                     <Text
-                      style={{ fontSize: 14, color: "#000", fontWeight: "100" }}
+                      style={{ fontSize: 14, color: "#ddd", fontWeight: "100" }}
                     >
                       计算和注意力:
                     </Text>
@@ -351,7 +382,7 @@ export default class MMSE_Detail extends PureComponent {
                 >
                   <Text>
                     <Text
-                      style={{ fontSize: 14, color: "#000", fontWeight: "100" }}
+                      style={{ fontSize: 14, color: "#ddd", fontWeight: "100" }}
                     >
                       命名:
                     </Text>
@@ -390,7 +421,7 @@ export default class MMSE_Detail extends PureComponent {
                 >
                   <Text>
                     <Text
-                      style={{ fontSize: 14, color: "#000", fontWeight: "100" }}
+                      style={{ fontSize: 14, color: "#ddd", fontWeight: "100" }}
                     >
                       复述:
                     </Text>
@@ -422,7 +453,7 @@ export default class MMSE_Detail extends PureComponent {
                 >
                   <Text>
                     <Text
-                      style={{ fontSize: 14, color: "#000", fontWeight: "100" }}
+                      style={{ fontSize: 14, color: "#ddd", fontWeight: "100" }}
                     >
                       阅读:
                     </Text>
@@ -454,7 +485,7 @@ export default class MMSE_Detail extends PureComponent {
                 >
                   <Text>
                     <Text
-                      style={{ fontSize: 14, color: "#000", fontWeight: "100" }}
+                      style={{ fontSize: 14, color: "#ddd", fontWeight: "100" }}
                     >
                       理解:
                     </Text>
@@ -506,7 +537,7 @@ export default class MMSE_Detail extends PureComponent {
                 >
                   <Text>
                     <Text
-                      style={{ fontSize: 14, color: "#000", fontWeight: "100" }}
+                      style={{ fontSize: 14, color: "#ddd", fontWeight: "100" }}
                     >
                       书写:
                     </Text>
@@ -538,7 +569,7 @@ export default class MMSE_Detail extends PureComponent {
                 >
                   <Text>
                     <Text
-                      style={{ fontSize: 14, color: "#000", fontWeight: "100" }}
+                      style={{ fontSize: 14, color: "#ddd", fontWeight: "100" }}
                     >
                       视空间知觉:
                     </Text>
@@ -580,7 +611,7 @@ export default class MMSE_Detail extends PureComponent {
                 >
                   <Text>
                     <Text
-                      style={{ fontSize: 14, color: "#000", fontWeight: "100" }}
+                      style={{ fontSize: 14, color: "#ddd", fontWeight: "100" }}
                     >
                       延迟回忆:
                     </Text>
@@ -644,7 +675,7 @@ export default class MMSE_Detail extends PureComponent {
                     style={{
                       fontSize: 14,
                       color: "#fff",
-                      backgroundColor: "#000",
+                      backgroundColor: "#ddd",
                       width: dp(100),
                       fontWeight: "100",
                       textAlign: "center"

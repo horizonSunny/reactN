@@ -1,31 +1,26 @@
 import {
   View,
   Text,
-  Image,
-  StyleSheet,
-  TextInput,
-  ToastAndroid,
-  Modal,
-  TouchableNativeFeedback,
-  ScrollView
+  Button,
+  ImageBackground,
 } from "react-native";
+import ButtomImg from "../../components/ButtonImg/ButtonImg";
 import React, { PureComponent } from "react";
 import data from "./testData";
 import AnswerReverse from "./components/AnswerReverse";
 import TableBorder from "./components/TableBorder";
 import styles from "../../../assets/css/common";
-// import NavigationService from "../../router/NavigationService";
-import { NavigationActions } from "react-navigation";
+import NavigationService from "../../router/NavigationService";
+import { StackActions } from "react-navigation";
 
 export default class CDT_Detail extends PureComponent {
   constructor(props) {
     super(props);
     // 获取参数，test测试
     let item = this.props.navigation.state.params.item;
-    console.log("-----------------------");
-    console.log("item", item);
-
     const propsInfo = JSON.parse(item.assessmentAnswer);
+    console.log("-----------------------");
+    console.log('propsInfo_',propsInfo)
     const score = data.score;
     const result = data.result;
     const questionModel = propsInfo.cdt.questionInfo;
@@ -38,6 +33,12 @@ export default class CDT_Detail extends PureComponent {
       referenceValue: item.referenceValue,
       result: item.result
     };
+  }
+  goBack=()=>{
+    const popAction = StackActions.pop({
+      n: 1,
+    });
+    this.props.navigation.dispatch(popAction);
   }
   render() {
     const cdtInfo = [
@@ -60,14 +61,36 @@ export default class CDT_Detail extends PureComponent {
     ];
     return (
       <React.Fragment>
-        <View style={{ alignItems: "center" }}>
-          <View
+      <View style={{height: dp(90),backgroundColor: "#33455d"}}>
+            <ImageBackground source={require("./img/top.png")} style={{
+                width: "100%",
+                height: "100%",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center"
+              }}>
+              <ButtomImg
+              onPress={this.goBack}
+              style={{
+                width: dp(36),
+                height: dp(38),
+                marginLeft: dp(40),
+                marginRight: dp(40)
+              }}
+              source={require("./img/back.png")}
+            />
+            </ImageBackground>
+        </View>
+        <View style={{ alignItems: "center" ,backgroundColor: '#fff',height: dp(1300),paddingTop:dp(20)}}>
+         <View
             style={{
               width: dp(1400),
               height: dp(200),
               borderWidth: dp(2),
-              borderColor: "#000",
-              alignItems: "center"
+              borderColor: "#ddd",
+              alignItems: "center",
+              paddingTop:dp(10),
+              paddingBottom:dp(10)
             }}
           >
             <Text>CDT量表评估报告</Text>
@@ -113,7 +136,7 @@ export default class CDT_Detail extends PureComponent {
                 style={{
                   width: "60%",
                   height: dp(50),
-                  borderColor: "#000",
+                  borderColor: "#ddd",
                   borderTopWidth: dp(3),
                   borderBottomWidth: dp(2),
                   textAlign: "center",
@@ -126,7 +149,7 @@ export default class CDT_Detail extends PureComponent {
                 style={{
                   width: "40%",
                   height: dp(50),
-                  borderColor: "#000",
+                  borderColor: "#ddd",
                   borderTopWidth: dp(3),
                   borderBottomWidth: dp(2),
                   textAlign: "center",

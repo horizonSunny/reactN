@@ -72,7 +72,7 @@ const Main = inject("rootStore")(props => {
     console.log("firstPage_" + firstPage);
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'Report' })]
+      actions: [NavigationActions.navigate({ routeName: firstPage })]
     });
     props.navigation.dispatch(resetAction);
   });

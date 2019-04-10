@@ -24,6 +24,7 @@ import TopBar from "../../components/TopBar/TopBar";
 import Button from "../../components/Button/Button";
 import data from "./testData";
 import NavigationService from "../../router/NavigationService";
+import PubSub from "../../components/PubSub/PubSub";
 import http from "../../utils/http/index";
 
 @inject("rootStore")
@@ -36,6 +37,7 @@ export default class ReportFromScale extends Component {
     super(props);
   }
   componentDidMount() {
+    PubSub.publish("stopTime");
     // 获取rooter并且转换成数据对象
     let info = this.props.navigation.state.params.info;
     console.log("ReportFromScale_info_", info);

@@ -7,13 +7,16 @@ import {
   ToastAndroid,
   Modal,
   TouchableNativeFeedback,
-  ScrollView
+  ScrollView,
+  ImageBackground
 } from "react-native";
 import React, { PureComponent } from "react";
 import data from "./testData";
 import AnswerReverse from "./components/AnswerReverse";
 import TableBorder from "./components/TableBorder";
 import styles from "../../../assets/css/common";
+import ButtomImg from "../../components/ButtonImg/ButtonImg";
+import { StackActions } from "react-navigation";
 
 export default class MOCA_Detail extends PureComponent {
   constructor(props) {
@@ -47,6 +50,12 @@ export default class MOCA_Detail extends PureComponent {
       result: item.result
     };
   }
+  goBack=()=>{
+    const popAction = StackActions.pop({
+      n: 1,
+    });
+    this.props.navigation.dispatch(popAction);
+  }
   render() {
     const scoreInfo = [
       { height: "dp(400)", top: "dp(317)", score: 3 },
@@ -54,14 +63,36 @@ export default class MOCA_Detail extends PureComponent {
     ];
     return (
       <React.Fragment>
-        <View style={{ alignItems: "center" }}>
+      <View style={{height: dp(90),backgroundColor: "#33455d"}}>
+            <ImageBackground source={require("./img/top.png")} style={{
+                width: "100%",
+                height: "100%",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center"
+              }}>
+              <ButtomImg
+              onPress={this.goBack}
+              style={{
+                width: dp(36),
+                height: dp(38),
+                marginLeft: dp(40),
+                marginRight: dp(40)
+              }}
+              source={require("./img/back.png")}
+            />
+            </ImageBackground>
+        </View>
+        <View style={{ alignItems: "center", backgroundColor: '#fff',height: dp(1300),paddingTop:dp(20) }}>
           <View
             style={{
               width: dp(1400),
               height: dp(200),
               borderWidth: dp(2),
-              borderColor: "#000",
-              alignItems: "center"
+              borderColor: "#ddd",
+              alignItems: "center",
+              paddingTop:dp(10),
+              paddingBottom:dp(10)
             }}
           >
             <Text>MoCa量表评估报告</Text>
@@ -99,9 +130,9 @@ export default class MOCA_Detail extends PureComponent {
           <View
             style={{
               width: dp(1400),
-              height: dp(900),
+              height: dp(790),
               borderWidth: dp(2),
-              borderColor: "#000"
+              borderColor: "#ddd"
             }}
           >
             <ScrollView>
@@ -110,7 +141,7 @@ export default class MOCA_Detail extends PureComponent {
                   width: dp(1300),
                   height: dp(1900),
                   borderTopWidth: dp(2),
-                  borderColor: "#000"
+                  borderColor: "#ddd"
                 }}
               >
                 <TableBorder
@@ -1075,7 +1106,7 @@ export default class MOCA_Detail extends PureComponent {
                   position: "absolute",
                   left: dp(1300),
                   borderTopWidth: dp(2),
-                  borderColor: "#000"
+                  borderColor: "#ddd"
                 }}
               >
                 <TableBorder
@@ -1330,7 +1361,7 @@ export default class MOCA_Detail extends PureComponent {
                   position: "absolute",
                   left: dp(1100),
                   borderTopWidth: dp(2),
-                  borderColor: "#000"
+                  borderColor: "#ddd"
                 }}
               >
                 <TableBorder

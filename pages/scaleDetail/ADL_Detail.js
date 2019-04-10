@@ -2,6 +2,7 @@ import {
   View,
   Text,
   Image,
+  ImageBackground,
   StyleSheet,
   TextInput,
   ToastAndroid,
@@ -9,11 +10,13 @@ import {
   TouchableNativeFeedback,
   ScrollView
 } from "react-native";
+import ButtomImg from "../../components/ButtonImg/ButtonImg";
 import React, { PureComponent } from "react";
 import data from "./testData";
 import AnswerReverse from "./components/AnswerReverse";
 import TableBorder from "./components/TableBorder";
 import styles from "../../../assets/css/common";
+import { StackActions } from "react-navigation";
 
 export default class ADL_Detail extends PureComponent {
   constructor(props) {
@@ -35,6 +38,12 @@ export default class ADL_Detail extends PureComponent {
       referenceValue: item.referenceValue,
       result: item.result
     };
+  }
+  goBack=()=>{
+    const popAction = StackActions.pop({
+      n: 1,
+    });
+    this.props.navigation.dispatch(popAction);
   }
   render() {
     const adlInfo = [
@@ -118,14 +127,36 @@ export default class ADL_Detail extends PureComponent {
     ];
     return (
       <React.Fragment>
-        <View style={{ alignItems: "center" }}>
+      <View style={{height: dp(90),backgroundColor: "#33455d"}}>
+            <ImageBackground source={require("./img/top.png")} style={{
+                width: "100%",
+                height: "100%",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center"
+              }}>
+              <ButtomImg
+              onPress={this.goBack}
+              style={{
+                width: dp(36),
+                height: dp(38),
+                marginLeft: dp(40),
+                marginRight: dp(40)
+              }}
+              source={require("./img/back.png")}
+            />
+            </ImageBackground>
+        </View>
+        <View style={{ alignItems: "center", backgroundColor: '#fff',height: dp(1300),paddingTop:dp(20)}}>
           <View
             style={{
               width: dp(1400),
               height: dp(200),
               borderWidth: dp(2),
-              borderColor: "#000",
-              alignItems: "center"
+              borderColor: "#ddd",
+              alignItems: "center",
+              paddingTop:dp(10),
+              paddingBottom:dp(10)
             }}
           >
             <Text>ADL量表评估报告</Text>
@@ -163,9 +194,9 @@ export default class ADL_Detail extends PureComponent {
           <View
             style={{
               width: dp(1400),
-              height: dp(900),
+              height: dp(790),
               borderWidth: dp(2),
-              borderColor: "#000"
+              borderColor: "#ddd"
             }}
           >
             <ScrollView>
