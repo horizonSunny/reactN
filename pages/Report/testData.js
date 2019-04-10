@@ -8,13 +8,12 @@ export default (data = {
         {
           uid: 1,
           assessmentUid: null,
-          assessmentName: "MMSE",
+          assessmentName: "ADL",
           assessmentContent: "认知筛选量表",
           score: 425,
           referenceValue: "≥27",
           result: "不正常",
-          assessmentAnswer: null,
-          questions: {
+          assessmentAnswer: {
             lift: {
               score: 1,
               answer: "1"
@@ -95,7 +94,8 @@ export default (data = {
               score: 3,
               answer: "3"
             }
-          }
+          },
+
         }
       ],
       patientUid: 1,
@@ -112,13 +112,12 @@ export default (data = {
         {
           uid: 1,
           assessmentUid: null,
-          assessmentName: "MMSE",
+          assessmentName: "ADL",
           assessmentContent: "认知筛选量表",
           score: 425,
           referenceValue: "≥27",
           result: "不正常",
-          assessmentAnswer: null,
-          questions: {
+          assessmentAnswer: {
             lift: {
               score: 1,
               answer: "1"

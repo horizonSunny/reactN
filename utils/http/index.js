@@ -8,6 +8,8 @@ import { CONFIG } from "./baseConfig";
 import { checkStatus } from "./checkStatus";
 import { Methods } from "./methods";
 
+console.log(222222231231231231231313212+'-http');
+console.log('CONFIG_new_',CONFIG)
 const axiosInstance = axios.create(CONFIG);
 
 /**
