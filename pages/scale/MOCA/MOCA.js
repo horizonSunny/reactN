@@ -101,13 +101,20 @@ export default class MOCA extends React.Component {
   calculateAll = () => {
     console.log("this.state_", this.state);
     let totalPoints = 0;
-    let values = Object.values(this.state);
-    for (let item = 0; item < values.length; item++) {
-      if (values[item].totalScore) {
-        totalPoints += values[item].totalScore;
+    let entries = Object.entries(this.state);
+    for (let item = 0; item < entries.length; item++) {
+      const key = entries[item][0];
+      const value = entries[item][1];
+      if(key !== 'memory' && value['totalScore']){
+        totalPoints += value.totalScore;
       } else {
-        continue;
+          continue;
       }
+    }
+    // 获取受试者年龄
+    const educationTime = this.props.rootStore.userInfo['educationTime']
+    if(educationTime<=12 && totalPoints<30){
+      totalPoints += 1; 
     }
     console.log("totalPoints_moca_", totalPoints);
     console.log("directiveForce_moca_123_", this.state.directiveForce);
@@ -136,6 +143,7 @@ export default class MOCA extends React.Component {
     } else {
       status = "重度";
     }
+    // this.props.rootStore.
     // this.props.rootStore.setReportData(reportData)
     const MOCA = {
       assessmentAnswer: JSON.stringify(questionInfoTotal),

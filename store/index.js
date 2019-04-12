@@ -30,14 +30,14 @@ class Store {
   setUser() {
     this.haveUser = true;
   }
-  // 患者个人信息，从安卓获取或者在BaseInfo获取
+  // 患者个人信息，从安卓获取或者在BaseInfo获取，没有的话必需设置初始值education，因为moca会依据这个做总分加减
   @observable userInfo = {
     name: "",
     age: "",
     sex: "",
     phone: "",
     idNumber: "",
-    educationTime: 0,
+    educationTime: 24
   };
   @action.bound
   setUserInfo(userInfo) {

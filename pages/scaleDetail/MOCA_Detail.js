@@ -233,7 +233,7 @@ export default class MOCA_Detail extends PureComponent {
                       <AnswerReverse
                         score={
                           this.state.questionModel["viewSpace"]["questionInfo"][
-                            "horologe"
+                            "outline"
                           ]["score"]
                         }
                       />
@@ -243,7 +243,7 @@ export default class MOCA_Detail extends PureComponent {
                       <AnswerReverse
                         score={
                           this.state.questionModel["viewSpace"]["questionInfo"][
-                            "horologe"
+                            "number"
                           ]["score"]
                         }
                       />
@@ -253,7 +253,7 @@ export default class MOCA_Detail extends PureComponent {
                       <AnswerReverse
                         score={
                           this.state.questionModel["viewSpace"]["questionInfo"][
-                            "horologe"
+                            "pointer"
                           ]["score"]
                         }
                       />

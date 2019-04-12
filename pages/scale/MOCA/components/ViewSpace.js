@@ -23,6 +23,7 @@ import Audio from "../../../../components/Audio/Audio";
 import styles from "../../../../../assets/css/common";
 import { DrawNumberCircle } from "../../../../utils/drawNumberCircle";
 import ligatureCoordinate from "./ViewSpaceComponent/ligatureCoordinate";
+import Radio from "../../../../components/Radio/src/Radio";
 import AnswerConfirm from "../../../PageComponent/AnswerConfirm/AnswerConfirm";
 
 export default class ViewSpace extends Component {
@@ -42,7 +43,9 @@ export default class ViewSpace extends Component {
     let questionInfo = {
       ligature: objectClone(answerModel),
       cube: objectClone(answerModel),
-      horologe: objectClone(answerModel)
+      outline: objectClone(answerModel),
+      number: objectClone(answerModel),
+      pointer: objectClone(answerModel),
     };
     if (this.props.questionModel["questionInfo"] === "") {
       this.setState({ questionInfo: questionInfo });
@@ -98,8 +101,14 @@ export default class ViewSpace extends Component {
       questionInfo["ligature"]["answer"]
     );
     questionInfo["cube"]["score"] = parseInt(questionInfo["cube"]["answer"]);
-    questionInfo["horologe"]["score"] = parseInt(
-      questionInfo["horologe"]["answer"]
+    questionInfo["outline"]["score"] = parseInt(
+      questionInfo["outline"]["answer"]
+    );
+    questionInfo["number"]["score"] = parseInt(
+      questionInfo["number"]["answer"]
+    );
+    questionInfo["pointer"]["score"] = parseInt(
+      questionInfo["pointer"]["answer"]
     );
     let values = Object.values(questionInfo);
     let totalScore = 0;
@@ -408,11 +417,64 @@ export default class ViewSpace extends Component {
                 )}
               </View>
               <View style={{ alignItems: "center", marginTop: dp(50) }} />
-              <AnswerConfirm
-                questionType={"horologe"}
-                questionInfo={this.state.questionInfo}
-                keyBoardChange={this.keyBoardChange}
-              />
+              <View style={[styles.table, { marginBottom: dp(50) }]}>
+          <View style={styles.tableColumn1}>
+            <Image
+              style={{ width: dp(250), height: dp(320) }}
+              source={require("./img/doctor1.png")}
+            />
+          </View>
+          <View>
+            <View style={styles.tableRow}>
+              <Text style={[styles.th, styles.tdb]}>词语名称 </Text>
+              <Text style={[styles.th, styles.tdb]}>正确</Text>
+              <Text style={[styles.th, styles.tdb]}>错误</Text>
+            </View>
+              <View style={styles.tableRow}>
+                <Text style={[styles.td, styles.tdb]}>轮廓</Text>
+                <Radio.RadioGroup
+                  model={this.state.questionInfo["outline"]["answer"]}
+                  onChange={this.keyBoardChange.bind(this, "outline")}
+                >
+                  <View style={styles.td}>
+                    <Radio value={1} style={styles.radio} />
+                  </View>
+                  <View style={styles.td}>
+                    <Radio value={0} style={styles.radio} />
+                  </View>
+                </Radio.RadioGroup>
+               </View>
+                <View style={styles.tableRow}>
+                  <Text style={[styles.td, styles.tdb]}>数字</Text>
+                  <Radio.RadioGroup
+                    model={this.state.questionInfo["number"]["answer"]}
+                    onChange={this.keyBoardChange.bind(this, "number")}
+                  >
+                    <View style={styles.td}>
+                      <Radio value={1} style={styles.radio} />
+                    </View>
+                    <View style={styles.td}>
+                      <Radio value={0} style={styles.radio} />
+                    </View>
+                  </Radio.RadioGroup>
+                </View>
+                <View style={styles.tableRow}>
+                  <Text style={[styles.td, styles.tdb]}>指针</Text>
+                  <Radio.RadioGroup
+                    model={this.state.questionInfo["pointer"]["answer"]}
+                    onChange={this.keyBoardChange.bind(this, "pointer")}
+                  >
+                    <View style={styles.td}>
+                      <Radio value={1} style={styles.radio} />
+                    </View>
+                    <View style={styles.td}>
+                      <Radio value={0} style={styles.radio} />
+                    </View>
+                  </Radio.RadioGroup>
+                </View>
+              </View>
+            </View>
+        
             </View>
             <View style={{ alignItems: "center", marginTop: dp(50) }} />
             <FrontAndBack goNext={this.goNext} goPrev={this.goPrev} />
