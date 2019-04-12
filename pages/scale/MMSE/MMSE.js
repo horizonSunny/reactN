@@ -106,6 +106,7 @@ export default class MMSE extends React.Component {
       }
     }
     console.log("totalPoints_MMse_", totalPoints);
+    console.log("totalPoints_MMse_type_", typeof(totalPoints));
     console.log("directiveForce_MMse_123_", this.state.directiveForce);
     const obj = {
       directiveForce: this.state.directiveForce,
@@ -125,12 +126,12 @@ export default class MMSE extends React.Component {
     let status;
     if (totalPoints >= 27) {
       status = "正常";
-    } else if (27 > totalPoints >= 21) {
-      status = "轻度";
-    } else if (21 > totalPoints >= 10) {
-      status = "中度";
+    } else if (27 > totalPoints && totalPoints >= 21) {
+      status = "轻度痴呆";
+    } else if (21 > totalPoints && totalPoints >= 10) {
+      status = "中度痴呆";
     } else {
-      status = "重度";
+      status = "重度痴呆";
     }
     // this.props.rootStore.setReportData(reportData)
     const MMSE = {
