@@ -434,7 +434,7 @@ export default class MMSE_Detail extends PureComponent {
                   </View>
                   <View style={{ flexDirection: "row" }}>
                     <Text style={{ marginLeft: dp(50) }}>
-                      四十四只石狮子
+                      大家齐心协力拉紧绳
                       <AnswerReverse
                         score={
                           this.state.questionModel["retell"]["questionInfo"][
