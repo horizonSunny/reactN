@@ -214,13 +214,14 @@ export default class MMSE_Detail extends PureComponent {
                      
                   </Text>
                   <View>
+                     
                     <View style={{ left: dp(0), position: "absolute" }}>
                       {directive.map((item, index) => {
                         if (index % 2 === 0) {
                           return (
                             <Text key={index}>
                               {item.question}{" "}
-                              <AnswerReverse score={item.scroe} />
+                              <AnswerReverse score={item.score} />
                             </Text>
                           );
                         }
@@ -232,7 +233,7 @@ export default class MMSE_Detail extends PureComponent {
                           return (
                             <Text key={index}>
                               {item.question}{" "}
-                              <AnswerReverse score={item.answer} />
+                              <AnswerReverse score={item.score} />
                             </Text>
                           );
                         }
