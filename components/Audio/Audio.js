@@ -60,11 +60,13 @@ export default class Audio extends React.PureComponent {
   }
   render() {
     console.log(this.state.audioIcon);
+    const style = this.props.audioStyle ? this.props.audioStyle : { width: dp(230), height: dp(230) }
+    
     return (
       <React.Fragment>
         <ButtonImg
           onPress={this.handlePress}
-          style={{ width: dp(230), height: dp(230) }}
+          style={style}
           source={this.state.audioIcon}
         />
         <Text style={{ fontSize: font(30), color: "#479e13" }}>点击播放</Text>

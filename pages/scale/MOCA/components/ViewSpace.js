@@ -110,13 +110,9 @@ export default class ViewSpace extends Component {
     questionInfo["pointer"]["score"] = parseInt(
       questionInfo["pointer"]["answer"]
     );
-    console.log('weqeqeqeqwewqeqwewqeqeqewwqewqewqewq')
-    console.log('questionInfo["ligature"]["answer"]_',questionInfo["ligature"]["answer"])
-    console.log('this.state.horologeImg_',this.state.horologeImg)
     questionInfo["ligature"]["answer"] = this.state.ligatureImg
     questionInfo["cube"]["answer"] = this.state.cubeImg
     questionInfo["outline"]["answer"] = this.state.horologeImg
-    console.log('weqeqeqeqwewqeqwewqeqeqewwqewqewqewq')
     let values = Object.values(questionInfo);
     let totalScore = 0;
     for (let index = 0; index < values.length; index++) {
@@ -199,7 +195,7 @@ export default class ViewSpace extends Component {
                   width: dp(200)
                 }}
               >
-                <Audio src="moca_1.m4a" />
+                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />
               </View>
             </View>
             <View
