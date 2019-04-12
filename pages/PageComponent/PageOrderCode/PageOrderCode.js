@@ -8,6 +8,15 @@ export default class PageOrderCode extends React.Component {
     super(props);
   }
   render() {
+    const styleBackground = this.props.pageOrderCodeStyle ? this.props.pageOrderCodeStyle['background'] : 
+    { width: dp(219),
+      height: dp(98),
+      position: "absolute",
+      top: 0,
+      left: dp(-20) }
+    const styleQuesNum = this.props.pageOrderCodeStyle ? this.props.pageOrderCodeStyle['quesNum'] : styles.quesNum
+    const styleText = this.props.pageOrderCodeStyle ? this.props.pageOrderCodeStyle['text'] : 
+    { fontSize: font(30) }
     return (
       <BackgroundImage
         source={
@@ -16,24 +25,18 @@ export default class PageOrderCode extends React.Component {
             : require("../img/bianhao1.png")
         }
         key={4}
-        style={{
-          width: dp(219),
-          height: dp(98),
-          position: "absolute",
-          top: 0,
-          left: dp(-20)
-        }}
+        style={styleBackground}
       >
         <Text
           style={[
-            styles.quesNum,
+            styleQuesNum,
             { width: "100%" },
             { textAlign: "right" },
             { paddingRight: dp(30) }
           ]}
         >
           {this.props.index}
-          <Text style={{ fontSize: font(30) }}>/ {this.props.indexTotal}</Text>
+          <Text style={styleText}>/ {this.props.indexTotal}</Text>
         </Text>
       </BackgroundImage>
     );

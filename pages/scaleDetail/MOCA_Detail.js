@@ -179,7 +179,7 @@ export default class MOCA_Detail extends PureComponent {
                   >
                     <Image
                       source={{ uri:     this.state.questionModel["viewSpace"]["questionInfo"][
-                            "ligature"
+                            "ligatureImg"
                           ]["answer"]}}
                       style={{
                         width: "100%",
@@ -192,7 +192,7 @@ export default class MOCA_Detail extends PureComponent {
                     />
                     <Image
                     source={{ uri:  this.state.questionModel["viewSpace"]["questionInfo"][
-                            "cube"
+                            "cubeImg"
                           ]["answer"]}}
                     style={{
                       width: "100%",
@@ -205,7 +205,7 @@ export default class MOCA_Detail extends PureComponent {
                   />
                   <Image
                   source={{ uri:  this.state.questionModel["viewSpace"]["questionInfo"][
-                            "outline"
+                            "horologeImg"
                           ]["answer"]}}
                     style={{
                       width: "100%",

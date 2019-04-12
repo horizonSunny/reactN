@@ -9,8 +9,9 @@ export default class FrontAndBack extends React.Component {
     super(props);
   }
   render() {
+    const stylePadding = this.props.frontAndBackStyle ? this.props.frontAndBackStyle : {};
     return (
-      <View style={{ alignItems: "center" }}>
+      <View style={[{ alignItems: "center" },stylePadding]}>
         <PrevButton
           onPress={this.props.goPrev}
           text="上一页"

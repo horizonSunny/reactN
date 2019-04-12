@@ -2,7 +2,7 @@ let ligatureCoordinate = [
   {
     text: "甲",
     circle: {
-      start: [450, 50],
+      start: [372, 36],
       circleStart: [0, 30, 10],
       circleEnd: [0, -30, 10]
     }
@@ -10,7 +10,7 @@ let ligatureCoordinate = [
   {
     text: "乙",
     circle: {
-      start: [380, 115],
+      start: [322, 92],
       circleStart: [0, 30, 10],
       circleEnd: [0, -30, 10]
     }
@@ -18,7 +18,7 @@ let ligatureCoordinate = [
   {
     text: "丙",
     circle: {
-      start: [250, 300],
+      start: [229, 214],
       circleStart: [0, 30, 10],
       circleEnd: [0, -30, 10]
     }
@@ -26,7 +26,7 @@ let ligatureCoordinate = [
   {
     text: "丁",
     circle: {
-      start: [105, 200],
+      start: [125, 142],
       circleStart: [0, 30, 10],
       circleEnd: [0, -30, 10]
     }
@@ -34,7 +34,7 @@ let ligatureCoordinate = [
   {
     text: "戊",
     circle: {
-      start: [250, 50],
+      start: [228, 36],
       circleStart: [0, 30, 10],
       circleEnd: [0, -30, 10]
     }
@@ -42,7 +42,7 @@ let ligatureCoordinate = [
   {
     text: 1,
     circle: {
-      start: [250, 130],
+      start: [229, 93],
       circleStart: [0, 30, 10],
       circleEnd: [0, -30, 10]
     }
@@ -50,7 +50,7 @@ let ligatureCoordinate = [
   {
     text: 2,
     circle: {
-      start: [520, 120],
+      start: [421, 86],
       circleStart: [0, 30, 10],
       circleEnd: [0, -30, 10]
     }
@@ -58,7 +58,7 @@ let ligatureCoordinate = [
   {
     text: 3,
     circle: {
-      start: [520, 230],
+      start: [421, 164],
       circleStart: [0, 30, 10],
       circleEnd: [0, -30, 10]
     }
@@ -66,7 +66,7 @@ let ligatureCoordinate = [
   {
     text: 4,
     circle: {
-      start: [300, 200],
+      start: [264, 142],
       circleStart: [0, 30, 10],
       circleEnd: [0, -30, 10]
     }
@@ -74,7 +74,7 @@ let ligatureCoordinate = [
   {
     text: 5,
     circle: {
-      start: [100, 100],
+      start: [121, 71],
       circleStart: [0, 30, 10],
       circleEnd: [0, -30, 10]
     }

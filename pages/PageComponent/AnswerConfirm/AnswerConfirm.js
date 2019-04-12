@@ -9,26 +9,32 @@ export default class AnswerConfirm extends React.Component {
     super(props);
   }
   render() {
+    const styleOut = this.props.answerConfirmStyle ? this.props.answerConfirmStyle['styleOut'] : 
+    {
+      flexDirection: "row",
+      height: dp(320),
+      alignItems: "center"
+    }
+    const styleImg = this.props.answerConfirmStyle ? this.props.answerConfirmStyle['styleImg'] : { width: dp(250), height: dp(320) }
+    const styleAnswer = this.props.answerConfirmStyle ? this.props.answerConfirmStyle['styleAnswer'] : [styles.th, { width: dp(600) }, styles.tdb]
+    const styleRadio = this.props.answerConfirmStyle ? this.props.answerConfirmStyle['styleRadio'] : [styles.td, { width: dp(600) }]
+    const styleRadioSize = this.props.answerConfirmStyle ? this.props.answerConfirmStyle['styleRadioSize']:styles.radio
     return (
       <View
-        style={{
-          flexDirection: "row",
-          height: dp(320),
-          alignItems: "center"
-        }}
+        style={styleOut}
       >
         <View style={styles.tableColumn1}>
           <Image
-            style={{ width: dp(250), height: dp(320) }}
+            style={styleImg}
             source={require("../img/doctor1.png")}
           />
         </View>
         <View>
           <View style={styles.tableRow}>
-            <Text style={[styles.th, { width: dp(600) }, styles.tdb]}>
+            <Text style={styleAnswer}>
               正确
             </Text>
-            <Text style={[styles.th, { width: dp(600) }, styles.tdb]}>
+            <Text style={styleAnswer}>
               错误
             </Text>
           </View>
@@ -40,11 +46,11 @@ export default class AnswerConfirm extends React.Component {
                 this.props.questionType
               )}
             >
-              <View style={[styles.td, { width: dp(600) }]}>
-                <Radio value={1} style={styles.radio} />
+              <View style={styleRadio}>
+                <Radio value={1} style={styleRadioSize} />
               </View>
-              <View style={[styles.td, { width: dp(600) }]}>
-                <Radio value={0} style={styles.radio} />
+              <View style={styleRadio}>
+                <Radio value={0} style={styleRadioSize} />
               </View>
             </Radio.RadioGroup>
           </View>

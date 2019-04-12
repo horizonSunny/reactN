@@ -31,7 +31,7 @@ export default class ViewSpace extends Component {
     super(props);
     this.state = {
       questionModel: "viewSpace",
-      questionIndex: this.props.directionForward ? 5 : 0,
+      questionIndex: this.props.directionForward ? 2 : 0,
       totalScore: 0
     };
   }
@@ -46,6 +46,9 @@ export default class ViewSpace extends Component {
       outline: objectClone(answerModel),
       number: objectClone(answerModel),
       pointer: objectClone(answerModel),
+      horologeImg: objectClone(answerModel),
+      ligatureImg: objectClone(answerModel),
+      cubeImg: objectClone(answerModel),
     };
     if (this.props.questionModel["questionInfo"] === "") {
       this.setState({ questionInfo: questionInfo });
@@ -74,14 +77,14 @@ export default class ViewSpace extends Component {
     });
   };
   goNext = () => {
-    const questionLength = 5;
+    const questionLength = 2;
     // 表示是否全部问题, 是否全部结束了
     const questionTotal = Object.getOwnPropertyNames(this.state.questionInfo);
-    // 判断是否为空，为空则return,135,对应0，1，2
-    const typeIndex = (this.state.questionIndex + 1) / 2 - 1;
+    const typeIndex = this.state.questionIndex;
     console.log("typeIndex_", typeIndex);
+    console.log('this.state.questionInfo_',this.state.questionInfo);
     const questionType = questionTotal[typeIndex];
-    console.log("questionType_", questionType);
+    console.log("questionType_", this.state);
     if (this.state.questionInfo[questionType]["answer"] === "") {
       androidToast("请选择选项");
       return;
@@ -110,9 +113,9 @@ export default class ViewSpace extends Component {
     questionInfo["pointer"]["score"] = parseInt(
       questionInfo["pointer"]["answer"]
     );
-    questionInfo["ligature"]["answer"] = this.state.ligatureImg
-    questionInfo["cube"]["answer"] = this.state.cubeImg
-    questionInfo["outline"]["answer"] = this.state.horologeImg
+    questionInfo["ligatureImg"]["answer"] = this.state.ligatureImg
+    questionInfo["cubeImg"]["answer"] = this.state.cubeImg
+    questionInfo["horologeImg"]["answer"] = this.state.horologeImg
     let values = Object.values(questionInfo);
     let totalScore = 0;
     for (let index = 0; index < values.length; index++) {
@@ -129,58 +132,98 @@ export default class ViewSpace extends Component {
     );
   };
   getBase64 = base64 => {
+    const index = this.state.questionIndex;
+    console.log('index_',index);
     switch (this.state.questionIndex) {
       case 0:
         this.setState({
-          ligatureImg: base64,
-          questionIndex: this.state.questionIndex + 1
+          ligatureImg: base64
+        },()=>{
+          this.goNext();
+        });
+        break;
+      case 1:
+        this.setState({
+          cubeImg: base64
+        },()=>{
+          this.goNext();
         });
         break;
       case 2:
         this.setState({
-          cubeImg: base64,
-          questionIndex: this.state.questionIndex + 1
-        });
-        break;
-      case 4:
-        this.setState({
-          horologeImg: base64,
-          questionIndex: this.state.questionIndex + 1
+          horologeImg: base64
+        },()=>{
+          this.goNext();
         });
         break;
     }
   };
 
   render() {
+    const answerConfirmCss =  {
+      styleOut:  {
+              flexDirection: "row",
+              height: dp(150),
+              alignItems: "center"
+            },
+      styleImg:{ width: dp(102), height: dp(150) },
+      styleAnswer:[styles.th, { width: dp(250) }, styles.tdb,{fontSize:dp(20)}],
+      styleRadio:[styles.td, { width: dp(250) }],
+      styleRadioSize: {width: dp(30), height: dp(30)}
+    }
+    const pageOrderCodeCss =  { 
+      background:{
+        width: dp(150),
+        height: dp(65),
+        position: "absolute",
+        top: dp(50),
+        left: dp(-20) },
+      quesNum:{
+        fontSize: font(30),
+        color: "#ffffff",
+        marginRight: dp(20),
+        position: "absolute",
+        left: dp(10),
+        top: dp(10)
+      },
+      text:{
+        fontSize: font(20) 
+      }
+    }
     return (
       <React.Fragment>
         {this.state.questionIndex === 0 && (
-          <View style={{ marginTop: dp(30) }}>
+          <View style={{ marginTop: dp(10) }}>
             <View
               style={{
                 backgroundColor: "#fff",
-                marginTop: dp(50)
+                marginTop: dp(0)
               }}
             >
               <PageOrderCode
-                backgroundColor={"green"}
                 index={this.state.questionIndex + 1}
                 indexTotal={22}
+                pageOrderCodeStyle={pageOrderCodeCss}
               />
               <View
                 style={{
-                  flexDirection: "row",
                   width: dp(1300),
-                  alignItems: "center",
                   marginTop: dp(-570),
-                  marginLeft: dp(300)
+                  marginLeft: dp(150)
                 }}
               >
-                <Text style={[styles.questionText, { width: "80%" }]}>
-                  1-1.请您按照
-                  <Text style={{ color: "black", fontSize: font(40) }}>
-                    (1甲2乙3丙4丁5戊的顺序连线)
-                  </Text>
+                <Text style={[{
+                  width: dp(1200),
+                  color: "#2c2c2c",
+                  marginTop:dp(15),
+                  lineHeight: dp(70),
+                  paddingRight: dp(80),
+                  fontWeight: "100"
+                }, { fontSize: font(40),width: "80%" }]}>
+                  交替连线测验
+                </Text>
+                <Text style={{ color: "black", fontSize: font(30) }}>
+                    请您在这画一条连线，按照从数字到汉字并逐渐升高到顺序。您从这里开始[指向数字(1)],从1连向甲，再连向2，并一直连下去，到这里结束[指向汉字(戊)]
                 </Text>
               </View>
               <View
@@ -203,8 +246,8 @@ export default class ViewSpace extends Component {
                 alignItems: "center",
                 flexDirection: "row",
                 justifyContent: "center",
-                marginTop: dp(60),
-                height: dp(700),
+                marginTop: dp(10),
+                height: dp(600),
                 zIndex: 999
               }}
             >
@@ -213,8 +256,8 @@ export default class ViewSpace extends Component {
                 ref={this.canvasLigature}
                 strokeWidth={1}
                 canvasStyle={{
-                  width: dp(1300),
-                  height: dp(700)
+                  width: dp(1200),
+                  height: dp(600)
                 }}
               >
                 {ligatureCoordinate.map((item, index) => {
@@ -228,8 +271,17 @@ export default class ViewSpace extends Component {
                 })}
               </Canvas>
             </View>
-            <View style={{ alignItems: "center", marginTop: dp(100) }} />
+            <View style={{ alignItems: "center", marginTop: dp(20) }} >
+                <AnswerConfirm
+                    questionType={"ligature"}
+                    questionInfo={this.state.questionInfo}
+                    keyBoardChange={this.keyBoardChange}
+                    answerConfirmStyle = {answerConfirmCss}
+                  />
+            </View>
+            <View style={{marginTop: dp(30) }} />
             <FrontAndBack
+              frontAndBackStyle={{paddingRight:dp(50)}}
               goNext={() => {
                 this.canvasLigature.current.buildImg();
               }}
@@ -238,67 +290,61 @@ export default class ViewSpace extends Component {
           </View>
         )}
         {this.state.questionIndex === 1 && (
-          <View>
-            <View style={{ alignItems: "center" }}>
-              <View style={{ width: dp(1000), height: dp(500) }}>
-                {this.state.ligatureImg && (
-                  <Image
-                    source={{ uri: this.state.ligatureImg }}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      backgroundColor: "rgb(240,240,240)",
-                      resizeMode: "cover"
-                    }}
-                  />
-                )}
-              </View>
-              <View style={{ alignItems: "center", marginTop: dp(50) }} />
-              <AnswerConfirm
-                questionType={"ligature"}
-                questionInfo={this.state.questionInfo}
-                keyBoardChange={this.keyBoardChange}
-              />
-            </View>
-            <View style={{ alignItems: "center", marginTop: dp(50) }} />
-            <FrontAndBack goNext={this.goNext} goPrev={this.goPrev} />
-          </View>
-        )}
-        {this.state.questionIndex === 2 && (
-          <View style={{ marginTop: dp(30) }}>
+          <View style={{ marginTop: dp(10) }}>
             <View
               style={{
                 backgroundColor: "#fff",
-                marginTop: dp(50),
-                alignItems: "center"
+                marginTop: dp(0)
               }}
             >
-              <PageOrderCode index={2} indexTotal={22} />
+              <PageOrderCode
+                index={this.state.questionIndex + 1}
+                indexTotal={22}
+                pageOrderCodeStyle={pageOrderCodeCss}
+              />
               <View
                 style={{
-                  width: dp(1000),
+                  width: dp(1300),
                   marginTop: dp(-570),
-                  justifyContent: "center",
-                  textAlign: "center",
-                  alignItems: "center"
+                  marginLeft: dp(150)
                 }}
               >
-                <Text style={[styles.questionText, { width: "100%" }]}>
-                  1-2.请画一个立方体
-                  <Text style={{ color: "black", fontSize: font(40) }}>
-                    (视空间与执行能力)
-                  </Text>
+                <Text style={[{
+                  width: dp(1200),
+                  color: "#2c2c2c",
+                  marginTop:dp(15),
+                  lineHeight: dp(70),
+                  paddingRight: dp(80),
+                  fontWeight: "100"
+                }, { fontSize: font(40),width: "80%" }]}>
+                  视结构功能检测(立方体)
+                </Text>
+                <Text style={{ color: "black", fontSize: font(30) }}>
+                    请您照着这幅图在下面的空白处原样画一遍，并尽可能准确
                 </Text>
               </View>
-              <View style={{ justifyContent: "center" }} />
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderLeftColor: "#ddd",
+                  position: "absolute",
+                  right: dp(50),
+                  height: dp(200),
+                  width: dp(200)
+                }}
+              >
+                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />
+              </View>
             </View>
             <View
               style={{
                 alignItems: "center",
                 flexDirection: "row",
                 justifyContent: "center",
-                marginTop: dp(60),
-                height: dp(700)
+                marginTop: dp(20),
+                height: dp(600)
               }}
             >
               <Canvas
@@ -306,13 +352,22 @@ export default class ViewSpace extends Component {
                 ref={this.canvasCube}
                 strokeWidth={1}
                 canvasStyle={{
-                  width: dp(1300),
-                  height: dp(700)
+                  width: dp(1200),
+                  height: dp(600)
                 }}
               />
+            </View>     
+            <View style={{ alignItems: "center", marginTop: dp(20) }} >
+                  <AnswerConfirm
+                      questionType={"cube"}
+                      questionInfo={this.state.questionInfo}
+                      keyBoardChange={this.keyBoardChange}
+                      answerConfirmStyle = {answerConfirmCss}
+                    />
             </View>
-            <View style={{ alignItems: "center", marginTop: dp(100) }} />
+            <View style={{marginTop: dp(20) }} />
             <FrontAndBack
+              frontAndBackStyle={{paddingRight:dp(50)}}
               goNext={() => {
                 this.canvasCube.current.buildImg();
               }}
@@ -320,68 +375,62 @@ export default class ViewSpace extends Component {
             />
           </View>
         )}
-        {this.state.questionIndex === 3 && (
-          <View>
-            <View style={{ alignItems: "center" }}>
-              <View style={{ width: dp(1000), height: dp(500) }}>
-                {this.state.cubeImg && (
-                  <Image
-                    source={{ uri: this.state.cubeImg }}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      backgroundColor: "rgb(240,240,240)",
-                      resizeMode: "cover"
-                    }}
-                  />
-                )}
-              </View>
-              <View style={{ alignItems: "center", marginTop: dp(50) }} />
-              <AnswerConfirm
-                questionType={"cube"}
-                questionInfo={this.state.questionInfo}
-                keyBoardChange={this.keyBoardChange}
-              />
-            </View>
-            <View style={{ alignItems: "center", marginTop: dp(50) }} />
-            <FrontAndBack goNext={this.goNext} goPrev={this.goPrev} />
-          </View>
-        )}
-        {this.state.questionIndex === 4 && (
-          <View style={{ marginTop: dp(30) }}>
+        {this.state.questionIndex === 2 && (
+          <View style={{ marginTop: dp(10) }}>
             <View
               style={{
                 backgroundColor: "#fff",
-                marginTop: dp(50),
-                alignItems: "center"
+                marginTop: dp(0)
               }}
             >
-              <PageOrderCode index={3} indexTotal={22} />
+              <PageOrderCode
+                index={this.state.questionIndex + 1}
+                indexTotal={22}
+                pageOrderCodeStyle={pageOrderCodeCss}
+              />
               <View
                 style={{
-                  width: dp(1000),
+                  width: dp(1300),
                   marginTop: dp(-570),
-                  justifyContent: "center",
-                  textAlign: "center",
-                  alignItems: "center"
+                  marginLeft: dp(150)
                 }}
               >
-                <Text style={[styles.questionText, { width: "100%" }]}>
-                  1-2.画钟表
-                  <Text style={{ color: "black", fontSize: font(40) }}>
-                    (11点15分)
-                  </Text>
+                <Text style={[{
+                  width: dp(1200),
+                  color: "#2c2c2c",
+                  marginTop:dp(15),
+                  lineHeight: dp(70),
+                  paddingRight: dp(80),
+                  fontWeight: "100"
+                }, { fontSize: font(40),width: "80%" }]}>
+                  执行功能检测(画钟试验)
+                </Text>
+                <Text style={{ color: "black", fontSize: font(30) }}>
+                    请您在这画一个圆形的表，像一般钟表一样填齐所有数字，并用指针画出11点10分
                 </Text>
               </View>
-              <View style={{ justifyContent: "center" }} />
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderLeftColor: "#ddd",
+                  position: "absolute",
+                  right: dp(50),
+                  height: dp(200),
+                  width: dp(200)
+                }}
+              >
+                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />
+              </View>
             </View>
             <View
               style={{
                 alignItems: "center",
                 flexDirection: "row",
                 justifyContent: "center",
-                marginTop: dp(60),
-                height: dp(700)
+                marginTop: dp(10),
+                height: dp(600)
               }}
             >
               <Canvas
@@ -389,98 +438,77 @@ export default class ViewSpace extends Component {
                 ref={this.canvasHorologe}
                 strokeWidth={1}
                 canvasStyle={{
-                  width: dp(1300),
-                  height: dp(700)
+                  width: dp(1200),
+                  height: dp(600)
                 }}
               />
             </View>
-            <View style={{ alignItems: "center", marginTop: dp(100) }} />
+            <View style={{ alignItems: "center", marginTop: dp(20) }} >
+            <View style={[styles.table, { marginBottom: dp(20) },{height: dp(200),marginLeft:dp(0)}]}>
+                          <View style={styles.tableColumn1}>
+                            <Image
+                              style={{ width: dp(150), height: dp(200) }}
+                              source={require("./img/doctor1.png")}
+                            />
+                          </View>
+                          <View>
+                                <View style={styles.tableRow}>
+                                  <Text style={[styles.th, styles.tdb,{fontSize: font(24),width: dp(240)}]}>词语名称 </Text>
+                                  <Text style={[styles.th, styles.tdb,{fontSize: font(24),width: dp(240)}]}>正确</Text>
+                                  <Text style={[styles.th, styles.tdb,{fontSize: font(24),width: dp(240)}]}>错误</Text>
+                                </View>
+                                <View style={styles.tableRow}>
+                                <Text style={[styles.td, styles.tdb,{fontSize: font(24),width: dp(240)}]}>轮廓</Text>
+                                  <Radio.RadioGroup
+                                    model={this.state.questionInfo["outline"]["answer"]}
+                                    onChange={this.keyBoardChange.bind(this, "outline")}
+                                  >
+                                    <View style={[styles.td, {fontSize: font(24),width: dp(240)}]}>
+                                      <Radio value={1} style={{width: dp(30), height: dp(30)}} />
+                                    </View>
+                                    <View style={[styles.td, {fontSize: font(24),width: dp(240)}]}>
+                                      <Radio value={0} style={{width: dp(30), height: dp(30)}} />
+                                    </View>
+                                  </Radio.RadioGroup>
+                                </View>
+                                <View style={styles.tableRow}>
+                                  <Text style={[styles.td, styles.tdb,{fontSize: font(24),width: dp(240)}]}>数字</Text>
+                                  <Radio.RadioGroup
+                                    model={this.state.questionInfo["number"]["answer"]}
+                                    onChange={this.keyBoardChange.bind(this, "number")}
+                                  >
+                                    <View style={[styles.td, {fontSize: font(24),width: dp(240)}]}>
+                                      <Radio value={1} style={{width: dp(30), height: dp(30)}} />
+                                    </View>
+                                    <View style={[styles.td, {fontSize: font(24),width: dp(240)}]}>
+                                      <Radio value={0} style={{width: dp(30), height: dp(30)}} />
+                                    </View>
+                                  </Radio.RadioGroup>
+                                </View>
+                                <View style={styles.tableRow}>
+                                  <Text style={[styles.td, styles.tdb,{fontSize: font(24),width: dp(240)}]}>指针</Text>
+                                  <Radio.RadioGroup
+                                    model={this.state.questionInfo["pointer"]["answer"]}
+                                    onChange={this.keyBoardChange.bind(this, "pointer")}
+                                  >
+                                    <View style={[styles.td, {fontSize: font(24),width: dp(240)}]}>
+                                      <Radio value={1} style={{width: dp(30), height: dp(30)}} />
+                                    </View>
+                                    <View style={[styles.td, {fontSize: font(24),width: dp(240)}]}>
+                                      <Radio value={0} style={{width: dp(30), height: dp(30)}} />
+                                    </View>
+                                  </Radio.RadioGroup>
+                                </View>
+                              </View>
+                            </View>
+            </View>
             <FrontAndBack
+              frontAndBackStyle={{paddingRight:dp(50)}}
               goNext={() => {
                 this.canvasHorologe.current.buildImg();
               }}
               goPrev={this.goPrev}
             />
-          </View>
-        )}
-        {this.state.questionIndex === 5 && (
-          <View>
-            <View style={{ alignItems: "center" }}>
-              <View style={{ width: dp(1000), height: dp(500) }}>
-                {this.state.horologeImg && (
-                  <Image
-                    source={{ uri: this.state.horologeImg }}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      backgroundColor: "rgb(240,240,240)",
-                      resizeMode: "cover"
-                    }}
-                  />
-                )}
-              </View>
-              <View style={{ alignItems: "center", marginTop: dp(50) }} />
-              <View style={[styles.table, { marginBottom: dp(50) }]}>
-          <View style={styles.tableColumn1}>
-            <Image
-              style={{ width: dp(250), height: dp(320) }}
-              source={require("./img/doctor1.png")}
-            />
-          </View>
-          <View>
-            <View style={styles.tableRow}>
-              <Text style={[styles.th, styles.tdb]}>词语名称 </Text>
-              <Text style={[styles.th, styles.tdb]}>正确</Text>
-              <Text style={[styles.th, styles.tdb]}>错误</Text>
-            </View>
-              <View style={styles.tableRow}>
-                <Text style={[styles.td, styles.tdb]}>轮廓</Text>
-                <Radio.RadioGroup
-                  model={this.state.questionInfo["outline"]["answer"]}
-                  onChange={this.keyBoardChange.bind(this, "outline")}
-                >
-                  <View style={styles.td}>
-                    <Radio value={1} style={styles.radio} />
-                  </View>
-                  <View style={styles.td}>
-                    <Radio value={0} style={styles.radio} />
-                  </View>
-                </Radio.RadioGroup>
-               </View>
-                <View style={styles.tableRow}>
-                  <Text style={[styles.td, styles.tdb]}>数字</Text>
-                  <Radio.RadioGroup
-                    model={this.state.questionInfo["number"]["answer"]}
-                    onChange={this.keyBoardChange.bind(this, "number")}
-                  >
-                    <View style={styles.td}>
-                      <Radio value={1} style={styles.radio} />
-                    </View>
-                    <View style={styles.td}>
-                      <Radio value={0} style={styles.radio} />
-                    </View>
-                  </Radio.RadioGroup>
-                </View>
-                <View style={styles.tableRow}>
-                  <Text style={[styles.td, styles.tdb]}>指针</Text>
-                  <Radio.RadioGroup
-                    model={this.state.questionInfo["pointer"]["answer"]}
-                    onChange={this.keyBoardChange.bind(this, "pointer")}
-                  >
-                    <View style={styles.td}>
-                      <Radio value={1} style={styles.radio} />
-                    </View>
-                    <View style={styles.td}>
-                      <Radio value={0} style={styles.radio} />
-                    </View>
-                  </Radio.RadioGroup>
-                </View>
-              </View>
-            </View>
-        
-            </View>
-            <View style={{ alignItems: "center", marginTop: dp(50) }} />
-            <FrontAndBack goNext={this.goNext} goPrev={this.goPrev} />
           </View>
         )}
       </React.Fragment>
