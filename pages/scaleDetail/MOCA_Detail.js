@@ -619,7 +619,7 @@ export default class MOCA_Detail extends PureComponent {
                       paddingLeft: dp(20)
                     }}
                   >
-                    读出下列数字,每当数字1出现时,患者必须用手敲打一下桌面，错误数大雨等于2个不给分
+                    读出下列数字,每当数字1出现时,患者必须用手敲打一下桌面，错误数大于等于2个不给分
                   </Text>
                   <View style={{ flexDirection: "row", marginTop: dp(10) }}>
                     <Text style={{ marginLeft: dp(130) }}>
@@ -735,16 +735,6 @@ export default class MOCA_Detail extends PureComponent {
                       语言:
                     </Text>
                   </Text>
-                  <Text
-                    style={{
-                      width: dp(250),
-                      height: dp(140),
-                      left: dp(150),
-                      position: "absolute"
-                    }}
-                  >
-                    读出下列数字，请患者重复{"\n"}(每秒一个)
-                  </Text>
                   <View
                     style={[
                       {
@@ -754,7 +744,7 @@ export default class MOCA_Detail extends PureComponent {
                     ]}
                   >
                     <Text>
-                      重复:我只知道今天是张亮过来帮过忙的人
+                      重复:我只知道今天张亮是过来帮过忙的人
                       <AnswerReverse
                         score={
                           this.state.questionModel["repeatRead"][
@@ -877,7 +867,7 @@ export default class MOCA_Detail extends PureComponent {
                         fontWeight: "100"
                       }}
                     >
-                      延时回忆:
+                      延迟回忆:
                     </Text>
                   </Text>
                   <View
@@ -1181,7 +1171,7 @@ export default class MOCA_Detail extends PureComponent {
                       textAlign: "center"
                     }}
                   >
-                    不记分
+                    不计分
                   </Text>
                 </TableBorder>
                 <TableBorder
@@ -1370,7 +1360,7 @@ export default class MOCA_Detail extends PureComponent {
                     height: dp(100),
                     borderTopWidth: dp(0),
                     alignItems: "center",
-                    top: dp(1750)
+                    top: dp(1800)
                   }}
                 >
                   <Text

@@ -111,6 +111,11 @@ export default class Calculate extends React.Component {
     for (let index = 0; index < values.length; index++) {
       totalScore += Number(values[index].score);
     }
+    if(totalScore>3){
+      totalScore = 3
+    }else if(totalScore>=2&&totalScore<=3){
+      totalScore = 2
+    }
     this.setState(
       {
         questionInfo: questionInfo,

@@ -7,7 +7,7 @@ import Http from "../utils/http";
 
 class Store {
   // 存储从安卓传来的量表名字,表示要做那几个测评量表，可以理解为一个schedule
-  @observable scaleName = [{ assessmentName: "CDT", assessmentUid: 0 }];
+  @observable scaleName = [{ assessmentName: "MOCA", assessmentUid: 0 }];
   @action.bound
   setScaleNames(scaleName) {
     this.scaleName.replace(scaleName);
@@ -36,7 +36,8 @@ class Store {
     age: "",
     sex: "",
     phone: "",
-    idNumber: ""
+    idNumber: "",
+    educationTime: 0,
   };
   @action.bound
   setUserInfo(userInfo) {

@@ -170,7 +170,7 @@ export default class Attention extends Component {
             </View>
             <View style={styles.tableRow}>
               <Text style={[styles.tableCheckTd, styles.tdb]}>倒背</Text>
-              {[7, 4, 3, "", ""].map((item, index) => {
+              {[7, 4, 2, "", ""].map((item, index) => {
                 return (
                   <Text
                     key={index}

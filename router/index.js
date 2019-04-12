@@ -36,7 +36,9 @@ function initData(res, rootStore) {
       sex: info.userInfo.sex,
       age: info.userInfo.age,
       name: info.userInfo.name,
-      phone: info.userInfo.phone
+      phone: info.userInfo.phone,
+      // educationTime: info.userInfo.educationTime
+      educationTime: 12
     };
     rootStore.setUserInfo(userInfo);
   }
