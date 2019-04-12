@@ -110,6 +110,13 @@ export default class ViewSpace extends Component {
     questionInfo["pointer"]["score"] = parseInt(
       questionInfo["pointer"]["answer"]
     );
+    console.log('weqeqeqeqwewqeqwewqeqeqewwqewqewqewq')
+    console.log('questionInfo["ligature"]["answer"]_',questionInfo["ligature"]["answer"])
+    console.log('this.state.horologeImg_',this.state.horologeImg)
+    questionInfo["ligature"]["answer"] = this.state.ligatureImg
+    questionInfo["cube"]["answer"] = this.state.cubeImg
+    questionInfo["outline"]["answer"] = this.state.horologeImg
+    console.log('weqeqeqeqwewqeqwewqeqeqewwqewqewqewq')
     let values = Object.values(questionInfo);
     let totalScore = 0;
     for (let index = 0; index < values.length; index++) {

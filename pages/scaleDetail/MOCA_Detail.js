@@ -178,34 +178,44 @@ export default class MOCA_Detail extends PureComponent {
                     }}
                   >
                     <Image
+                      source={{ uri:     this.state.questionModel["viewSpace"]["questionInfo"][
+                            "ligature"
+                          ]["answer"]}}
                       style={{
                         width: "100%",
                         height: "100%",
                         marginLeft: dp(20),
                         marginTop: dp(20),
+                        backgroundColor: "rgb(240,240,240)",
                         resizeMode: "cover"
                       }}
-                      source={require("./img/line.png")}
                     />
                     <Image
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        marginLeft: dp(20),
-                        marginTop: dp(20),
-                        resizeMode: "cover"
-                      }}
-                      source={require("./img/cube.png")}
-                    />
-                    <Image
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        marginLeft: dp(20),
-                        marginTop: dp(20),
-                        resizeMode: "cover"
-                      }}
-                    />
+                    source={{ uri:  this.state.questionModel["viewSpace"]["questionInfo"][
+                            "cube"
+                          ]["answer"]}}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      marginLeft: dp(20),
+                      marginTop: dp(20),
+                      backgroundColor: "rgb(240,240,240)",
+                      resizeMode: "cover"
+                    }}
+                  />
+                  <Image
+                  source={{ uri:  this.state.questionModel["viewSpace"]["questionInfo"][
+                            "outline"
+                          ]["answer"]}}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      marginLeft: dp(20),
+                      marginTop: dp(20),
+                      backgroundColor: "rgb(240,240,240)",
+                      resizeMode: "cover"
+                    }}
+                  />
                   </View>
                   <View style={{ flexDirection: "row", marginTop: dp(30) }}>
                     <Text style={{ marginLeft: dp(130) }}>
