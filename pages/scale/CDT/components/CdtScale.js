@@ -145,9 +145,9 @@ export default class CdtScale extends React.Component {
                 }}
               >
                 <Text style={[styles.questionText, { width: "100%" }]}>
-                  1-2.画钟表
+                  画钟测验
                   <Text style={{ color: "black", fontSize: font(40) }}>
-                    (11点15分)
+                    (11点10分)
                   </Text>
                 </Text>
               </View>
