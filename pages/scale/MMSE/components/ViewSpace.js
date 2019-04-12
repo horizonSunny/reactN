@@ -32,7 +32,7 @@ export default class ViewSpace extends React.Component {
     super(props);
     this.state = {
       questionModel: "viewSpace",
-      questionIndex: 17
+      questionIndex: 18
       // isDrawResult: false
     };
   }
@@ -108,7 +108,7 @@ export default class ViewSpace extends React.Component {
     return (
       <React.Fragment>
         <View style={{ backgroundColor: "#fff", marginTop: dp(80) }}>
-          <PageOrderCode index={this.state.questionIndex + 1} />
+          <PageOrderCode index={this.state.questionIndex + 1} indexTotal={19}/>
           <View
             style={{
               flexDirection: "row",

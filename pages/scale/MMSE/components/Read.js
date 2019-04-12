@@ -30,7 +30,7 @@ export default class Read extends React.Component {
     super(props);
     this.state = {
       questionModel: "read",
-      questionIndex: 14
+      questionIndex: 15
     };
   }
   componentWillMount() {
@@ -89,6 +89,9 @@ export default class Read extends React.Component {
       }
     );
   };
+  showModle=()=>{
+    this.setState({ modalVisible: true })
+  }
   render() {
     return (
       <View style={{ marginTop: dp(30) }}>
@@ -135,9 +138,7 @@ export default class Read extends React.Component {
             }}
             source={require("./img/zhanshi.png")}
             sourcePress={require("./img/zhanshi.png")}
-            onPress={() => {
-              this.setState({ modalVisible: true });
-            }}
+            onPress={this.showModle}
           />
           <Modal
             animationType="slide"

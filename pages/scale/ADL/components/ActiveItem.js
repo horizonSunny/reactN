@@ -34,10 +34,6 @@ export default class ActiveItem extends React.Component {
     const options = [
       {
         text: "自己完全可以做",
-        value: 0
-      },
-      {
-        text: "需要帮助",
         value: 1
       },
       {
@@ -45,8 +41,12 @@ export default class ActiveItem extends React.Component {
         value: 2
       },
       {
-        text: "根本不能做",
+        text: "需要帮助",
         value: 3
+      },
+      {
+        text: "根本不能做",
+        value: 4
       }
     ];
     return (

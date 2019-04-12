@@ -103,13 +103,13 @@ export default class Memory extends Component {
     questionInfo["velvet"]["score"] = parseInt(
       questionInfo["velvet"]["answer"]
     );
-    questionInfo["churchTwo"]["churchTwo"] = parseInt(
+    questionInfo["churchTwo"]["score"] = parseInt(
       questionInfo["church"]["answer"]
     );
-    questionInfo["chrysanthemumTwo"]["churchTwo"] = parseInt(
+    questionInfo["chrysanthemumTwo"]["score"] = parseInt(
       questionInfo["chrysanthemumTwo"]["answer"]
     );
-    questionInfo["redTwo"]["churchTwo"] = parseInt(
+    questionInfo["redTwo"]["score"] = parseInt(
       questionInfo["redTwo"]["answer"]
     );
     let values = Object.values(questionInfo);

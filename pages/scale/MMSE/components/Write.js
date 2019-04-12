@@ -30,7 +30,7 @@ export default class Write extends React.Component {
     super(props);
     this.state = {
       questionModel: "write",
-      questionIndex: 16
+      questionIndex: 17
     };
   }
   componentWillMount() {

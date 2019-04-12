@@ -135,7 +135,7 @@ export default class ActiveScale extends React.Component {
     };
     console.log("questionInfoTotal_", questionInfoTotal);
     let status;
-    if (totalPoints <= 26) {
+    if (totalPoints <= 22) {
       status = "正常";
     } else {
       status = "不正常";

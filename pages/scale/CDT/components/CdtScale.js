@@ -115,10 +115,10 @@ export default class CdtScale extends React.Component {
   };
   render() {
     info = [
-      { quetionName: "封闭的圆", quetionType: "haveCircle" },
-      { quetionName: "12个数字", quetionType: "twelveNum" },
-      { quetionName: "位置准确", quetionType: "ordinalPosition" },
-      { quetionName: "指针正确", quetionType: "pointer" }
+      { quetionName: "画好一个封闭的圆", quetionType: "haveCircle" },
+      { quetionName: "12个数字均没有遗漏", quetionType: "twelveNum" },
+      { quetionName: "数字的位置及顺序准确", quetionType: "ordinalPosition" },
+      { quetionName: "将指针置于正确的位置", quetionType: "pointer" }
     ];
     return (
       <View>

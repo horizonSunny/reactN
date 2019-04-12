@@ -30,7 +30,7 @@ export default class Understand extends React.Component {
     super(props);
     this.state = {
       questionModel: "understand",
-      questionIndex: 15
+      questionIndex: 16
     };
   }
   componentWillMount() {

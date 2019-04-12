@@ -25,7 +25,7 @@ export default class CalculAteattention extends React.Component {
     this.state = {
       reduceSeven: 5,
       questionModel: "calculAteattention",
-      questionIndex: 10
+      questionIndex: 11
     };
   }
   componentWillMount() {
@@ -50,6 +50,15 @@ export default class CalculAteattention extends React.Component {
     const questionArr = Object.keys(questionInfo);
     this.setState({ questionArr: questionArr });
   }
+  /**
+   * @description 表示上一页面
+   */
+  goPrev = () => {
+    this.setState({ questionInfo: this.state.questionInfo });
+    console.log("immediatrly_", this.state.questionInfo);
+    commonFunction.jumpWithParameter("forward", this.state, this.props);
+    return;
+  };
   /**
    * @description 表示下一次减法运算
    */
