@@ -1,17 +1,17 @@
 let namedList = [
   {
     url: "./img/doctor1.png",
-    question: "2-1.请说出下图是什么动物",
+    question: "(命名) 请您告诉我这个动物的名字",
     questionType: "lion"
   },
   {
     url: "./img/doctor1.png",
-    question: "2-2.请说出下图是什么动物",
+    question: "(命名) 请您告诉我这个动物的名字",
     questionType: "rhinoceros"
   },
   {
     url: "./img/doctor1.png",
-    question: "2-3.请说出下图是什么动物",
+    question: "(命名) 请您告诉我这个动物的名字",
     questionType: "camel"
   }
 ];

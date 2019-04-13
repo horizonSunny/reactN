@@ -20,7 +20,7 @@ import { objectClone } from "../../../../utils/objectClone";
 import * as commonFunction from "../../../PageComponent/commonFunction/commonFunction";
 import PageOrderCode from "../../../PageComponent/PageOrderCode/PageOrderCode";
 import FrontAndBack from "../../../PageComponent/frontAndBack/frontAndBack";
-import DoctorHelpConfirm from "../../../PageComponent/DoctorHelpConfirm/DoctorHelpConfirm";
+import DoctorConfirmNormal from "../../../PageComponent/DoctorConfirmNormal/DoctorConfirmNormal";
 import styles from "../../../../../assets/css/common";
 import { DrawNumberCircle } from "../../../../utils/drawNumberCircle";
 import AnswerConfirm from "../../../PageComponent/AnswerConfirm/AnswerConfirm";
@@ -91,9 +91,29 @@ export default class Fluency extends Component {
   };
   render() {
     const info = {
-      question: "5-3.请在1分钟尽可能多说出动物名字(≥11正确)",
+      question: "词语流畅性",
+      questionDetail:"请您尽可能快，尽可能多地说出您所知道的动物的名称。时间是1分钟，请您想一想，准备好了么？开始(提示：1分钟内说出动物名称大于等于11个算正确)",
       questionType: "fluency"
     };
+    const pageOrderCodeCss =  { 
+      background:{
+        width: dp(150),
+        height: dp(65),
+        position: "absolute",
+        top: dp(50),
+        left: dp(-20) },
+      quesNum:{
+        fontSize: font(30),
+        color: "#ffffff",
+        marginRight: dp(20),
+        position: "absolute",
+        left: dp(10),
+        top: dp(10)
+      },
+      text:{
+        fontSize: font(20) 
+      }
+    }
     function AudioShow() {
       return (
         <View
@@ -108,13 +128,27 @@ export default class Fluency extends Component {
             width: dp(200)
           }}
         >
-          <Audio src="moca_13.m4a" />
+            <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderLeftColor: "#ddd",
+                  position: "absolute",
+                  right: dp(50),
+                  height: dp(200),
+                  width: dp(200)
+                }}
+              >
+                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />
+              </View>
         </View>
       );
     }
     return (
-      <DoctorHelpConfirm
+      <DoctorConfirmNormal
         question={info.question}
+        questionDetail = {info.questionDetail}
         questionType={info.questionType}
         indexTotal={22}
         questionInfo={this.state.questionInfo}

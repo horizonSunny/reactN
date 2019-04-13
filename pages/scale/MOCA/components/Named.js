@@ -12,20 +12,14 @@ import {
   TouchableNativeFeedback,
   ScrollView
 } from "react-native";
-import Canvas from "../../../../components/Canvas/Canvas";
 import { Image } from "react-native/Libraries/Animated/src/Animated";
-import KeyBoardNumber from "../../../../components/tools/KeyBoardNumber";
 import androidToast from "../../../PageComponent/AndroidToast/AndroidToast";
 import { objectClone } from "../../../../utils/objectClone";
 import * as commonFunction from "../../../PageComponent/commonFunction/commonFunction";
-import PageOrderCode from "../../../PageComponent/PageOrderCode/PageOrderCode";
-import FrontAndBack from "../../../PageComponent/frontAndBack/frontAndBack";
-import DoctorHelpConfirm from "../../../PageComponent/DoctorHelpConfirm/DoctorHelpConfirm";
-import styles from "../../../../../assets/css/common";
-import { DrawNumberCircle } from "../../../../utils/drawNumberCircle";
-import AnswerConfirm from "../../../PageComponent/AnswerConfirm/AnswerConfirm";
+import DoctorConfirmNormal from "../../../PageComponent/DoctorConfirmNormal/DoctorConfirmNormal";
 import namedList from "./NamedComponent/namedComponent";
 import Audio from "../../../../components/Audio/Audio";
+import styles from "../../../../../assets/css/common";
 
 export default class Named extends React.Component {
   constructor(props) {
@@ -121,7 +115,21 @@ export default class Named extends React.Component {
             width: dp(200)
           }}
         >
-          <Audio src="moca_46.m4a" />
+            <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderLeftColor: "#ddd",
+                  position: "absolute",
+                  right: dp(50),
+                  height: dp(200),
+                  width: dp(200)
+                }}
+              >
+                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />
+              </View>
+           
         </View>
       );
     }
@@ -134,7 +142,7 @@ export default class Named extends React.Component {
     return namedList.map((item, index) => {
       return (
         this.state.questionIndex === index && (
-          <DoctorHelpConfirm
+          <DoctorConfirmNormal
             key={index}
             question={item.question}
             questionType={item.questionType}
@@ -148,14 +156,14 @@ export default class Named extends React.Component {
           >
             <Image
               style={{
-                width: dp(400),
-                height: dp(300),
+                width: dp(600),
+                height: dp(450),
                 marginTop: dp(10),
                 resizeMode: "cover"
               }}
               source={img_arr[index]}
             />
-          </DoctorHelpConfirm>
+          </DoctorConfirmNormal>
         )
       );
     });

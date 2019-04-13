@@ -26,6 +26,7 @@ import { DrawNumberCircle } from "../../../../utils/drawNumberCircle";
 import AnswerConfirm from "../../../PageComponent/AnswerConfirm/AnswerConfirm";
 import namedList from "./NamedComponent/namedComponent";
 import Audio from "../../../../components/Audio/Audio";
+import DoctorConfirmNormal from "../../../PageComponent/DoctorConfirmNormal/DoctorConfirmNormal";
 
 export default class DirectiveForce extends Component {
   constructor(props) {
@@ -116,17 +117,18 @@ export default class DirectiveForce extends Component {
     );
   };
   render() {
+    const moduleName = '定向'
     const namedList = [
       {
-        question: "请告诉现在是那年?",
+        question: "请您告诉现在是哪年?",
         questionType: "year"
       },
       {
-        question: "请告诉我现在是哪月(几月份)?",
+        question: "请告诉我现在是哪月?",
         questionType: "month"
       },
       {
-        question: "请告诉我现在是娜日(今天是几号)?",
+        question: "请告诉我现在是哪日?",
         questionType: "day"
       },
       {
@@ -156,21 +158,34 @@ export default class DirectiveForce extends Component {
             width: dp(200)
           }}
         >
-          {props.index === 17 && <Audio src="moca_17.m4a" />}
-          {props.index === 18 && <Audio src="moca_18.m4a" />}
-          {props.index === 19 && <Audio src="moca_19.m4a" />}
-          {props.index === 20 && <Audio src="moca_20.m4a" />}
-          {props.index === 21 && <Audio src="moca_21.m4a" />}
-          {props.index === 22 && <Audio src="moca_22.m4a" />}
+        <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderLeftColor: "#ddd",
+                  position: "absolute",
+                  right: dp(50),
+                  height: dp(200),
+                  width: dp(200)
+                }}
+              >
+              {props.index === 17 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_17.m4a" />}
+              {props.index === 18 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_18.m4a" />}
+              {props.index === 19 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_19.m4a" />}
+              {props.index === 20 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_20.m4a" />}
+              {props.index === 21 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_21.m4a" />}
+              {props.index === 22 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_22.m4a" />}
+              </View>
         </View>
       );
     }
     return namedList.map((item, index) => {
       return (
         this.state.questionIndex === index + 16 && (
-          <DoctorHelpConfirm
+          <DoctorConfirmNormal
             key={index}
-            question={item.question}
+            question={moduleName}
             questionType={item.questionType}
             indexTotal={22}
             questionInfo={this.state.questionInfo}
@@ -180,8 +195,10 @@ export default class DirectiveForce extends Component {
             goNext={this.goNext}
             audio={<AudioShow index={this.state.questionIndex + 1} />}
           >
-            <View style={{ marginTop: dp(100) }} />
-          </DoctorHelpConfirm>
+            <View style={{marginTop:dp(200),marginBottom:dp(200)}}>
+              <Text style={{fontSize:font(40),color:'black'}}>{item["question"]}</Text>
+            </View>
+          </DoctorConfirmNormal>
         )
       );
     });

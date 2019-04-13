@@ -20,7 +20,7 @@ import { objectClone } from "../../../../utils/objectClone";
 import * as commonFunction from "../../../PageComponent/commonFunction/commonFunction";
 import PageOrderCode from "../../../PageComponent/PageOrderCode/PageOrderCode";
 import FrontAndBack from "../../../PageComponent/frontAndBack/frontAndBack";
-import DoctorHelpConfirm from "../../../PageComponent/DoctorHelpConfirm/DoctorHelpConfirm";
+import DoctorConfirmNormal from "../../../PageComponent/DoctorConfirmNormal/DoctorConfirmNormal";
 import styles from "../../../../../assets/css/common";
 import { DrawNumberCircle } from "../../../../utils/drawNumberCircle";
 import AnswerConfirm from "../../../PageComponent/AnswerConfirm/AnswerConfirm";
@@ -107,19 +107,17 @@ export default class Abstract extends Component {
   render() {
     const namedList = [
       {
-        questionTitl: "6-2.请您说说句子和香蕉在上面方面相似？如橘子-香蕉=水果",
-        question:
-          "您再说说火车和自行车在什么方面相似？(回答运输工具，交通工具，旅行用的的均视为正确)",
+        question:"抽象思维",
+        questionDetail:"请您说说橘子和香蕉在什么方面相类似？您在说说火车和自行车在什么方面相类似？(回答运输工具、交通工具、旅行用的均视为正确)",
         questionType: "transportation"
       },
       {
-        questionTitl: "6-2.请您说说句子和香蕉在上面方面相似？如橘子-香蕉=水果",
-        question:
-          "您再说说手表和尺子在什么方面相似？(回答测量仪器，测量用的均视为正确)",
+        question:"抽象思维",
+        questionDetail:"您再说说手表和尺子在什么方面相类似？(下列的回答被视为正确：测量仪器、测量用的)",
         questionType: "measure"
       }
     ];
-    function AudioShow(props) {
+  function AudioShow(props) {
       return (
         <View
           style={{
@@ -133,17 +131,33 @@ export default class Abstract extends Component {
             width: dp(200)
           }}
         >
-          {props.index === 13 && <Audio src="moca_13.m4a" />}
-          {props.index === 14 && <Audio src="moca_14.m4a" />}
+            <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderLeftColor: "#ddd",
+                  position: "absolute",
+                  right: dp(50),
+                  height: dp(200),
+                  width: dp(200)
+                }}
+              >
+                 {props.index === 13 &&   
+                  <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />}
+                 {props.index === 14 && 
+                   <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />}
+              </View>
         </View>
       );
     }
-    return namedList.map((item, index) => {
+  return namedList.map((item, index) => {
       return (
         this.state.questionIndex === index + 13 && (
-          <DoctorHelpConfirm
+          <DoctorConfirmNormal
             key={index}
-            question={item.questionTitl}
+            question={item.question}
+            questionDetail = {item.questionDetail}
             questionType={item.questionType}
             indexTotal={22}
             questionInfo={this.state.questionInfo}
@@ -153,10 +167,7 @@ export default class Abstract extends Component {
             goNext={this.goNext}
             audio={<AudioShow index={this.state.questionIndex} />}
           >
-            <View>
-              <Text>{item["question"]}</Text>
-            </View>
-          </DoctorHelpConfirm>
+          </DoctorConfirmNormal>
         )
       );
     });

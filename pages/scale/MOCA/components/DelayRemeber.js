@@ -107,65 +107,93 @@ export default class DelayRemeber extends Component {
   };
   render() {
     const radioStyles = [
-      { oneTop: dp(110), twoTop: dp(220), left: dp(272), name: "face" },
-      { oneTop: dp(110), twoTop: dp(220), left: dp(472), name: "velvet" },
-      { oneTop: dp(110), twoTop: dp(220), left: dp(672), name: "church" },
+      { oneTop: dp(80), twoTop: dp(150), left: dp(285), name: "face" },
+      { oneTop: dp(80), twoTop: dp(150), left: dp(485), name: "velvet" },
+      { oneTop: dp(80), twoTop: dp(150), left: dp(685), name: "church" },
       {
-        oneTop: dp(110),
-        twoTop: dp(220),
-        left: dp(872),
+        oneTop: dp(80),
+        twoTop: dp(150),
+        left: dp(885),
         name: "chrysanthemum"
       },
-      { oneTop: dp(110), twoTop: dp(220), left: dp(1072), name: "red" }
+      { oneTop: dp(80), twoTop: dp(150), left: dp(1085), name: "red" }
     ];
+    const pageOrderCodeCss =  { 
+      background:{
+        width: dp(150),
+        height: dp(65),
+        position: "absolute",
+        top: dp(50),
+        left: dp(-20) },
+      quesNum:{
+        fontSize: font(30),
+        color: "#ffffff",
+        marginRight: dp(20),
+        position: "absolute",
+        left: dp(10),
+        top: dp(10)
+      },
+      text:{
+        fontSize: font(20) 
+      }
+    }
     return (
       <React.Fragment>
-        <View style={{ marginTop: dp(30) }}>
-          <View
-            style={{
-              backgroundColor: "white",
-              marginTop: dp(50)
-            }}
-          >
-            <PageOrderCode
-              backgroundColor={"green"}
-              index={this.state.questionIndex + 1}
-              indexTotal={22}
-            />
-            <View
+      <View style={{ marginTop: dp(10) }}>
+        <View
               style={{
-                flexDirection: "row",
-                width: dp(1300),
-                alignItems: "center",
-                marginTop: dp(-570),
-                marginLeft: dp(300)
+                backgroundColor: "#fff",
+                marginTop: dp(10)
               }}
             >
-              <Text style={[styles.questionText, { width: "100%" }]}>
-                3-1.(延时回忆，不能提醒)刚才我给您读了几个词让您记住，请您再尽量回忆一下，告诉我这些词都有什么？
-              </Text>
+              <PageOrderCode
+                index={this.state.questionIndex + 1}
+                indexTotal={22}
+                pageOrderCodeStyle={pageOrderCodeCss}
+              />
+              <View
+                style={{
+                  width: dp(1300),
+                  marginTop: dp(-570),
+                  marginLeft: dp(150)
+                }}
+              >
+                <Text style={[{
+                  width: dp(1200),
+                  color: "#2c2c2c",
+                  marginTop:dp(15),
+                  lineHeight: dp(70),
+                  paddingRight: dp(80),
+                  fontWeight: "100"
+                }, { fontSize: font(40),width: "80%" }]}>
+                   延迟回忆，回忆时不能提示
+                </Text>
+                <Text style={{ color: "black", fontSize: font(30) }}>
+                    刚才我给你读了几个词让您记住，请您再尽量回忆一下，告诉我这些词都有什么
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderLeftColor: "#ddd",
+                  position: "absolute",
+                  right: dp(50),
+                  height: dp(200),
+                  width: dp(200)
+                }}
+              >
+                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />
+              </View>
             </View>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                borderLeftColor: "#ddd",
-                position: "absolute",
-                right: dp(50),
-                height: dp(200),
-                width: dp(200)
-              }}
-            >
-              <Audio src="moca_16.m4a" />
-            </View>
-          </View>
         </View>
-        <View style={{ alignItems: "center", marginTop: dp(50) }} />
-        <View style={[styles.table]}>
+        <View style={{ alignItems: "center", marginTop: dp(550) }} />
+        <View style={{ alignItems: "center", marginTop: dp(50) }} >
+          <View style={[styles.table,{ marginBottom: dp(20) },{height: dp(200),marginLeft:dp(0)}]}>
           <View style={styles.tableColumn1}>
             <Image
-              style={{ width: dp(250), height: dp(320) }}
+              style={{width: dp(150), height: dp(200)}}
               source={require("./img/doctor1.png")}
             />
           </View>
@@ -206,31 +234,28 @@ export default class DelayRemeber extends Component {
                       position: "absolute",
                       top: item["oneTop"],
                       left: item["left"],
-                      width: 50,
-                      height: 50,
                       backgroundColor: "#fff"
                     }}
                   >
-                    <Radio value={1} style={styles.radio} />
+                    <Radio value={1} styleHight={25} style={{width: dp(30), height: dp(30)}} />
                   </View>
                   <View
                     style={{
                       position: "absolute",
-                      width: 50,
-                      height: 49,
                       top: item["twoTop"],
                       left: item["left"],
                       backgroundColor: "#fff"
                     }}
                   >
-                    <Radio value={0} style={styles.radio} />
+                    <Radio value={0} styleHight={25} style={{width: dp(30), height: dp(30)}} />
                   </View>
                 </Radio.RadioGroup>
               );
             })}
           </View>
         </View>
-        <View style={{ alignItems: "center", marginTop: dp(180) }} />
+        </View>
+        <View style={{ alignItems: "center", marginTop: dp(20) }} />
         <FrontAndBack goNext={this.goNext} goPrev={this.goPrev} />
       </React.Fragment>
     );

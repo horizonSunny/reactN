@@ -129,77 +129,126 @@ export default class Memory extends Component {
   };
   render() {
     const radioStyles = [
-      { oneTop: dp(110), twoTop: dp(220), left: dp(272), name: "face" },
-      { oneTop: dp(110), twoTop: dp(220), left: dp(472), name: "velvet" },
-      { oneTop: dp(110), twoTop: dp(220), left: dp(672), name: "church" },
+      { oneTop: dp(53), twoTop: dp(103), left: dp(285), name: "face" },
+      { oneTop: dp(53), twoTop: dp(103), left: dp(485), name: "velvet" },
+      { oneTop: dp(53), twoTop: dp(103), left: dp(685), name: "church" },
       {
-        oneTop: dp(110),
-        twoTop: dp(220),
+        oneTop: dp(53),
+        twoTop: dp(103),
         left: dp(872),
         name: "chrysanthemum"
       },
-      { oneTop: dp(110), twoTop: dp(220), left: dp(1072), name: "red" }
+      { oneTop: dp(53), twoTop: dp(103), left: dp(1085), name: "red" }
     ];
     const radioTwoStyles = [
-      { oneTop: dp(110), twoTop: dp(220), left: dp(272), name: "faceTwo" },
-      { oneTop: dp(110), twoTop: dp(220), left: dp(472), name: "velvetTwo" },
-      { oneTop: dp(110), twoTop: dp(220), left: dp(672), name: "churchTwo" },
+      { oneTop: dp(53), twoTop: dp(103), left: dp(285), name: "faceTwo" },
+      { oneTop: dp(53), twoTop: dp(103), left: dp(485), name: "velvetTwo" },
+      { oneTop: dp(53), twoTop: dp(103), left: dp(685), name: "churchTwo" },
       {
-        oneTop: dp(110),
-        twoTop: dp(220),
+        oneTop: dp(53),
+        twoTop: dp(103),
         left: dp(872),
         name: "chrysanthemumTwo"
       },
-      { oneTop: dp(110), twoTop: dp(220), left: dp(1072), name: "redTwo" }
+      { oneTop: dp(53), twoTop: dp(103), left: dp(1085), name: "redTwo" }
     ];
+    const pageOrderCodeCss =  { 
+      background:{
+        width: dp(150),
+        height: dp(65),
+        position: "absolute",
+        top: dp(50),
+        left: dp(-20) },
+      quesNum:{
+        fontSize: font(30),
+        color: "#ffffff",
+        marginRight: dp(20),
+        position: "absolute",
+        left: dp(10),
+        top: dp(10)
+      },
+      text:{
+        fontSize: font(20) 
+      }
+    }
     return (
       <React.Fragment>
-        <View style={{ marginTop: dp(30) }}>
-          <View
-            style={{
-              backgroundColor: "white",
-              marginTop: dp(50)
-            }}
-          >
-            <PageOrderCode
-              backgroundColor={"green"}
-              index={this.state.questionIndex + 1}
-              indexTotal={22}
-            />
-            <View
+      <View style={{ marginTop: dp(10) }}>
+        <View
               style={{
-                flexDirection: "row",
-                width: dp(1300),
-                alignItems: "center",
-                marginTop: dp(-570),
-                marginLeft: dp(300)
+                backgroundColor: "#fff",
+                marginTop: dp(0)
               }}
             >
-              <Text style={[styles.questionText, { width: "100%" }]}>
-                3-1.(记忆，不记分)读出下列词语(每秒一个)，患者重复2次，5分钟后回忆？
-              </Text>
+              <PageOrderCode
+                index={this.state.questionIndex + 1}
+                indexTotal={22}
+                pageOrderCodeStyle={pageOrderCodeCss}
+              />
+              <View
+                style={{
+                  width: dp(1300),
+                  marginTop: dp(-570),
+                  marginLeft: dp(150)
+                }}
+              >
+                <Text style={[{
+                  width: dp(1200),
+                  color: "#2c2c2c",
+                  marginTop:dp(15),
+                  lineHeight: dp(70),
+                  paddingRight: dp(80),
+                  fontWeight: "100"
+                }, { fontSize: font(40),width: "80%" }]}>
+                  记忆力检测
+                </Text>
+                <Text style={{ color: "black", fontSize: font(30) }}>
+                    这是一个记忆力测验。在下面的时间里我会给您读几个词，你要注意听，一定要记住。当我读完后，把您记住的词告诉我。可以不按照我读的顺序。
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderLeftColor: "#ddd",
+                  position: "absolute",
+                  right: dp(50),
+                  height: dp(200),
+                  width: dp(200)
+                }}
+              >
+                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />
+              </View>
             </View>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                borderLeftColor: "#ddd",
-                position: "absolute",
-                right: dp(50),
-                height: dp(200),
-                width: dp(200)
-              }}
-            >
-              <Audio src="moca_16.m4a" />
-            </View>
-          </View>
         </View>
         <View style={{ alignItems: "center", marginTop: dp(30) }} />
-        <View style={[styles.table]}>
+        <View
+          style={{
+            alignItems: "center",
+            marginTop: dp(300),
+            marginBottom: dp(50)
+          }}
+        >
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              width: dp(1500),
+              borderBottomWidth: dp(1),
+              borderBottomColor: "#ddd"
+            }}
+          />
+        </View>
+        <View style={[styles.table,{
+              flexDirection: "row",
+              height: dp(150),
+              alignItems: "center"
+            }]}>
           <View style={styles.tableColumn1}>
             <Image
-              style={{ width: dp(250), height: dp(320) }}
+              style={{ width: dp(102), height: dp(150) }}
               source={require("./img/doctor1.png")}
             />
           </View>
@@ -234,41 +283,43 @@ export default class Memory extends Component {
                   key={index}
                   model={this.state.questionInfo[item["name"]]["answer"]}
                   onChange={this.keyBoardChange.bind(this, item["name"])}
+                  radioStyle = {true}
                 >
                   <View
                     style={{
                       position: "absolute",
                       top: item["oneTop"],
                       left: item["left"],
-                      width: 50,
-                      height: 50,
-                      backgroundColor: "#fff"
+                      backgroundColor:'#fff'
                     }}
                   >
-                    <Radio value={1} style={styles.radio} />
+                    <Radio value={1} styleHight={25} style={{width: dp(30), height: dp(30)}} />
                   </View>
                   <View
                     style={{
                       position: "absolute",
-                      width: 50,
-                      height: 49,
                       top: item["twoTop"],
                       left: item["left"],
-                      backgroundColor: "#fff"
+                      backgroundColor:'#fff'
                     }}
                   >
-                    <Radio value={0} style={styles.radio} />
+                    <Radio value={0} styleHight={25} style={{width: dp(30), height: dp(30)}} />
                   </View>
                 </Radio.RadioGroup>
               );
             })}
           </View>
         </View>
-        <View style={{ alignItems: "center", marginTop: dp(20) }} />
-        <View style={[styles.table]}>
+        <View style={{ alignItems: "center", marginTop: dp(30) }} />
+        
+        <View style={[styles.table,{
+              flexDirection: "row",
+              height: dp(150),
+              alignItems: "center"
+            }]}>
           <View style={styles.tableColumn1}>
             <Image
-              style={{ width: dp(250), height: dp(320) }}
+              style={{ width: dp(102), height: dp(150) }}
               source={require("./img/doctor1.png")}
             />
           </View>
@@ -309,24 +360,19 @@ export default class Memory extends Component {
                       position: "absolute",
                       top: item["oneTop"],
                       left: item["left"],
-                      width: 50,
-                      height: 50,
-                      backgroundColor: "#fff"
                     }}
                   >
-                    <Radio value={1} style={styles.radio} />
+                    <Radio value={1} styleHight={25} style={{width: dp(30), height: dp(30)}}  />
                   </View>
                   <View
                     style={{
                       position: "absolute",
-                      width: 50,
-                      height: 49,
                       top: item["twoTop"],
                       left: item["left"],
-                      backgroundColor: "#fff"
+                      backgroundColor:'#fff'
                     }}
                   >
-                    <Radio value={0} style={styles.radio} />
+                    <Radio value={0} styleHight={25} style={{width: dp(30), height: dp(30)}}  />
                   </View>
                 </Radio.RadioGroup>
               );
@@ -335,7 +381,7 @@ export default class Memory extends Component {
         </View>
 
         <View style={{ alignItems: "center", marginTop: dp(20) }} />
-        <FrontAndBack goNext={this.goNext} goPrev={this.goPrev} />
+        <FrontAndBack frontAndBackStyle={{paddingRight:dp(50)}} goNext={this.goNext} goPrev={this.goPrev} />
       </React.Fragment>
     );
   }

@@ -14,6 +14,9 @@ import {
 
 import {GroupContext} from "./RadioGroupContext";
  class Radio extends Component{
+  constructor(props) {
+    super(props);
+  }
   static propTypes={
     value:PropTypes.number.isRequired,
     type:PropTypes.string
@@ -55,8 +58,10 @@ import {GroupContext} from "./RadioGroupContext";
   }
   render(){
     const {value}=this.state;
+    console.log('this.props.radioStyle_', this.props.styleHight)
+    const outHeight = this.props.styleHight ? {height:20,justifyContent:'center'}:{height:50,justifyContent:'center'}
     return(
-      <View style={[{height:50,justifyContent:'center'}]}>
+      <View style={[outHeight]}>
         <TouchableWithoutFeedback hitSlop={this.props.hitSlop?this.props.hitSlop:{top:50,left:50,right:50,bottom:50}}    onPress={this.handlePress}>
           <View style={{flexDirection:'row',alignItems:'center'}}>
             {this.renderImg(this.props.model,value)}

@@ -362,7 +362,7 @@ export default class MOCA extends React.Component {
       <View style={styles.container}>
         <TopBar
           onPress={this.onPress}
-          content={{ completeForm: "3", evaluationName: "MMSE" }}
+          content={{ completeForm: "3", evaluationName: "MOCA" }}
         />
         {this.state.homePage && this.renderHomePage()}
         {!this.state.homePage && this.renderQuestionPage()}

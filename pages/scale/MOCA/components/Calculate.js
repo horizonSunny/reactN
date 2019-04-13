@@ -19,6 +19,7 @@ import * as commonFunction from "../../../PageComponent/commonFunction/commonFun
 import PageOrderCode from "../../../PageComponent/PageOrderCode/PageOrderCode";
 import FrontAndBack from "../../../PageComponent/frontAndBack/frontAndBack";
 import styles from "../../../../../assets/css/common";
+import Audio from "../../../../components/Audio/Audio";
 
 export default class Calculate extends React.Component {
   constructor(props) {
@@ -212,20 +213,79 @@ export default class Calculate extends React.Component {
     );
   }
   render() {
+    const pageOrderCodeCss =  { 
+      background:{
+        width: dp(150),
+        height: dp(65),
+        position: "absolute",
+        top: dp(50),
+        left: dp(-20) },
+      quesNum:{
+        fontSize: font(30),
+        color: "#ffffff",
+        marginRight: dp(20),
+        position: "absolute",
+        left: dp(10),
+        top: dp(10)
+      },
+      text:{
+        fontSize: font(20) 
+      }
+    }
     return (
       <View>
-        <View
-          style={{
-            backgroundColor: "#fff",
-            marginTop: dp(50),
-            alignItems: "center"
-          }}
-        >
-          <PageOrderCode index={this.state.questionIndex + 1} indexTotal={22} />
-          <View
+      <View style={{ marginTop: dp(10) }}>
+            <View
+              style={{
+                backgroundColor: "#fff",
+                marginTop: dp(0)
+              }}
+            >
+              <PageOrderCode
+                index={this.state.questionIndex + 1}
+                indexTotal={22}
+                pageOrderCodeStyle={pageOrderCodeCss}
+              />
+              <View
+                style={{
+                  width: dp(1300),
+                  marginTop: dp(-570),
+                  marginLeft: dp(150)
+                }}
+              >
+                <Text style={[{
+                  width: dp(1200),
+                  color: "#2c2c2c",
+                  marginTop:dp(15),
+                  lineHeight: dp(70),
+                  paddingRight: dp(80),
+                  fontWeight: "100"
+                }, { fontSize: font(40),width: "80%" }]}>
+                  连续减7
+                </Text>
+                <Text style={{ color: "black", fontSize: font(30) }}>
+                    现在请您做一道计算题，计算100连续减去7，共计算5次，将每次计算的得数告诉我
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderLeftColor: "#ddd",
+                  position: "absolute",
+                  right: dp(50),
+                  height: dp(200),
+                  width: dp(200)
+                }}
+              >
+                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />
+              </View>
+            </View>
+            <View
             style={{
               width: dp(800),
-              marginTop: dp(-570),
+              marginTop: dp(-400),
               justifyContent: "center",
               textAlign: "center"
             }}
@@ -236,7 +296,7 @@ export default class Calculate extends React.Component {
           </View>
         </View>
 
-        <View style={{ flexDirection: "row", marginLeft: dp(350) }}>
+        <View style={{ flexDirection: "row", marginLeft: dp(350),marginTop: dp(200) }}>
           <View style={{ width: "50%", paddingRight: dp(300) }}>
             {this.reduce()}
           </View>

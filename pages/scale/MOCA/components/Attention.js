@@ -102,53 +102,82 @@ export default class Attention extends Component {
     );
   };
   render() {
+    const pageOrderCodeCss =  { 
+      background:{
+        width: dp(150),
+        height: dp(65),
+        position: "absolute",
+        top: dp(50),
+        left: dp(-20) },
+      quesNum:{
+        fontSize: font(30),
+        color: "#ffffff",
+        marginRight: dp(20),
+        position: "absolute",
+        left: dp(10),
+        top: dp(10)
+      },
+      text:{
+        fontSize: font(20) 
+      }
+    }
+
     return (
       <React.Fragment>
-        <View style={{ marginTop: dp(30) }}>
-          <View
-            style={{
-              backgroundColor: "white",
-              marginTop: dp(50)
-            }}
-          >
-            <PageOrderCode
-              backgroundColor={"green"}
-              index={this.state.questionIndex + 1}
-              indexTotal={22}
-            />
+        <View style={{ marginTop: dp(10) }}>
             <View
               style={{
-                flexDirection: "row",
-                width: dp(1300),
-                alignItems: "center",
-                marginTop: dp(-570),
-                marginLeft: dp(300)
+                backgroundColor: "#fff",
+                marginTop: dp(0)
               }}
             >
-              <Text style={[styles.questionText, { width: "100%" }]}>
-                3-1.读出下列词语(每秒1个),后由患者{"\n"}
-                重复上述过程，重复两次，5分钟后回忆
-              </Text>
+              <PageOrderCode
+                index={this.state.questionIndex + 1}
+                indexTotal={22}
+                pageOrderCodeStyle={pageOrderCodeCss}
+              />
+              <View
+                style={{
+                  width: dp(1300),
+                  marginTop: dp(-570),
+                  marginLeft: dp(150)
+                }}
+              >
+                <Text style={[{
+                  width: dp(1200),
+                  color: "#2c2c2c",
+                  marginTop:dp(15),
+                  lineHeight: dp(70),
+                  paddingRight: dp(80),
+                  fontWeight: "100"
+                }, { fontSize: font(40),width: "80%" }]}>
+                  注意力检测
+                </Text>
+                <Text style={{ color: "black", fontSize: font(30) }}>
+                    下面请您仔细听我说一些数字，当我说完您就跟着照样背出来。下面我再说一些数字，您仔细听，当我说完时请您按我说当
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderLeftColor: "#ddd",
+                  position: "absolute",
+                  right: dp(50),
+                  height: dp(200),
+                  width: dp(200)
+                }}
+              >
+                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />
+              </View>
             </View>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                borderLeftColor: "#ddd",
-                position: "absolute",
-                right: dp(50),
-                height: dp(200),
-                width: dp(200)
-              }}
-            >
-              <Audio src="moca_1.m4a" />
-            </View>
-          </View>
         </View>
-        <View
-          style={[styles.table, { marginBottom: dp(30), marginTop: dp(50) }]}
-        >
+        <View style={[styles.table, {marginBottom: dp(350), marginTop: dp(50) },{
+              flexDirection: "row",
+              height: dp(150),
+              alignItems: "center"
+            }]}>
           <View style={{ width: dp(70) }} />
           <View>
             <View style={styles.tableRow}>
@@ -187,44 +216,48 @@ export default class Attention extends Component {
             </View>
           </View>
         </View>
-        <View style={[styles.table, { marginBottom: dp(50) }]}>
+        <View style={[styles.table, { marginBottom: dp(50) },{
+              flexDirection: "row",
+              height: dp(150),
+              alignItems: "center"
+            }]}>
           <View style={styles.tableColumn1}>
             <Image
-              style={{ width: dp(250), height: dp(320) }}
+              style={{ width: dp(102), height: dp(150) }}
               source={require("./img/doctor1.png")}
             />
           </View>
           <View>
-            <View style={styles.tableRow}>
-              <Text style={[styles.th, styles.tdb]}>词语名称 </Text>
-              <Text style={[styles.th, styles.tdb]}>正确</Text>
-              <Text style={[styles.th, styles.tdb]}>错误</Text>
+            <View style={[styles.tableRow,{fontSize:dp(20)}]}>
+              <Text style={[styles.th, styles.tdb,{fontSize:dp(20)}]}>词语名称 </Text>
+              <Text style={[styles.th, styles.tdb,{fontSize:dp(20)}]}>正确</Text>
+              <Text style={[styles.th, styles.tdb,{fontSize:dp(20)}]}>错误</Text>
             </View>
-            <View style={styles.tableRow}>
-              <Text style={[styles.td, styles.tdb]}>顺背</Text>
+            <View style={[styles.tableRow,{fontSize:dp(20)}]}>
+              <Text style={[styles.td, styles.tdb,{fontSize:dp(20)}]}>顺背</Text>
               <Radio.RadioGroup
                 model={this.state.questionInfo["orderRead"]["answer"]}
                 onChange={this.keyBoardChange.bind(this, "orderRead")}
               >
                 <View style={styles.td}>
-                  <Radio value={1} style={styles.radio} />
+                  <Radio value={1} style={[styles.radio,{width: dp(30), height: dp(30)}]} />
                 </View>
                 <View style={styles.td}>
-                  <Radio value={0} style={styles.radio} />
+                  <Radio value={0} style={[styles.radio,{width: dp(30), height: dp(30)}]} />
                 </View>
               </Radio.RadioGroup>
             </View>
             <View style={styles.tableRow}>
-              <Text style={[styles.td, styles.tdb]}>倒背</Text>
+              <Text style={[styles.td, styles.tdb,{fontSize:dp(20)}]}>倒背</Text>
               <Radio.RadioGroup
                 model={this.state.questionInfo["invertedOrder"]["answer"]}
                 onChange={this.keyBoardChange.bind(this, "invertedOrder")}
               >
                 <View style={styles.td}>
-                  <Radio value={1} style={styles.radio} />
+                  <Radio value={1} style={[styles.radio,{width: dp(30), height: dp(30)}]} />
                 </View>
                 <View style={styles.td}>
-                  <Radio value={0} style={styles.radio} />
+                  <Radio value={0} style={[styles.radio,{width: dp(30), height: dp(30)}]} />
                 </View>
               </Radio.RadioGroup>
             </View>

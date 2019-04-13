@@ -112,58 +112,86 @@ export default class RepeatRead extends Component {
     );
   };
   render() {
+    const pageOrderCodeCss =  { 
+      background:{
+        width: dp(150),
+        height: dp(65),
+        position: "absolute",
+        top: dp(50),
+        left: dp(-20) },
+      quesNum:{
+        fontSize: font(30),
+        color: "#ffffff",
+        marginRight: dp(20),
+        position: "absolute",
+        left: dp(10),
+        top: dp(10)
+      },
+      text:{
+        fontSize: font(20) 
+      }
+    }
+    const answerConfirmCss =  {
+      styleOut:  {
+              flexDirection: "row",
+              height: dp(150),
+              alignItems: "center"
+            },
+      styleImg:{ width: dp(102), height: dp(150) },
+      styleAnswer:[styles.th, { width: dp(250) }, styles.tdb,{fontSize:dp(20)}],
+      styleRadio:[styles.td, { width: dp(250) }],
+      styleRadioSize: {width: dp(30), height: dp(30)}
+    }
     return (
       <View>
-        <View style={{ marginTop: dp(30) }}>
-          <View
-            style={{
-              backgroundColor: "white",
-              marginTop: dp(50)
-            }}
-          >
-            {this.state.questionIndex === 10 && (
-              <PageOrderCode
-                backgroundColor={"green"}
-                index={11}
-                indexTotal={22}
-              />
-            )}
-            {this.state.questionIndex === 11 && (
-              <PageOrderCode
-                backgroundColor={"green"}
-                index={12}
-                indexTotal={22}
-              />
-            )}
+      <View style={{ marginTop: dp(10) }}>
             <View
               style={{
-                flexDirection: "row",
-                width: dp(1300),
-                alignItems: "center",
-                marginTop: dp(-570),
-                marginLeft: dp(300)
+                backgroundColor: "#fff",
+                marginTop: dp(0)
               }}
             >
-              <Text style={[styles.questionText, { width: "100%" }]}>
-                5-2.(语言)请重复下面的句子
-              </Text>
+              <PageOrderCode
+                index={this.state.questionIndex + 1}
+                indexTotal={22}
+                pageOrderCodeStyle={pageOrderCodeCss}
+              />
+              <View
+                style={{
+                  width: dp(1300),
+                  marginTop: dp(-570),
+                  marginLeft: dp(150)
+                }}
+              >
+                <Text style={[{
+                  width: dp(1200),
+                  color: "#2c2c2c",
+                  marginTop:dp(15),
+                  lineHeight: dp(70),
+                  paddingRight: dp(80),
+                  fontWeight: "100"
+                }, { fontSize: font(40),width: "80%" }]}>
+                  句子复述
+                </Text>
+                <Text style={{ color: "black", fontSize: font(30) }}>
+                    现在我要对您说一句话，我说完后请您按我说话原样重复出来
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderLeftColor: "#ddd",
+                  position: "absolute",
+                  right: dp(50),
+                  height: dp(200),
+                  width: dp(200)
+                }}
+              >
+                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />
+              </View>
             </View>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                borderLeftColor: "#ddd",
-                position: "absolute",
-                right: dp(50),
-                height: dp(200),
-                width: dp(200)
-              }}
-            >
-              {this.state.questionIndex === 10 && <Audio src="moca_11.m4a" />}
-              {this.state.questionIndex === 11 && <Audio src="moca_12.m4a" />}
-            </View>
-          </View>
         </View>
 
         {this.state.questionIndex === 10 && (
@@ -171,13 +199,13 @@ export default class RepeatRead extends Component {
             <View
               style={{
                 alignItems: "center",
-                marginBottom: dp(100)
+                marginBottom: dp(50)
               }}
             >
               <Text
                 style={{
                   marginTop: dp(200),
-                  fontSize: 30
+                  fontSize: dp(40)
                 }}
               >
                 我只知道今天张亮是来帮过忙的人
@@ -185,7 +213,7 @@ export default class RepeatRead extends Component {
               <View
                 style={{
                   width: dp(1200),
-                  marginTop: dp(50),
+                  marginTop: dp(300),
                   borderBottomColor: "#ddd",
                   borderBottomWidth: dp(3)
                 }}
@@ -196,9 +224,10 @@ export default class RepeatRead extends Component {
                 questionType={"oneRepeat"}
                 questionInfo={this.state.questionInfo}
                 keyBoardChange={this.keyBoardChange}
+                answerConfirmStyle = {answerConfirmCss}
               />
             </View>
-            <FrontAndBack goNext={this.goNext} goPrev={this.goPrev} />
+            <FrontAndBack frontAndBackStyle={{paddingRight:dp(50)}} goNext={this.goNext} goPrev={this.goPrev} />
           </React.Fragment>
         )}
         {this.state.questionIndex === 11 && (
@@ -207,13 +236,13 @@ export default class RepeatRead extends Component {
               <View
                 style={{
                   alignItems: "center",
-                  marginBottom: dp(100)
+                  marginBottom: dp(50)
                 }}
               >
                 <Text
                   style={{
                     marginTop: dp(200),
-                    fontSize: 30
+                    fontSize: dp(40)
                   }}
                 >
                   狗在房间的时候，猫总是躺在沙发下面
@@ -221,7 +250,7 @@ export default class RepeatRead extends Component {
                 <View
                   style={{
                     width: dp(1200),
-                    marginTop: dp(50),
+                    marginTop: dp(300),
                     borderBottomColor: "#ddd",
                     borderBottomWidth: dp(3)
                   }}
@@ -232,9 +261,10 @@ export default class RepeatRead extends Component {
                   questionType={"twoRepeat"}
                   questionInfo={this.state.questionInfo}
                   keyBoardChange={this.keyBoardChange}
+                  answerConfirmStyle = {answerConfirmCss}
                 />
               </View>
-              <FrontAndBack goNext={this.goNext} goPrev={this.goPrev} />
+              <FrontAndBack frontAndBackStyle={{paddingRight:dp(50)}} goNext={this.goNext} goPrev={this.goPrev} />
             </React.Fragment>
           </React.Fragment>
         )}
