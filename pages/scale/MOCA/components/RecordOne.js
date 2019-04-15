@@ -173,7 +173,7 @@ export default class RecordOne extends Component {
                   width: dp(200)
                 }}
               >
-                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />
+                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_6_2.m4a" />
               </View>
             </View>
         </View>

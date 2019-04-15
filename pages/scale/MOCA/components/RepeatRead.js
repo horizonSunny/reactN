@@ -173,9 +173,14 @@ export default class RepeatRead extends Component {
                 }, { fontSize: font(40),width: "80%" }]}>
                   句子复述
                 </Text>
-                <Text style={{ color: "black", fontSize: font(30) }}>
+                {this.state.questionIndex === 10 &&   
+                  <Text style={{ color: "black", fontSize: font(30) }}>
                     现在我要对您说一句话，我说完后请您按我说话原样重复出来
-                </Text>
+                  </Text>}
+                 {this.state.questionIndex === 11 && 
+                  <Text style={{ color: "black", fontSize: font(30) }}>
+                    现在我再说另一句话，我说完后请您也按照原样重复出来
+                  </Text>}
               </View>
               <View
                 style={{
@@ -189,7 +194,10 @@ export default class RepeatRead extends Component {
                   width: dp(200)
                 }}
               >
-                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />
+                 {this.state.questionIndex === 10 &&   
+                  <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_7_1.m4a" />}
+                 {this.state.questionIndex === 11 && 
+                   <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_7_2.m4a" />}
               </View>
             </View>
         </View>

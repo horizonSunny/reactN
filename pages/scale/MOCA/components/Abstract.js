@@ -108,7 +108,7 @@ export default class Abstract extends Component {
     const namedList = [
       {
         question:"抽象思维",
-        questionDetail:"请您说说橘子和香蕉在什么方面相类似？您在说说火车和自行车在什么方面相类似？(回答运输工具、交通工具、旅行用的均视为正确)",
+        questionDetail:"请您说说橘子和香蕉在什么方面相类似？您再说说火车和自行车在什么方面相类似？(回答运输工具、交通工具、旅行用的均视为正确)",
         questionType: "transportation"
       },
       {
@@ -144,9 +144,9 @@ export default class Abstract extends Component {
                 }}
               >
                  {props.index === 13 &&   
-                  <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />}
+                  <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_9_1.m4a" />}
                  {props.index === 14 && 
-                   <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />}
+                   <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_9_2.m4a" />}
               </View>
         </View>
       );

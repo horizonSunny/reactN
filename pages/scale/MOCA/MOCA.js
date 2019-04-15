@@ -213,7 +213,7 @@ export default class MOCA extends React.Component {
   renderQuestionPage() {
     return (
       <View>
-        {this.state.questionModelIndex === 0 && (
+        {this.state.questionModelIndex === 1 && (
           <ViewSpace
             questionModel={this.state.viewSpace}
             directionForward={this.state.directionForward}
@@ -283,7 +283,7 @@ export default class MOCA extends React.Component {
             callBack={this.childrenInfo}
           />
         )}
-        {this.state.questionModelIndex === 10 && (
+        {this.state.questionModelIndex === 0 && (
           <DirectiveForce
             questionModel={this.state.directiveForce}
             directionForward={this.state.directionForward}

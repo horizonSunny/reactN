@@ -335,7 +335,7 @@ export default class ViewSpace extends Component {
                   width: dp(200)
                 }}
               >
-                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />
+                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_2.m4a" />
               </View>
             </View>
             <View
@@ -347,12 +347,22 @@ export default class ViewSpace extends Component {
                 height: dp(600)
               }}
             >
+            <Image
+                style={{
+                  width: dp(400),
+                  height: dp(400),
+                  marginTop: dp(10),
+                  marginRight: dp(20),
+                  resizeMode: "cover"
+                }}
+                source={require("./img/cube.png")}
+              />
               <Canvas
                 getBase64={this.getBase64}
                 ref={this.canvasCube}
                 strokeWidth={1}
                 canvasStyle={{
-                  width: dp(1200),
+                  width: dp(700),
                   height: dp(600)
                 }}
               />
@@ -421,7 +431,7 @@ export default class ViewSpace extends Component {
                   width: dp(200)
                 }}
               >
-                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_1.m4a" />
+                <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_3.m4a" />
               </View>
             </View>
             <View

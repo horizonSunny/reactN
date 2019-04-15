@@ -170,12 +170,12 @@ export default class DirectiveForce extends Component {
                   width: dp(200)
                 }}
               >
-              {props.index === 17 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_17.m4a" />}
-              {props.index === 18 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_18.m4a" />}
-              {props.index === 19 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_19.m4a" />}
-              {props.index === 20 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_20.m4a" />}
-              {props.index === 21 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_21.m4a" />}
-              {props.index === 22 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_22.m4a" />}
+              {props.index === 17 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_11_1.m4a" />}
+              {props.index === 18 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_11_2.m4a" />}
+              {props.index === 19 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_11_3.m4a" />}
+              {props.index === 20 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_11_4.m4a" />}
+              {props.index === 21 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_11_5.m4a" />}
+              {props.index === 22 && <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_11_6.m4a" />}
               </View>
         </View>
       );
