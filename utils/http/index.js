@@ -15,19 +15,34 @@ let  axiosInstance  = axios.create({
   timeout: 5000,
   headers: {
     "X-Requested-With": "XMLHttpRequest", //设置该请求为ajax异步请求，区分传统页面请求等等
-    "Content-Type": "application/json; charset=UTF-8" //这是contentType
+    "Content-Type": "application/json; charset=UTF-8",//这是contentType
+    // 'Token': 'Bearer WE0vNi9piAIKs2yXCHhXlRYWEHUOAnuJD960jCk+IhitJpq/eL461qs8RgzFNHCUfmSwgUNsVLepnGbxSUwBYg=='
   }});
 /**
  * 请求拦截
  */
+// async function getToken(){
+//   console.log('这里是获取accesstoken')
+//   let token
+//     await storage.load('accesstoken', (data) => {
+//     console.log('token____baseConfig_getToken_2313_',data)
+//     return data;
+//   });
+//   console.log('token____baseConfig_getToken_5678_',token)
+//   return token;
+// }
+let token 
+storage.load('accesstoken', (data) => {
+  token = data 
+  console.log('token____baseConfig_getToken_2313_',token)
+  // return data;
+});
+// let token = 'Bearer WE0vNi9piAIKs2yXCHhXlRYWEHUOAnuJD960jCk+IhitJpq/eL461qs8RgzFNHCUfmSwgUNsVLepnGbxSUwBYg=='
 axiosInstance.interceptors.request.use(
   config => {
     //请求拦截器,发起请求时可以显示loading,
-    let token =  await storage.load('accesstoken', (data) => {
-      return data;
-    });
-    console.log('这里设置请求头部信息')
-    config.headers.common['Token'] = token
+    // config.headers.common['Token'] = 'Bearer WE0vNi9piAIKs2yXCHhXlRYWEHUOAnuJD960jCk+IhitJpq/eL461qs8RgzFNHCUfmSwgUNsVLepnGbxSUwBYg=='
+    config.headers.common['Token'] = token;
     return config;
   },
   function(error) {
