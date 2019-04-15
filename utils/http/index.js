@@ -4,20 +4,30 @@
  */
 import axios from "axios";
 import { ToastAndroid } from "react-native";
-import { CONFIG } from "./baseConfig";
 import { checkStatus } from "./checkStatus";
+import { storage } from '../../utils/storage';
 import { Methods } from "./methods";
 
-console.log(222222231231231231231313212+'-http');
-console.log('CONFIG_new_',CONFIG)
-const axiosInstance = axios.create(CONFIG);
 
+
+let  axiosInstance  = axios.create({
+  baseURL: "",
+  timeout: 5000,
+  headers: {
+    "X-Requested-With": "XMLHttpRequest", //设置该请求为ajax异步请求，区分传统页面请求等等
+    "Content-Type": "application/json; charset=UTF-8" //这是contentType
+  }});
 /**
  * 请求拦截
  */
 axiosInstance.interceptors.request.use(
   config => {
     //请求拦截器,发起请求时可以显示loading,
+    let token =  await storage.load('accesstoken', (data) => {
+      return data;
+    });
+    console.log('这里设置请求头部信息')
+    config.headers.common['Token'] = token
     return config;
   },
   function(error) {

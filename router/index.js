@@ -42,12 +42,13 @@ function initData(res, rootStore) {
     };
     rootStore.setUserInfo(userInfo);
   }
-  storage.save('accesstoken','Bearer xL3fwCRNgiB2W9PsUbm3npF/CLYsO/x0iOkHD49XeF4rEsvkgAhtETOtiYwJ0bMuQrvoMeMJAwtddwdqNBj0CA==')
+  console.log('这里是access token 的存储',info.accesstoken)
+  storage.save('accesstoken',info.accesstoken)
   console.log("info.scaleName === true_", info.scaleName.length);
-  // info.scaleName.length !== 0
-  //   ? rootStore.setScaleNames(info.scaleName)
-  //   : "report";
-  // judgeOperateProcess(info, rootStore);
+  info.scaleName.length !== 0
+    ? rootStore.setScaleNames(info.scaleName)
+    : "report";
+  judgeOperateProcess(info, rootStore);
 }
 
 /**
