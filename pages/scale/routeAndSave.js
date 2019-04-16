@@ -28,9 +28,9 @@ export function save(calculateResult, rootStore) {
   //
   if (rootStore.scaleCurrentIndex === rootStore.scaleName.length) {
     const obj = {
-      assessmentPlanUid: 1,
+      assessmentPlanUid: rootStore.userInfo.assessmentPlanUid,
       items: rootStore.finishedScale,
-      patientUid: 2
+      patientUid: rootStore.userInfo.patientUid
     };
     //表示有用户有量表，这边只有1，3能进.2是直接到档案列表页面
     const urlAll = url+"/rest/assessmentRecord"

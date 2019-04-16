@@ -30,7 +30,8 @@ export default class Read extends React.Component {
     super(props);
     this.state = {
       questionModel: "read",
-      questionIndex: 15
+      questionIndex: 15,
+      modalVisible: false
     };
   }
   componentWillMount() {

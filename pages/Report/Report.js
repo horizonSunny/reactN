@@ -43,7 +43,7 @@ export default class Report extends Component {
   componentDidMount() {
     // 获取时间并且转换成数据对象
     let self = this;
-    const urlAll = url+"/rest/assessmentRecord/2"
+    const urlAll = url+"/rest/assessmentRecord/"+rootStore.userInfo.patientUid
     console.log("urlAll_",urlAll);
     http
       .get(urlAll)

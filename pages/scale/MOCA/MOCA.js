@@ -141,7 +141,7 @@ export default class MOCA extends React.Component {
     if (totalPoints > 26) {
       status = "正常";
     } else {
-      status = "重度";
+      status = "异常";
     }
     // this.props.rootStore.
     // this.props.rootStore.setReportData(reportData)
