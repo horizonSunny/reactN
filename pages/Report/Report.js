@@ -43,12 +43,13 @@ export default class Report extends Component {
   componentDidMount() {
     // 获取时间并且转换成数据对象
     let self = this;
-    const urlAll = url+"/rest/assessmentRecord/"+rootStore.userInfo.patientUid
+    const urlAll = url+"/rest/assessmentRecord/"+ this.props.rootStore.userInfo.patientUid
+    // const urlAll = url+"/rest/assessmentRecord/"+6
     console.log("urlAll_",urlAll);
     http
       .get(urlAll)
       .then(function(response) {
-        self.setState({ resData: data }, () => {
+        self.setState({ resData: response }, () => {
           console.log("resData__", self.state.resData);
           self.getTime();
         });
@@ -61,6 +62,7 @@ export default class Report extends Component {
   }
   //获取scheme时间并且转换成数组
   getTime = () => {
+    console.log('213123123123123214211412412');
     this.setState(
       {
         schemeData: this.state.resData.body

@@ -56,13 +56,14 @@ function initData(res, rootStore) {
  * @description 判断脑健康师操作流程,1有用户有量表，测评 2有用户无量表，档案 3 无用户有量表 脑健康师自测 ；
  */
 function judgeOperateProcess(info, rootStore) {
-  if (info.userInfo && info.scaleName.length !== 0) {
+  if (info.userInfo!==null && info.scaleName !== null) {
     rootStore.setOperateProcess(1);
-  } else if (info.userInfo && info.scaleName.length === 0) {
+  } else if (info.userInfo!==null && info.scaleName == null) {
     rootStore.setOperateProcess(2);
-  } else if (!info.userInfo && info.scaleName.length !== 0) {
+  } else if (!info.userInfo === null && info.scaleName !== null) {
     rootStore.setOperateProcess(3);
   }
+  console.log('rootStore.operateProcess_',rootStore.operateProcess)
 }
 const Main = inject("rootStore")(props => {
   RNbridge.init().then(res => {
