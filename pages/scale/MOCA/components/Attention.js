@@ -154,7 +154,7 @@ export default class Attention extends Component {
                   注意力检测
                 </Text>
                 <Text style={{ color: "black", fontSize: font(30) }}>
-                    下面请您仔细听我说一些数字，当我说完您就跟着照样背出来。下面我再说一些数字，您仔细听，当我说完时请您按我说当
+                    下面请您仔细听我说一些数字，当我说完您就跟着照样背出来。下面我再说一些数字，您仔细听，当我说完时请您按我说的数字顺序倒着背出来
                 </Text>
               </View>
               <View

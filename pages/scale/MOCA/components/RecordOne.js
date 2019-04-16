@@ -155,10 +155,10 @@ export default class RecordOne extends Component {
                   paddingRight: dp(80),
                   fontWeight: "100"
                 }, { fontSize: font(40),width: "80%" }]}>
-                  注意力检测
+                  警觉性
                 </Text>
                 <Text style={{ color: "black", fontSize: font(30) }}>
-                    下面请您仔细听我说一些数字，当我说完您就跟着照样背出来。下面我再说一些数字，您仔细听，当我说完时请您按我说当
+                    下面我要读出一串数字，请注意听。每当我读到1的时候，您就敲打一下桌子，当我读其他数字时候不要敲打(提示：如果完全正确或只有一次错误则算正确)
                 </Text>
               </View>
               <View
@@ -187,11 +187,12 @@ export default class RecordOne extends Component {
           <View>
             <View style={styles.tableRow}>
               {[
-                [5, 2, 1, 3, 9, 4],
-                [1, 1, 8, 0, 6, 2],
-                [1, 5, 1, 9, 4, 5],
-                [1, 1, 1, 4, 1, 9],
-                [0, 5, 1, 1, 2]
+                [5, 1, 1, 1, 0],
+                [2, 1, 5, 1, 5],
+                [1, 8, 1, 1, 1],
+                [3, 0, 9, 4, 1],
+                [9, 6, 4, 1, 2],
+                [4, 2, 5, 9],
               ].map((item, index) => {
                 return (
                   <View key={index}>

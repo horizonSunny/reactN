@@ -17,7 +17,7 @@ module.exports = {
   },
   CDT: {
     assessmentName: "CDT",
-    referenceValue: ">4",
+    referenceValue: "≥4",
     assessmentContent: "筛查视空间和视结构的功能障碍"
   }
 };
