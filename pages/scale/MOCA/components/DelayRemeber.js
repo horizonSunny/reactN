@@ -147,8 +147,8 @@ export default class DelayRemeber extends Component {
               }}
             >
               <PageOrderCode
-                index={this.state.questionIndex + 1}
-                indexTotal={22}
+                index={10}
+                indexTotal={11}
                 pageOrderCodeStyle={pageOrderCodeCss}
               />
               <View

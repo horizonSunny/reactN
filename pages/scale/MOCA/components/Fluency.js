@@ -95,25 +95,7 @@ export default class Fluency extends Component {
       questionDetail:"请您尽可能快，尽可能多地说出您所知道的动物的名称。时间是1分钟，请您想一想，准备好了么？开始(提示：1分钟内说出动物名称大于等于11个算正确)",
       questionType: "fluency"
     };
-    const pageOrderCodeCss =  { 
-      background:{
-        width: dp(150),
-        height: dp(65),
-        position: "absolute",
-        top: dp(50),
-        left: dp(-20) },
-      quesNum:{
-        fontSize: font(30),
-        color: "#ffffff",
-        marginRight: dp(20),
-        position: "absolute",
-        left: dp(10),
-        top: dp(10)
-      },
-      text:{
-        fontSize: font(20) 
-      }
-    }
+
     function AudioShow() {
       return (
         <View
@@ -150,9 +132,9 @@ export default class Fluency extends Component {
         question={info.question}
         questionDetail = {info.questionDetail}
         questionType={info.questionType}
-        indexTotal={22}
+        indexTotal={11}
         questionInfo={this.state.questionInfo}
-        questionIndex={this.state.questionIndex}
+        questionIndex={7}
         keyBoardChange={this.keyBoardChange}
         goPrev={this.goPrev}
         goNext={this.goNext}

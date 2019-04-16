@@ -146,9 +146,9 @@ export default class Named extends React.Component {
             key={index}
             question={item.question}
             questionType={item.questionType}
-            indexTotal={22}
+            indexTotal={11}
             questionInfo={this.state.questionInfo}
-            questionIndex={this.state.questionIndex + 3}
+            questionIndex={3}
             keyBoardChange={this.keyBoardChange}
             goPrev={this.goPrev}
             goNext={this.goNext}

@@ -28,7 +28,7 @@ import { storage } from '../utils/storage';
 function initData(res, rootStore) {
   console.log("initScaleData", res);
   // 这边判断是有没有用户信息和量表信息
-  // const info = res.respInfo;
+  // const response = res.respInfo;
   // const info = JSON.parse(response);
   const info = res;
   if (info.userInfo !== undefined) {
@@ -42,13 +42,13 @@ function initData(res, rootStore) {
     };
     rootStore.setUserInfo(userInfo);
   }
-  console.log('这里是access token 的存储',info.accesstoken)
-  storage.save('accesstoken',info.accesstoken)
-  console.log("info.scaleName === true_", info.scaleName.length);
-  info.scaleName.length !== 0
-    ? rootStore.setScaleNames(info.scaleName)
-    : "report";
-  judgeOperateProcess(info, rootStore);
+  // console.log('这里是access token 的存储',info.accesstoken)
+  // storage.save('accesstoken',info.accesstoken)
+  // console.log("info.scaleName === true_", info.scaleName.length);
+  // info.scaleName.length !== 0
+  //   ? rootStore.setScaleNames(info.scaleName)
+  //   : "report";
+  // judgeOperateProcess(info, rootStore);
 }
 
 /**

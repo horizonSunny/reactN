@@ -159,9 +159,9 @@ export default class Abstract extends Component {
             question={item.question}
             questionDetail = {item.questionDetail}
             questionType={item.questionType}
-            indexTotal={22}
+            indexTotal={11}
             questionInfo={this.state.questionInfo}
-            questionIndex={this.state.questionIndex}
+            questionIndex={8}
             keyBoardChange={this.keyBoardChange}
             goPrev={this.goPrev}
             goNext={this.goNext}

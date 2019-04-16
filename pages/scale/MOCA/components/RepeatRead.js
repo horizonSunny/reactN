@@ -152,8 +152,8 @@ export default class RepeatRead extends Component {
               }}
             >
               <PageOrderCode
-                index={this.state.questionIndex + 1}
-                indexTotal={22}
+                index={7}
+                indexTotal={11}
                 pageOrderCodeStyle={pageOrderCodeCss}
               />
               <View

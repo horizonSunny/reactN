@@ -201,8 +201,8 @@ export default class ViewSpace extends Component {
               }}
             >
               <PageOrderCode
-                index={this.state.questionIndex + 1}
-                indexTotal={22}
+                index={1}
+                indexTotal={11}
                 pageOrderCodeStyle={pageOrderCodeCss}
               />
               <View
@@ -298,8 +298,8 @@ export default class ViewSpace extends Component {
               }}
             >
               <PageOrderCode
-                index={this.state.questionIndex + 1}
-                indexTotal={22}
+                index={2}
+                indexTotal={11}
                 pageOrderCodeStyle={pageOrderCodeCss}
               />
               <View
@@ -394,8 +394,8 @@ export default class ViewSpace extends Component {
               }}
             >
               <PageOrderCode
-                index={this.state.questionIndex + 1}
-                indexTotal={22}
+                index={3}
+                indexTotal={11}
                 pageOrderCodeStyle={pageOrderCodeCss}
               />
               <View

@@ -187,9 +187,9 @@ export default class DirectiveForce extends Component {
             key={index}
             question={moduleName}
             questionType={item.questionType}
-            indexTotal={22}
+            indexTotal={11}
             questionInfo={this.state.questionInfo}
-            questionIndex={this.state.questionIndex}
+            questionIndex={10}
             keyBoardChange={this.keyBoardChange}
             goPrev={this.goPrev}
             goNext={this.goNext}
