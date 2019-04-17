@@ -64,7 +64,8 @@ export default class DirectiveForce extends Component {
     this.setState({ questionInfo: questionInfo });
   };
   goPrev = () => {
-    if (this.state.questionIndex === 0) {
+    console.log('this.state.questionIndex_',this.state.questionIndex);
+    if (this.state.questionIndex === 16) {
       commonFunction.jumpWithParameter("forward", this.state, this.props);
       return;
     }

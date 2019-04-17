@@ -354,12 +354,14 @@ export default class Memory extends Component {
                   key={index}
                   model={this.state.questionInfo[item["name"]]["answer"]}
                   onChange={this.keyBoardChange.bind(this, item["name"])}
+                  radioStyle = {true}
                 >
                   <View
                     style={{
                       position: "absolute",
                       top: item["oneTop"],
                       left: item["left"],
+                      backgroundColor:'#fff'
                     }}
                   >
                     <Radio value={1} styleHight={25} style={{width: dp(30), height: dp(30)}}  />

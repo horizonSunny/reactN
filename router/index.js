@@ -28,10 +28,10 @@ import { storage } from '../utils/storage';
 function initData(res, rootStore) {
   // console.log("initScaleData", res);
   // 这边判断是有没有用户信息和量表信息
-  const response = res.respInfo;
-  const info = JSON.parse(response);
+  // const response = res.respInfo;
+  // const info = JSON.parse(response);
 
-  // const info = data;
+  const info = data;
   if (info.userInfo !== undefined && info.userInfo !== null ) {
     let userInfo = {
       sex: info.userInfo.sex,
@@ -45,12 +45,13 @@ function initData(res, rootStore) {
     rootStore.setUserInfo(userInfo);
   }
   // console.log('这里是access token 的存储',info.accesstoken)
-  storage.save('accesstoken',info.accesstoken);
-  console.log("info.scaleName === true_", info.scaleName);
-  info.scaleName !== null
-    ? rootStore.setScaleNames(info.scaleName)
-    : "report";
-  judgeOperateProcess(info, rootStore);
+  // storage.save('accesstoken',info.accesstoken);
+  storage.save('accesstoken','Bearer XLtW1zXUm7m67ozEYQ9RIQOGkfMiRD7GdyZJKEFHPA4QNkyj6JVAsoFdqXq2Fvhg/R16wGqCFWGKiTIHJnJibQ==');
+  // console.log("info.scaleName === true_", info.scaleName);
+  // info.scaleName !== null
+  //   ? rootStore.setScaleNames(info.scaleName)
+  //   : "report";
+  // judgeOperateProcess(info, rootStore);
 }
 
 /**

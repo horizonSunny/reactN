@@ -90,7 +90,7 @@ export default class TopBar extends React.PureComponent {
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Text style={styles.name}>{this.props.rootStore.userInfo.name}</Text>
           <Text style={styles.sex}>
-            [{this.props.rootStore.userInfo.sex == "1" ? "男" : "女"}
+            [{this.props.rootStore.userInfo.sex == 0 ? "男" : "女"}
           </Text>
           <Text style={styles.age}>{this.props.rootStore.userInfo.age}岁]</Text>
         </View>

@@ -8,7 +8,6 @@ import {
   ToastAndroid,
   Modal,
   TouchableNativeFeedback,
-  Keyboard,
   ScrollView
 } from "react-native";
 
@@ -60,7 +59,6 @@ export default class Calculate extends React.Component {
     console.log("goNext!!!");
     console.log("this.state.questionInfo_", this.state.questionInfo);
     const questionCurrent = this.state.questionArr[5 - this.state.reduceSeven];
-    console.log('questionCurrent_',questionCurrent);
     const noEmpty = this.state.questionInfo[questionCurrent]["answer"] === "";
     const iterable = Object.values(this.state.questionInfo);
     console.log("iterable_", iterable);
@@ -178,15 +176,13 @@ export default class Calculate extends React.Component {
                 marginTop: dp(40)
               }}
             >
-              {/* <Text style={{ fontSize: font(60) }}>
-                {item === "ninetyThree" ? "100-7:" : "继续减7:"}
-              </Text> */}
               <Text style={{ fontSize: font(60) }}>
                 {item === "ninetyThree" ? "100-7:" : "继续减7:"}
               </Text>
-              <Text
+              <TextInput
                 ref={item}
                 placeholderTextColor="#434343"
+                keyboardType="number-pad"
                 style={{
                   width: dp(300),
                   height: dp(100),
@@ -199,9 +195,17 @@ export default class Calculate extends React.Component {
                   padding: dp(0),
                   lineHeight: dp(100)
                 }}
-              >
-               {this.state.questionInfo[item]["answer"]}
-              </Text>
+                value={this.state.questionInfo[item]["answer"]}
+                onFocus={() => {
+                  this.setState({
+                    reduceSeven: 5 - this.state.questionArr.indexOf(item)
+                  });
+                }}
+                autoFocus={item === "ninetyThree"}
+                onBlur={() => {
+                  this.refs.refKeyBoard.saveAndClear();
+                }}
+              />
             </View>
           );
         })}
@@ -238,8 +242,8 @@ export default class Calculate extends React.Component {
               }}
             >
               <PageOrderCode
-                index={6}
-                indexTotal={11}
+                index={this.state.questionIndex + 1}
+                indexTotal={22}
                 pageOrderCodeStyle={pageOrderCodeCss}
               />
               <View
