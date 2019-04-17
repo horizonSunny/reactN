@@ -35,13 +35,10 @@ let token
 storage.load('accesstoken', (data) => {
   token = data 
   console.log('token____baseConfig_getToken_2313_',token)
-  // return data;
 });
-// let token = 'Bearer WE0vNi9piAIKs2yXCHhXlRYWEHUOAnuJD960jCk+IhitJpq/eL461qs8RgzFNHCUfmSwgUNsVLepnGbxSUwBYg=='
 axiosInstance.interceptors.request.use(
   config => {
     //请求拦截器,发起请求时可以显示loading,
-    // config.headers.common['Token'] = 'Bearer WE0vNi9piAIKs2yXCHhXlRYWEHUOAnuJD960jCk+IhitJpq/eL461qs8RgzFNHCUfmSwgUNsVLepnGbxSUwBYg=='
     config.headers.common['Token'] = token;
     return config;
   },

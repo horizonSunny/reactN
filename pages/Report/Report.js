@@ -14,10 +14,11 @@ import {
   Alert,
   ActivityIndicator,
   TouchableNativeFeedback,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  ImageBackground
 } from "react-native";
 import { BackgroundImage } from "../../components/BackgroundImage/BackgroundImage";
-import ButtonImg from "../../components/ButtonImg/ButtonImg";
+import ButtomImg from "../../components/ButtonImg/ButtonImg";
 import { parseTime, diffTime } from "../../utils/handleTime";
 import { inject } from "mobx-react";
 import TopBar from "../../components/TopBar/TopBar";
@@ -46,7 +47,8 @@ export default class Report extends Component {
     const urlAll = url+"/rest/assessmentRecord/"+ this.props.rootStore.userInfo.patientUid
     // const urlAll = url+"/rest/assessmentRecord/"+6
     console.log("urlAll_",urlAll);
-    http
+    setTimeout(() => {
+      http
       .get(urlAll)
       .then(function(response) {
         self.setState({ resData: response }, () => {
@@ -55,10 +57,7 @@ export default class Report extends Component {
         });
       })
       .catch(function(error) {});
-    // console.log('url____',url)
-    // this.setState({ resData: data },()=>{
-    //   this.getTime();
-    // })
+    }, 0);
   }
   //获取scheme时间并且转换成数组
   getTime = () => {
@@ -138,14 +137,13 @@ export default class Report extends Component {
         }
         this.setState(
           {
-            currentScheme: scheme
+            currentScheme: scheme,
+            scaleArr:scheme['items']
           },
           () => {
             console.log("------------------");
             console.log("currentScheme_", this.state.currentScheme);
-            this.setState({
-              schemeArr: this.state.currentScheme['items']
-            })
+            console.log("scaleArr_", this.state.scaleArr);
           }
         );
       }
@@ -158,12 +156,32 @@ export default class Report extends Component {
     }
   };
   goNext = () => {};
-  goPre = () => {
+  goBack = () => {
     BackHandler.exitApp();
   };
   renderPages() {
     return (
       <React.Fragment>
+         <View style={{height: dp(90),backgroundColor: "#33455d"}}>
+            <ImageBackground source={require("./img/top.png")} style={{
+                width: "100%",
+                height: "100%",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center"
+              }}>
+              <ButtomImg
+              onPress={this.goBack}
+              style={{
+                width: dp(36),
+                height: dp(38),
+                marginLeft: dp(40),
+                marginRight: dp(40)
+              }}
+              source={require("./img/back.png")}
+            />
+            </ImageBackground>
+        </View>
         <View>
           <View style={[styles.mainCont, { position: "relative" }]}>
             <View

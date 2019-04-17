@@ -26,11 +26,12 @@ import RNbridge from "../components/RNbridge/RNbridge";
 import { inject } from "mobx-react";
 import { storage } from '../utils/storage';
 function initData(res, rootStore) {
-  console.log("initScaleData", res);
+  // console.log("initScaleData", res);
   // 这边判断是有没有用户信息和量表信息
   const response = res.respInfo;
   const info = JSON.parse(response);
-  // const info = res;
+
+  // const info = data;
   if (info.userInfo !== undefined && info.userInfo !== null ) {
     let userInfo = {
       sex: info.userInfo.sex,
@@ -43,10 +44,10 @@ function initData(res, rootStore) {
     };
     rootStore.setUserInfo(userInfo);
   }
-  console.log('这里是access token 的存储',info.accesstoken)
-  storage.save('accesstoken',info.accesstoken)
-  console.log("info.scaleName === true_", info.scaleName.length);
-  info.scaleName.length !== 0
+  // console.log('这里是access token 的存储',info.accesstoken)
+  storage.save('accesstoken',info.accesstoken);
+  console.log("info.scaleName === true_", info.scaleName);
+  info.scaleName !== null
     ? rootStore.setScaleNames(info.scaleName)
     : "report";
   judgeOperateProcess(info, rootStore);
@@ -56,11 +57,12 @@ function initData(res, rootStore) {
  * @description 判断脑健康师操作流程,1有用户有量表，测评 2有用户无量表，档案 3 无用户有量表 脑健康师自测 ；
  */
 function judgeOperateProcess(info, rootStore) {
-  if (info.userInfo!==null && info.scaleName !== null) {
+  console.log('judgeOperateProcess_',info);
+  if (info.userInfo !== null && info.scaleName !== null) {
     rootStore.setOperateProcess(1);
-  } else if (info.userInfo!==null && info.scaleName == null) {
+  } else if (info.userInfo !== null && info.scaleName == null) {
     rootStore.setOperateProcess(2);
-  } else if (!info.userInfo === null && info.scaleName !== null) {
+  } else if ( info.userInfo === null && info.scaleName !== null) {
     rootStore.setOperateProcess(3);
   }
   console.log('rootStore.operateProcess_',rootStore.operateProcess)
