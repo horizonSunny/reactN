@@ -56,7 +56,9 @@ class RNbridge{
 	static startTrain(data){
   	return ReactBridge.startTrain(data)
 	}
-
+  static homeFlash(){
+    return ReactBridge.homeFlash()
+  }
   /**
    *
    * @param {String} path 后台接口路径

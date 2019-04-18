@@ -2,6 +2,7 @@ import http from "../../utils/http/index";
 import * as message from "./scaleMessage";
 import NavigationService from "../../router/NavigationService";
 import { url } from '../../utils/globalUrl';
+import RNbridge from "../../components/RNbridge/RNbridge";
 
 export function save(calculateResult, rootStore) {
   // console.log("calculateResult_", calculateResult, "_rootStore_", rootStore);
@@ -38,6 +39,8 @@ export function save(calculateResult, rootStore) {
       http
         .post(urlAll, obj)
         .then(function(response) {
+          //这边调安卓端方法进行回掉刷新
+          RNbridge.homeFlash();
           console.log("response_", response);
         })
         .catch(function(error) {

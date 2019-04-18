@@ -133,7 +133,7 @@ export default class ActiveItem extends React.Component {
               alignItems: "center",
               flexWrap: "wrap"
             }}
-            model={this.props.itemAnswer}
+            model={Number(this.props.itemAnswer)}
             onChange={this.props.keyBoardChange.bind(
               this,
               this.props.item["name"]

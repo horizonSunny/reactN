@@ -59,6 +59,7 @@ export default class Calculate extends React.Component {
     console.log("goNext!!!");
     console.log("this.state.questionInfo_", this.state.questionInfo);
     const questionCurrent = this.state.questionArr[5 - this.state.reduceSeven];
+    console.log('questionCurrent_',questionCurrent);
     const noEmpty = this.state.questionInfo[questionCurrent]["answer"] === "";
     const iterable = Object.values(this.state.questionInfo);
     console.log("iterable_", iterable);
@@ -66,7 +67,7 @@ export default class Calculate extends React.Component {
       androidToast("请选择选项");
       return;
     } else {
-      this.catchFocus();
+      // this.catchFocus();
       if (this.state.reduceSeven > 1) {
         this.setState({
           reduceSeven: this.state.reduceSeven - 1
@@ -132,30 +133,30 @@ export default class Calculate extends React.Component {
     questionInfo[key]["answer"] = value;
     this.setState({ questionInfo: questionInfo });
   };
-  catchFocus = () => {
-    let index = 5 - this.state.reduceSeven + 1;
-    item = this.state.questionArr[index];
-    switch (item) {
-      case "ninetyThree":
-        this.refs.ninetyThree.focus();
-        break;
-      case "eightySix":
-        this.refs.eightySix.focus();
-        break;
-      case "seventyNine":
-        this.refs.seventyNine.focus();
-        break;
-      case "seventyTwo":
-        this.refs.seventyTwo.focus();
-        break;
-      case "sixtyFive":
-        this.refs.sixtyFive.focus();
-        break;
-      default:
-        this.refs.ninetyThree.focus();
-        break;
-    }
-  };
+  // catchFocus = () => {
+  //   let index = 5 - this.state.reduceSeven + 1;
+  //   item = this.state.questionArr[index];
+  //   switch (item) {
+  //     case "ninetyThree":
+  //       this.refs.ninetyThree.focus();
+  //       break;
+  //     case "eightySix":
+  //       this.refs.eightySix.focus();
+  //       break;
+  //     case "seventyNine":
+  //       this.refs.seventyNine.focus();
+  //       break;
+  //     case "seventyTwo":
+  //       this.refs.seventyTwo.focus();
+  //       break;
+  //     case "sixtyFive":
+  //       this.refs.sixtyFive.focus();
+  //       break;
+  //     default:
+  //       this.refs.ninetyThree.focus();
+  //       break;
+  //   }
+  // };
   goPrev = () => {
     this.setState({ questionInfo: this.state.questionInfo });
     console.log("immediatrly_", this.state.questionInfo);
@@ -176,10 +177,14 @@ export default class Calculate extends React.Component {
                 marginTop: dp(40)
               }}
             >
+             {item === this.state.questionArr[5 - this.state.reduceSeven] && <Image
+                style={{ width: dp(30), height: dp(30),marginTop:dp(26),marginRight:dp(15) }}
+                source={require("./img/radio-sel.png")}
+              />}
               <Text style={{ fontSize: font(60) }}>
                 {item === "ninetyThree" ? "100-7:" : "继续减7:"}
               </Text>
-              <TextInput
+              {/* <TextInput
                 ref={item}
                 placeholderTextColor="#434343"
                 keyboardType="number-pad"
@@ -205,7 +210,19 @@ export default class Calculate extends React.Component {
                 onBlur={() => {
                   this.refs.refKeyBoard.saveAndClear();
                 }}
-              />
+              /> */}
+              <Text   style={{
+                  width: dp(300),
+                  height: dp(100),
+                  borderColor: "#444444",
+                  borderWidth: dp(1),
+                  fontSize: font(60),
+                  textAlign: "center",
+                  color: "#434343",
+                  backgroundColor: "#fff",
+                  padding: dp(0),
+                  lineHeight: dp(100)
+                }}>{this.state.questionInfo[item]["answer"]}</Text>
             </View>
           );
         })}
