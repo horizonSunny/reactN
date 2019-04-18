@@ -190,6 +190,27 @@ export default class ViewSpace extends Component {
         fontSize: font(20) 
       }
     }
+    var {
+      Surface, //  一个矩形可渲染的区域，是其他元素的容器
+      Group, // 可容纳多个形状、文本和其他的分组
+      Shape, // 形状定义，可填充
+      Path, // 路径
+      LinearGradient, // 渐变色
+      Pattern, // 填充图片
+      ClippingRectangle // 剪辑
+    } = ART;
+    const linePath = Path().moveTo(229, 108).lineTo(372, 51);
+    const linePathTwo = Path().moveTo(365, 41).lineTo(414, 93);
+    const triangle = Path().moveTo(357, 56)
+    .lineTo(350, 54)
+    .lineTo(355,64)
+    .close()
+    const triangleTwo = Path().moveTo(410, 90)
+    .lineTo(411, 81)
+    .lineTo(402, 88)
+    .close()
+    // .lineTo(355,64)
+    // .close()
     return (
       <React.Fragment>
         {this.state.questionIndex === 0 && (
@@ -260,6 +281,12 @@ export default class ViewSpace extends Component {
                   height: dp(600)
                 }}
               >
+                <React.Fragment>
+                    <Shape d={ linePath } stroke='#999' strokeWidth={2} strokeDash={[10, 15]} />
+                    <Shape d={ linePathTwo } stroke='#999' strokeWidth={2} strokeDash={[10, 15]} />
+                    <Shape d={triangle} stroke="#999" strokeWidth={1} fill="#999"/>
+                    <Shape d={triangleTwo} stroke="#999" strokeWidth={1} fill="#999"/>
+                </React.Fragment>
                 {ligatureCoordinate.map((item, index) => {
                   return (
                     <DrawNumberCircle

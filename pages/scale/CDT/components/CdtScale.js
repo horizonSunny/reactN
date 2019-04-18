@@ -69,6 +69,10 @@ export default class CdtScale extends React.Component {
   };
   goPrev = () => {
     console.log("1223_hahah");
+    if(this.state.questionIndex === 0)
+    {
+      return 
+    }
     this.setState({
       questionIndex: this.state.questionIndex - 1
     });
