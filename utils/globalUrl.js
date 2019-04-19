@@ -1,6 +1,6 @@
 const dev = 'http://192.168.5.185:8081'
 const test = 'http://bms.nic.com'
-const production = '10.11.0.208'
-const build = '10.10.0.1'
+const production = 'http://106.14.50.239'
+const build = 'http://106.15.159.134'
 
-export const url = test
+export const url = production

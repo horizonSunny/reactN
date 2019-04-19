@@ -259,8 +259,8 @@ export default class Calculate extends React.Component {
               }}
             >
               <PageOrderCode
-                index={this.state.questionIndex + 1}
-                indexTotal={22}
+                index={6}
+                indexTotal={11}
                 pageOrderCodeStyle={pageOrderCodeCss}
               />
               <View
@@ -293,27 +293,14 @@ export default class Calculate extends React.Component {
                   position: "absolute",
                   right: dp(50),
                   height: dp(200),
-                  width: dp(200)
+                  width: dp(200),
                 }}
               >
                 <Audio audioStyle={{width: dp(150), height: dp(150) }} src="moca_6_3.m4a" />
               </View>
             </View>
-            <View
-            style={{
-              width: dp(800),
-              marginTop: dp(-400),
-              justifyContent: "center",
-              textAlign: "center"
-            }}
-          >
-            <Text style={[styles.questionText, { width: "100%" }]}>
-              请您计算100连续减去7
-            </Text>
-          </View>
         </View>
-
-        <View style={{ flexDirection: "row", marginLeft: dp(350),marginTop: dp(200) }}>
+         <View style={{ flexDirection: "row", marginLeft: dp(350),marginTop: dp(50) }}>
           <View style={{ width: "50%", paddingRight: dp(300) }}>
             {this.reduce()}
           </View>
@@ -331,8 +318,8 @@ export default class Calculate extends React.Component {
             />
           </View>
         </View>
-        <View style={{ alignItems: "center", marginTop: dp(50) }} />
-        <FrontAndBack goNext={this.goNext} goPrev={this.goPrev} />
+        <View style={{ alignItems: "center", marginTop: dp(50) }} /> 
+         <FrontAndBack goNext={this.goNext} goPrev={this.goPrev} /> 
       </View>
     );
   }
